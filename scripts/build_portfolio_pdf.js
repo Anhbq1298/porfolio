@@ -141,6 +141,7 @@ const SHEET_CSS = `
       const sheet = document.createElement('div'); sheet.className = 'sheet';
       sheet.innerHTML = `<div class="fit">${s.html}</div><div class="foot"><span>Bui Quang Anh (Mark) · Portfolio</span><span>${i + 1} / ${sheets.length}</span></div>`;
       const art = sheet.querySelector('.book-page');
+      Array.from(art.querySelectorAll('.about > *')).filter(e => /^\s*Hi, I/.test(e.textContent)).forEach(e => e.remove());
       if (art.classList.contains('merged')) { art.querySelectorAll('img').forEach(im => { im.loading = 'eager'; }); document.body.append(sheet); return; }
       if (art.querySelector('.tool-statement')) {
         sheet.dataset.tool = '1';

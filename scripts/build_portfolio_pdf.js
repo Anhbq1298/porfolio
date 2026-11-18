@@ -325,14 +325,14 @@ const SHEET_CSS = `
 
   const divider = path.join(TMP, 'divider.pdf');
   const dp = await context.newPage();
-  const coverB64 = fs.readFileSync(path.join(ROOT, 'assets', 'portfolio-cover.jpg')).toString('base64');
-  await dp.setContent(`<style>@page{size:297mm 210mm;margin:0}body{margin:0;height:210mm;display:grid;grid-template-columns:1fr 112mm;font-family:Inter,Arial,sans-serif;color:#172033}
-    .box{align-self:center;padding:0 22mm}.k{color:#1F4788;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px}
+  const cov = n => fs.readFileSync(path.join(ROOT, 'assets', `cover-${n}.jpg`)).toString('base64');
+  await dp.setContent(`<style>@page{size:297mm 210mm;margin:0}body{margin:0;height:210mm;display:grid;grid-template-columns:1fr 170mm;font-family:Inter,Arial,sans-serif;color:#172033}
+    .box{align-self:center;padding:0 18mm}.k{color:#1F4788;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px}
     h1{font-size:64px;line-height:1.05;margin:10px 0}p{color:#64748B;font-size:18px;line-height:1.55;max-width:640px;margin:0 0 10px}hr{border:0;border-top:3px solid #1F4788;width:64px;margin:20px 0}
-    .ph{position:relative;height:210mm}.ph img{width:100%;height:100%;object-fit:cover;display:block}.ph span{position:absolute;right:8px;bottom:6px;font-size:10px;color:#fff;opacity:.85}</style>
+    .ph{height:210mm;display:grid;grid-template-columns:1fr 1fr;gap:3mm}.ph img{width:100%;height:210mm;object-fit:cover;display:block}.ph span{position:absolute;right:8px;bottom:6px;font-size:10px;color:#fff;opacity:.85}</style>
     <div class="box"><div class="k">Part 2</div><h1>Portfolio</h1><hr><p><b>Bui Quang Anh (Mark)</b> · Structural Engineer &amp; Engineering Software Developer</p>
     <p>Book-style print-out of the online portfolio: one page per project and tool. The live version, with videos and interactive workflows, is at <b>anhbq1298.github.io/porfolio</b>.</p></div>
-    <div class="ph"><img src="data:image/jpeg;base64,${coverB64}"><span>Photo: Việt Anh Nguyễn / Pexels</span></div>`);
+    <div class="ph"><img src="data:image/jpeg;base64,${cov(1)}" style="object-position:30% center"><img src="data:image/jpeg;base64,${cov(2)}"></div>`);
   await dp.pdf({ path: divider, preferCSSPageSize: true, printBackground: true });
   await dp.close();
   await browser.close();

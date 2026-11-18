@@ -15,48 +15,106 @@
   const clone = (element) => {
     const copy = element.cloneNode(true);
     copy.removeAttribute('id');
+    if (copy.tagName === 'IMG') copy.loading = 'eager';
+    copy.querySelectorAll('img').forEach(img => { img.loading = 'eager'; });
     copy.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
     return copy;
   };
 
   const section = (selector) => Array.from(document.querySelectorAll(selector), clone);
+  const maybe = (element) => element ? [clone(element)] : [];
+
+  // Lightbox buttons do not work inside the book, so open images in a new tab instead.
+  const unbutton = (root) => {
+    root.querySelectorAll('button[data-full]').forEach(button => {
+      const link = document.createElement('a');
+      link.href = button.dataset.full;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.className = button.className;
+      link.append(...button.childNodes);
+      button.replaceWith(link);
+    });
+    return root;
+  };
+
+  const group = (className, children, heading) => {
+    const box = document.createElement('div');
+    box.className = className;
+    if (heading) {
+      const label = document.createElement('h4');
+      label.textContent = heading;
+      box.append(label);
+    }
+    children.forEach(child => box.append(child));
+    return box;
+  };
+
+  const details = (element, heading) => {
+    if (!element) return [];
+    const copy = clone(element);
+    copy.querySelector('summary')?.remove();
+    return [group('book-details', Array.from(copy.childNodes), heading)];
+  };
+
+  const gallery = (figures) => figures.length
+    ? [unbutton(group('book-gallery', figures.map(clone)))]
+    : [];
+
+  const projectPage = (project) => {
+    const firm = project.closest('.firm')?.querySelector('.firm-meta h3')?.textContent;
+    const role = project.closest('.firm')?.querySelector('.firm-meta .r')?.textContent;
+    const standardEl = project.closest('.firm')?.querySelector('.firm-meta .mono');
+    return {
+      title: project.querySelector('h3').textContent,
+      chapter: firm ? firm + ' · ' + (role || 'Selected projects') : 'Selected projects',
+      content: () => [
+        ...(standardEl ? [Object.assign(document.createElement('p'), { className: 'book-chapter', innerHTML: standardEl.innerHTML })] : []),
+        ...maybe(project.querySelector('.ph .badge')),
+        ...maybe(project.querySelector('.desc')),
+        ...maybe(project.querySelector('.proj-points')),
+        ...details(project.querySelector('details.more'), 'Scope and technical details'),
+        ...maybe(project.querySelector('.codes')),
+        ...gallery(Array.from(project.querySelectorAll('.gallery figure'))),
+        ...maybe(project.querySelector('.more-link')),
+      ],
+    };
+  };
+
+  const toolPage = (tool) => ({
+    title: tool.querySelector('h3').textContent,
+    key: tool.id,
+    chapter: 'Engineering tools',
+    content: () => {
+      const diagram = tool.querySelector('.home-flow');
+      const media = Array.from(tool.querySelectorAll('.tool-media button[data-full]'));
+      return [
+        ...maybe(tool.querySelector('.badge')),
+        ...Array.from(tool.querySelectorAll('.tool-statement'), clone),
+        ...(diagram ? [unbutton(clone(diagram))] : []),
+        ...details(tool.querySelector('details.more'), 'Technical scope'),
+        ...(media.length ? [unbutton(group('book-gallery', media.map(clone)))] : []),
+        ...maybe(tool.querySelector('.tool-links')),
+      ];
+    },
+  });
+
   const pages = [
     { title: document.querySelector('.hero h1').textContent, key: 'top',
-      content: () => section('.hero .role, .hero .lead, .hero .portrait') },
+      content: () => [
+        ...section('.hero .role, .hero .lead, .hero .portrait, .hero .focus, .hero .stats'),
+        group('book-downloads', Array.from(document.querySelectorAll('.hero .cv-download'), clone)),
+      ] },
     { title: 'About & Education', key: 'about', content: () => section('#about .about') },
     { title: 'Core Skills', key: 'skills', content: () => section('#skills .skills') },
-    ...Array.from(document.querySelectorAll('#experience .proj'), project => ({
-      title: project.querySelector('h3').textContent,
-      chapter: 'Selected Projects',
-      content: () => {
-        const image = project.querySelector('.gallery img');
-        return [
-          clone(project.querySelector('.desc')),
-          ...(image ? [clone(image)] : []),
-          clone(project.querySelector('.more-link')),
-        ];
-      },
-    })),
-    ...Array.from(document.querySelectorAll('#tools .flagship-tool'), tool => ({
-      title: tool.querySelector('h3').textContent,
-      key: tool.id,
-      chapter: 'Engineering Tools',
-      content: () => {
-        const diagram = clone(tool.querySelector('.home-flow'));
-        const button = diagram.querySelector('[data-full]');
-        const link = document.createElement('a');
-        link.href = button.dataset.full;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.append(button.querySelector('img'));
-        button.replaceWith(link);
-        return [
-          ...Array.from(tool.querySelectorAll('.tool-statement'), clone),
-          diagram,
-          clone(tool.querySelector('.tool-links')),
-        ];
-      },
-    })),
+    ...Array.from(document.querySelectorAll('#experience .proj'), projectPage),
+    ...Array.from(document.querySelectorAll('#tools .flagship-tool'), toolPage),
+    ...(document.querySelector('#tools .others') ? [{
+      title: 'Other automation tools',
+      key: 'other-automation',
+      chapter: 'Engineering tools',
+      content: () => [unbutton(clone(document.querySelector('#tools .others')))],
+    }] : []),
     { title: 'Contact', key: 'contact', content: () => section('#contact .contact p, #contact .contact-list') },
   ];
 

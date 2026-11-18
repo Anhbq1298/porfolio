@@ -368,3 +368,21 @@ button.oc-link{cursor:zoom-in}
 /* Problem / solution emphasis in supporting automation cards */
 .oc-b p b{display:inline;font-weight:750;color:var(--blue)}
 .oc-b p:first-of-type b{color:var(--text)}
+
+/* Case studies: put the engineering problem and solution in focus */
+.cs-body article #problem,
+.cs-body article #how-it-works {
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px;
+  margin-bottom:22px;
+  background:var(--surface);
+}
+.cs-body article #problem{border-left:4px solid #C46B60}
+.cs-body article #how-it-works{border-left:4px solid var(--blue);background:color-mix(in srgb,var(--blue-soft) 28%,var(--surface))}
+.cs-body article #problem h2,
+.cs-body article #how-it-works h2{font-size:22px;letter-spacing:-.02em;margin-bottom:10px}
+.cs-body article #problem h2{color:var(--text)}
+.cs-body article #how-it-works h2{color:var(--blue)}
+.cs-body article #how-it-works .flow{margin-top:18px}
+@media(max-width:600px){.cs-body article #problem,.cs-body article #how-it-works{padding:18px}}

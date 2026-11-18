@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quang Anh (Mark) Bui · Structural Engineer</title>
-<meta name="description" content="Portfolio of Quang Anh (Mark) Bui — structural engineer and engineering-automation developer. Projects with Thornton Tomasetti, Aurecon and Meinhardt; self-developed tools MBColumn, Mcotis, MCalcCanvas and SP-Editor.">
+<meta name="description" content="Structural engineering and computational R&amp;D portfolio of Quang Anh (Mark) Bui, featuring Mcotis, MCalcCanvas, mCompositeBeamDesign, MBColumn Lite and MGT.">
 <meta property="og:title" content="Quang Anh (Mark) Bui · Structural Engineer">
 <meta property="og:description" content="Structural design × engineering automation.">
 <meta property="og:image" content="assets/mcotis-moment.jpg">
@@ -277,132 +277,73 @@
 </section>
 
 <section id="tools">
-  <div class="wrap">
-    <div class="sec-head"><span class="num">04</span><h2>Tools &amp; R&amp;D</h2><p>Software I've built to remove manual steps from structural design — from award-winning internal tools to open web apps.</p></div>
-    <h3 class="sub-head">Featured</h3>
-    <div class="tools">
-
-      <article id="tool-mcotis" class="card tool">
-        <div class="tool-body">
-          <span class="badge">C# · .NET 8 · WPF · own FEM solver</span>
-          <h3>Mcotis</h3>
-          <p class="sub">Automated structural optimisation — a parametric FEM workflow that evaluates loading, truss depth and cable pretension across design alternatives for cable-supported and tied-arch transfer structures, then sizes the columns and compares cost.</p>
-          <details class="more"><summary>Key features</summary>
-          <ul>
-            <li><b>Study engine:</b> every loading × truss depth × cable pretension candidate is generated and analysed automatically.</li>
-            <li><b>Solver:</b> in-house FEM with tension-only cables, benchmarked against SAP2000; SAP2000 / ETABS kept only for import and export.</li>
-            <li><b>Design:</b> steel, CFT, encased and mega composite columns, with column optimisation over section ranges.</li>
-            <li><b>Cost:</b> material quantity take-off and estimated cost per candidate, so options are compared on tonnage and price.</li>
-          </ul>
-          </details>
-          <button class="flow-btn" data-full="assets/flow-mcotis.svg" data-cap="How it works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v4h11v4"/></svg>How it works</button>
-          <a class="more-link" href="tools/mcotis.html">Problem, method &amp; results →</a>
-        </div>
-        <div class="tool-media">
-          <button class="wide" data-full="assets/mcotis-moment.jpg" data-cap="Mcotis — ULS bending moment envelope"><img src="assets/mcotis-moment.jpg" alt="Mcotis bending moment diagram" loading="lazy"></button>
-          <button data-full="assets/mcotis-3d.jpg" data-cap="Mcotis — 3D extruded model"><img src="assets/mcotis-3d.jpg" alt="Mcotis 3D model of the cable-supported truss" loading="lazy" style="object-fit:contain;background:#fff"></button>
-          <button data-full="assets/mcotis-deflection.jpg" data-cap="Mcotis — SLS deflection contour"><img src="assets/mcotis-deflection.jpg" alt="Mcotis deflection contour" loading="lazy" style="object-fit:contain;background:#fff"></button>
-          <button class="wide" data-full="assets/mcotis-qto.jpg" data-cap="Mcotis — material quantities & estimated cost"><img src="assets/mcotis-qto.jpg" alt="Mcotis material quantities and cost table" loading="lazy"></button>
-        </div>
-      </article>
-
-      <article id="tool-pdfetabs" class="card tool stack">
-        <div class="tool-body">
-          <span class="badge">New · ETABS API · PDF markups</span>
-          <h3>PDFETABS Column Mapper</h3>
-          <p class="sub" style="margin:0">Faster, more reliable column naming for CORENET X submissions — matches PDF markup tags to ETABS columns and gives engineers a visual QA/QC overlay before names are written back.</p>
-          <details class="more"><summary>How it helps</summary><p style="margin:8px 0 0;font-size:15px;color:var(--text-2);max-width:72ch">PDF and ETABS columns are overlaid in one local frame and matched geometrically, so every match, mismatch and conflict is visible before names and pier labels are written to ETABS — reducing discrepancies between drawings and model.</p></details>
-          <a class="more-link" href="tools/pdfetabs-column-mapper.html">Problem, method &amp; results →</a>
-        </div>
-        <div class="tool-media" style="grid-template-columns:1fr">
-          <div class="pm-grid">
-            <figure class="pm-flow">
-              <button data-full="assets/pdfetabs-flow.svg" data-cap="PDFETABS Column Mapper — workflow"><img src="assets/pdfetabs-flow.svg" alt="Workflow: marked-up PDF and ETABS model are pinned to a common origin, matched geometrically within a search radius, reviewed, then names and pier labels are written back to ETABS and a QA report is exported" loading="lazy"></button>
-              <figcaption>How it works</figcaption>
-            </figure>
-            <div class="pm-shots">
-              <figure>
-                <button data-full="assets/pdfetabs-before.jpg" data-cap="Before mapping — PDF tags (orange) and ETABS columns (blue) overlaid; most columns still unmatched"><img src="assets/pdfetabs-before.jpg" alt="Mapper before matching: overlay chart with PDF and ETABS columns, list showing No match" loading="lazy"></button>
-                <figcaption><b>Before</b> — PDF tags (orange) over ETABS columns (blue), names not yet assigned</figcaption>
-              </figure>
-              <figure>
-                <button data-full="assets/pdfetabs-after.jpg" data-cap="After mapping — matched pairs inside the search radius, ready to apply names to ETABS"><img src="assets/pdfetabs-after.jpg" alt="Mapper after matching: list of matched columns with PDF names and zoomed overlay chart" loading="lazy"></button>
-                <figcaption><b>After</b> — matched pairs within the search radius, ready to write names back</figcaption>
-              </figure>
-            </div>
-          </div>
-          <video class="demo" controls muted playsinline preload="metadata" poster="assets/pdfetabs-poster.jpg">
-            <source src="assets/pdfetabs-column-mapper.mp4" type="video/mp4">
-          </video>
-        </div>
-      </article>
-
-      <article id="tool-mcalc" class="card tool">
-        <div class="tool-body">
-          <span class="badge">TypeScript · React · web</span>
-          <h3>MCalcCanvas</h3>
-          <p class="sub">A browser-based engineering calculation platform combining unit-aware equations, structural design templates and editable technical reports.</p>
-          <details class="more"><summary>Key features</summary>
-          <ul>
-            <li><b>Free canvas:</b> equations placed anywhere on A4 pages with an engineering grid.</li>
-            <li><b>Live engine:</b> unit-aware evaluation — change an input and every dependent result updates.</li>
-            <li><b>Templates:</b> RC beams and columns (EC2), steel beams and beam-columns (EC3), composite design (EC4).</li>
-            <li><b>Reports:</b> vector PDF calculation sheets with title block, outline and parameter panel.</li>
-          </ul>
-          </details>
-          <button class="flow-btn" data-full="assets/flow-mcalccanvas.svg" data-cap="How it works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v4h11v4"/></svg>How it works</button>
-          <a class="more-link" href="tools/mcalccanvas.html">Problem, method &amp; results →</a>
-          <div class="tool-links">
-            <a class="btn primary" href="https://anhbq1298.github.io/mCalcCanvas/" target="_blank" rel="noopener">Open live app</a>
-            <a class="btn ghost" href="https://github.com/Anhbq1298/mCalcCanvas" target="_blank" rel="noopener">Source on GitHub</a>
-          </div>
-        </div>
-        <div class="tool-media">
-          <button class="wide" data-full="assets/mcalc-column.jpg" data-cap="MCalcCanvas — RC rectangular column check (EC2)"><img src="assets/mcalc-column.jpg" alt="MCalcCanvas RC column worksheet" loading="lazy"></button>
-          <button data-full="assets/mcalc-steel.jpg" data-cap="MCalcCanvas — simply supported steel beam"><img src="assets/mcalc-steel.jpg" alt="MCalcCanvas steel beam worksheet" loading="lazy" style="object-position:top"></button>
-          <button data-full="assets/mcalc-pdf.jpg" data-cap="MCalcCanvas — exported PDF, steel beam-column check (EC3)"><img src="assets/mcalc-pdf.jpg" alt="MCalcCanvas PDF report page" loading="lazy" style="object-position:top"></button>
-        </div>
-      </article>
-
-      <article id="tool-sp" class="card tool">
-        <div class="tool-body">
-          <span class="badge">Python · ETABS API</span>
-          <h3>SP-Editor</h3>
-          <div class="award"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>Awarded — CORE studio R&amp;D 2024 Cycle 1, Thornton Tomasetti</div>
-          <p class="sub" style="margin-top:12px">Award-winning automation of shear-wall design input — extracts ETABS pier geometry and forces and generates spColumn files in batch.</p>
-          <details class="more"><summary>Key features</summary>
-          <ul>
-            <li>Extracts wall-pier geometry and filters design forces through the ETABS API.</li>
-            <li>Takes the user's reinforcement pattern, runs batch checks and exports DCR results.</li>
-            <li>Generates spColumn files for detailed design in later phases (100% DD / CD).</li>
-          </ul>
-          </details>
-          <button class="flow-btn" data-full="assets/flow-sp-editor.svg" data-cap="How it works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v4h11v4"/></svg>How it works</button>
-          <a class="more-link" href="tools/sp-editor.html">Problem, method &amp; results →</a>
-          <div class="tool-links">
-            <a class="btn ghost" href="https://www.youtube.com/watch?v=ujFrALC1rHs" target="_blank" rel="noopener">Watch demo on YouTube</a>
-          </div>
-        </div>
-        <div class="tool-media">
-          <button data-full="assets/sp-ui.jpg" data-cap="SP-Editor interface"><img src="assets/sp-ui.jpg" alt="SP-Editor interface" loading="lazy"></button>
-          <button data-full="assets/sp-flow.jpg" data-cap="SP-Editor workflow"><img src="assets/sp-flow.jpg" alt="SP-Editor workflow diagram" loading="lazy"></button>
-        </div>
-      </article>
-    </div>
-
-    <h3 class="sub-head">Other tools</h3>
-    <div class="others">
-      <article class="card oc"><a class="oc-im" href="tools/bridger.html" tabindex="-1" aria-hidden="true"><img src="assets/bridger-ui.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">.NET 8 · ETABS API</span><h3><a href="tools/bridger.html">Bridger</a></h3><p>Moves parts of one ETABS model into another with names and assignments intact, verifying every value.</p><div class="oc-links"><button class="oc-link flow-link" data-full="assets/flow-bridger.svg" data-cap="Bridger — how it works">How it works</button><a class="oc-link" href="tools/bridger.html">Details →</a></div></div></article>
-      <article class="card oc"><a class="oc-im" href="tools/mcompositebeamdesign.html" tabindex="-1" aria-hidden="true"><img src="assets/composite-ui.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">TypeScript · web</span><h3><a href="tools/mcompositebeamdesign.html">mCompositeBeamDesign</a></h3><p>Composite beam design to EN 1994-1-1 in the browser, with the full report editable in MCalcCanvas.</p><div class="oc-links"><button class="oc-link flow-link" data-full="assets/flow-mcompositebeamdesign.svg" data-cap="mCompositeBeamDesign — how it works">How it works</button><a class="oc-link" href="tools/mcompositebeamdesign.html">Details →</a><a class="oc-link" href="https://anhbq1298.github.io/mCalcCanvas/composite/" target="_blank" rel="noopener">Live app ↗</a></div></div></article>
-      <article class="card oc"><a class="oc-im" href="tools/mbcolumn-lite.html" tabindex="-1" aria-hidden="true"><img src="assets/mbclite-pmm.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">TypeScript · web</span><h3><a href="tools/mbcolumn-lite.html">MBColumn Lite</a></h3><p>Eurocode 2 column check with a fibre-based 3D PMM surface, solved in seconds in the browser.</p><div class="oc-links"><button class="oc-link flow-link" data-full="assets/flow-mbcolumn-lite.svg" data-cap="MBColumn Lite — how it works">How it works</button><a class="oc-link" href="tools/mbcolumn-lite.html">Details →</a><a class="oc-link" href="https://mbcolumnlite.netlify.app/" target="_blank" rel="noopener">Live app ↗</a></div></div></article>
-      <article class="card oc"><a class="oc-im" href="tools/mgt.html" tabindex="-1" aria-hidden="true"><img src="assets/mgt-rhino.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">Grasshopper · C# · Python</span><h3><a href="tools/mgt.html">MGT</a></h3><p>Grasshopper components that build, edit and load ETABS and SAP2000 models from Rhino geometry.</p><div class="oc-links"><button class="oc-link flow-link" data-full="assets/flow-mgt.svg" data-cap="MGT — how it works">How it works</button><a class="oc-link" href="tools/mgt.html">Details →</a><a class="oc-link" href="https://www.youtube.com/playlist?list=PLP4F5t1phy2g" target="_blank" rel="noopener">YouTube ↗</a></div></div></article>
-      <article class="card oc oc-text"><div class="oc-b"><span class="badge">AutoCAD · C#</span><h3>MDraftingHelper</h3><p>AutoCAD ribbon for 2D structural drafting: rebar tables, ties and hooks, steel-section blocks and an EC2 column PMM check.</p></div></article>
-      <article class="card oc oc-text"><div class="oc-b"><span class="badge">Excel VSTO · CSI API</span><h3>Excel CSI ToolBox</h3><p>Excel ribbon that reads and writes ETABS / SAP2000 results and objects, including batch drop-panel modelling.</p></div></article>
-      <article class="card oc oc-text"><div class="oc-b"><span class="badge">SAFE 22 add-in · C#</span><h3>SAFE Model Purger</h3><p>Finds and safely merges duplicate column, shell and spring properties, and matches shell load sets from ETABS.</p></div></article>
-      <article class="card oc oc-text"><div class="oc-b"><span class="badge">ETABS plugin · C#</span><h3>Floor Mesh Preview</h3><p>Shows the actual analysis mesh ETABS generates for floors and flags hanging nodes between slabs.</p></div></article>
-      <article class="card oc oc-text"><div class="oc-b"><span class="badge">Power BI · VBA</span><h3>Submittal dashboard</h3><p>Tracks shop-drawing status and team workload during construction administration.</p></div></article>
-    </div>
+ <div class="wrap">
+  <div class="sec-head"><span class="num">04</span><h2>Engineering Software &amp; R&amp;D</h2><p>Five featured tools. Each case study explains the engineering challenge, the computational solution and the evidence behind it.</p></div>
+  <h3 class="sub-head">Featured engineering tools</h3><div class="tools featured-tools"><article id="tool-mcotis" class="card tool flagship-tool">
+  <div class="tool-body"><span class="badge">C# · .NET 8 · FEM</span><h3>Mcotis</h3>
+  <div class="tool-statement"><span class="statement-label">01 / Problem</span><p>Manual design iterations make cable-supported truss optimisation slow and make it difficult to compare force, deflection, column design and cost consistently.</p></div>
+  <div class="tool-statement"><span class="statement-label">02 / Proposed solution</span><p>A parametric FEM study engine assesses loading, truss depth and cable pretension, then compares structural performance and material quantities across design alternatives.</p></div>
+  <figure class="home-flow"><button data-full="assets/flow-mcotis.svg" data-cap="Mcotis — workflow"><img src="assets/flow-mcotis.svg" alt="Problem, solution and output flow for Mcotis" loading="lazy"></button><figcaption>Problem → approach → output</figcaption></figure>
+  <details class="more"><summary>Technical scope</summary><ul><li>Parameter studies and tension-only cable behaviour</li><li>FEM verification against SAP2000 benchmarks</li><li>Member force, displacement and material comparisons</li></ul></details>
+  <div class="tool-links"><a class="btn primary" href="tools/mcotis.html">Explore case study →</a></div>
   </div>
+  <div class="tool-media"><button class="wide" data-full="assets/mcotis-moment.jpg" data-cap="Mcotis screenshot"><img src="assets/mcotis-moment.jpg" alt="Mcotis engineering analysis interface" loading="lazy"></button>
+  <button class="wide secondary-shot" data-full="assets/mcotis-3d.jpg" data-cap="Mcotis output"><img src="assets/mcotis-3d.jpg" alt="Mcotis supporting technical output" loading="lazy"></button></div>
+</article>
+<article id="tool-mcalc" class="card tool flagship-tool">
+  <div class="tool-body"><span class="badge">TypeScript · Engineering Calculation Canvas</span><h3>MCalcCanvas</h3>
+  <div class="tool-statement"><span class="statement-label">01 / Problem</span><p>Engineering calculations are trapped in licensed desktop software or opaque spreadsheets. Formulas, units and report formatting are difficult to review and reuse.</p></div>
+  <div class="tool-statement"><span class="statement-label">02 / Proposed solution</span><p>A free, human-readable calculation platform where engineers control inputs and understand the underlying mathematics. The longer-term vision is a community of user-authored templates with an API that lets AI generate formulas using the actual platform functions; engineers review and print the final reports.</p></div>
+  <figure class="home-flow"><button data-full="assets/flow-mcalccanvas.svg" data-cap="MCalcCanvas — workflow"><img src="assets/flow-mcalccanvas.svg" alt="Problem, solution and output flow for MCalcCanvas" loading="lazy"></button><figcaption>Problem → approach → output</figcaption></figure>
+  <details class="more"><summary>Technical scope</summary><ul><li>Readable, unit-aware equations and professional PDF reports</li><li>Create, adapt and share individual calculation templates</li><li>Roadmap: API-connected AI assists formula authoring; engineers verify every output</li></ul></details>
+  <div class="tool-links"><a class="btn primary" href="tools/mcalccanvas.html">Explore case study →</a><a class="btn ghost" href="https://anhbq1298.github.io/mCalcCanvas/" target="_blank" rel="noopener">Open application ↗</a></div>
+  </div>
+  <div class="tool-media"><button class="wide" data-full="assets/mcalc-column.jpg" data-cap="MCalcCanvas screenshot"><img src="assets/mcalc-column.jpg" alt="MCalcCanvas engineering analysis interface" loading="lazy"></button>
+  <button class="wide secondary-shot" data-full="assets/mcalc-pdf.jpg" data-cap="MCalcCanvas output"><img src="assets/mcalc-pdf.jpg" alt="MCalcCanvas supporting technical output" loading="lazy"></button></div>
+</article>
+<article id="tool-composite" class="card tool flagship-tool">
+  <div class="tool-body"><span class="badge">TypeScript · EC4 · FEM</span><h3>mCompositeBeamDesign</h3>
+  <div class="tool-statement"><span class="statement-label">01 / Problem</span><p>Uniform-beam assumptions and regular shear-stud layouts are insufficient for tapered beams, unconventional connector patterns and transverse shear design.</p></div>
+  <div class="tool-statement"><span class="statement-label">02 / Proposed solution</span><p>A composite-beam design workflow combining staged checks, FEM-based lateral-torsional buckling assessment for tapered members, user-defined shear-stud arrangements and transverse shear verification.</p></div>
+  <figure class="home-flow"><button data-full="assets/flow-mcompositebeamdesign.svg" data-cap="mCompositeBeamDesign — workflow"><img src="assets/flow-mcompositebeamdesign.svg" alt="Problem, solution and output flow for mCompositeBeamDesign" loading="lazy"></button><figcaption>Problem → approach → output</figcaption></figure>
+  <details class="more"><summary>Technical scope</summary><ul><li>FEM-derived critical buckling moment for non-prismatic beams</li><li>Variable shear-connector positions and degree of connection</li><li>Transverse shear checks and editable calculation reports</li></ul></details>
+  <div class="tool-links"><a class="btn primary" href="tools/mcompositebeamdesign.html">Explore case study →</a><a class="btn ghost" href="https://anhbq1298.github.io/mCalcCanvas/composite/" target="_blank" rel="noopener">Open application ↗</a></div>
+  </div>
+  <div class="tool-media"><button class="wide" data-full="assets/composite-ui.jpg" data-cap="mCompositeBeamDesign screenshot"><img src="assets/composite-ui.jpg" alt="mCompositeBeamDesign engineering analysis interface" loading="lazy"></button>
+  <button class="wide secondary-shot" data-full="assets/composite-report.jpg" data-cap="mCompositeBeamDesign output"><img src="assets/composite-report.jpg" alt="mCompositeBeamDesign supporting technical output" loading="lazy"></button></div>
+</article>
+<article id="tool-mbcolumn" class="card tool flagship-tool">
+  <div class="tool-body"><span class="badge">TypeScript · Fibre-section solver</span><h3>MBColumn Lite</h3>
+  <div class="tool-statement"><span class="statement-label">01 / Problem</span><p>Preset and symmetrical rebar arrangements do not represent non-typical column reinforcement, especially under combined axial load and biaxial bending.</p></div>
+  <div class="tool-statement"><span class="statement-label">02 / Proposed solution</span><p>A general fibre-section analysis workflow accepts arbitrary individual reinforcement coordinates within the modelled section and rebuilds the P–Mx–My interaction surface for the actual bar layout.</p></div>
+  <figure class="home-flow"><button data-full="assets/flow-mbcolumn-lite.svg" data-cap="MBColumn Lite — workflow"><img src="assets/flow-mbcolumn-lite.svg" alt="Problem, solution and output flow for MBColumn Lite" loading="lazy"></button><figcaption>Problem → approach → output</figcaption></figure>
+  <details class="more"><summary>Technical scope</summary><ul><li>Edit every bar position by coordinates or an interactive section editor</li><li>Recalculate full 3D PMM capacity when bars move</li><li>Evaluate non-typical layouts and report governing load cases</li></ul></details>
+  <div class="tool-links"><a class="btn primary" href="tools/mbcolumn-lite.html">Explore case study →</a><a class="btn ghost" href="https://mbcolumnlite.netlify.app/" target="_blank" rel="noopener">Open application ↗</a></div>
+  </div>
+  <div class="tool-media"><button class="wide" data-full="assets/mbclite-pmm.jpg" data-cap="MBColumn Lite screenshot"><img src="assets/mbclite-pmm.jpg" alt="MBColumn Lite engineering analysis interface" loading="lazy"></button>
+  <button class="wide secondary-shot" data-full="assets/mbclite-ui.jpg" data-cap="MBColumn Lite output"><img src="assets/mbclite-ui.jpg" alt="MBColumn Lite supporting technical output" loading="lazy"></button></div>
+</article>
+<article id="tool-mgt" class="card tool flagship-tool">
+  <div class="tool-body"><span class="badge">Grasshopper · C# · Python</span><h3>MGT</h3>
+  <div class="tool-statement"><span class="statement-label">01 / Problem</span><p>Architectural and parametric geometry must frequently be redrawn in ETABS or SAP2000, increasing effort and inconsistency during structural iteration.</p></div>
+  <div class="tool-statement"><span class="statement-label">02 / Proposed solution</span><p>Grasshopper components link Rhino geometry to CSI models through APIs to create, query and update structural elements, sections and loads parametrically.</p></div>
+  <figure class="home-flow"><button data-full="assets/flow-mgt.svg" data-cap="MGT — workflow"><img src="assets/flow-mgt.svg" alt="Problem, solution and output flow for MGT" loading="lazy"></button><figcaption>Problem → approach → output</figcaption></figure>
+  <details class="more"><summary>Technical scope</summary><ul><li>Rhino-to-CSI geometry integration</li><li>Scriptable model and loading operations</li><li>Reusable components for repetitive analysis tasks</li></ul></details>
+  <div class="tool-links"><a class="btn primary" href="tools/mgt.html">Explore case study →</a></div>
+  </div>
+  <div class="tool-media"><button class="wide" data-full="assets/mgt-rhino.jpg" data-cap="MGT screenshot"><img src="assets/mgt-rhino.jpg" alt="MGT engineering analysis interface" loading="lazy"></button>
+  <button class="wide secondary-shot" data-full="assets/mgt-toolbar.jpg" data-cap="MGT output"><img src="assets/mgt-toolbar.jpg" alt="MGT supporting technical output" loading="lazy"></button></div>
+</article></div>
+  <h3 class="sub-head" id="other-automation">Other Automation Tools</h3><p class="tools-intro">Targeted software for repetitive modelling, drawing coordination, quality assurance and project reporting.</p>
+  <div class="others"><article class="card oc"><a class="oc-im" href="tools/pdfetabs-column-mapper.html" tabindex="-1" aria-hidden="true"><img src="assets/pdfetabs-after.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">ETABS API · PDF</span><h3><a href="tools/pdfetabs-column-mapper.html">PDFETABS Column Mapper</a></h3><p><b>Problem.</b> PDF column tags and ETABS labels can diverge.</p><p><b>Solution.</b> Overlay and match them geometrically, with visual QA before write-back.</p><img class="oc-flow-img" src="assets/overview-pdfetabs.svg" alt="PDFETABS Column Mapper problem-to-solution flow" loading="lazy"><div class="oc-links"><a class="oc-link" href="tools/pdfetabs-column-mapper.html">Read case study →</a></div></div></article>
+<article class="card oc"><a class="oc-im" href="tools/sp-editor.html" tabindex="-1" aria-hidden="true"><img src="assets/sp-ui.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">Python · ETABS API</span><h3><a href="tools/sp-editor.html">SP-Editor</a></h3><p><b>Problem.</b> Transfer of wall pier geometry and forces into design tools is repetitive.</p><p><b>Solution.</b> Extract ETABS pier data and generate spColumn inputs and checks in batches.</p><img class="oc-flow-img" src="assets/overview-speditor.svg" alt="SP-Editor problem-to-solution flow" loading="lazy"><div class="oc-links"><a class="oc-link" href="tools/sp-editor.html">Read case study →</a></div></div></article>
+<article class="card oc"><a class="oc-im" href="tools/bridger.html" tabindex="-1" aria-hidden="true"><img src="assets/bridger-ui.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">.NET 8 · ETABS API</span><h3><a href="tools/bridger.html">Bridger</a></h3><p><b>Problem.</b> Copying model elements manually risks lost assignments.</p><p><b>Solution.</b> Transfer elements, loads and properties between ETABS models with verification.</p><img class="oc-flow-img" src="assets/overview-bridger.svg" alt="Bridger problem-to-solution flow" loading="lazy"><div class="oc-links"><a class="oc-link" href="tools/bridger.html">Read case study →</a></div></div></article>
+<article class="card oc"><div class="oc-b"><span class="badge">AutoCAD · C#</span><h3>MDraftingHelper</h3><p><b>Problem.</b> Repeating reinforcement detailing and annotation consumes drawing time.</p><p><b>Solution.</b> Use CAD commands for bars, ties, hooks and steel section blocks.</p><img class="oc-flow-img" src="assets/overview-mdrafting.svg" alt="MDraftingHelper problem-to-solution flow" loading="lazy"></div></article>
+<article class="card oc"><div class="oc-b"><span class="badge">Excel VSTO · CSI API</span><h3>Excel CSI ToolBox</h3><p><b>Problem.</b> Spreadsheet and CSI model data are tedious to reconcile.</p><p><b>Solution.</b> Read, edit and batch-write model objects and results through Excel.</p><img class="oc-flow-img" src="assets/overview-excelcsi.svg" alt="Excel CSI ToolBox problem-to-solution flow" loading="lazy"></div></article>
+<article class="card oc"><div class="oc-b"><span class="badge">SAFE · C#</span><h3>SAFE Model Purger</h3><p><b>Problem.</b> Redundant model properties complicate reviews.</p><p><b>Solution.</b> Detect and consolidate compatible property definitions.</p><img class="oc-flow-img" src="assets/overview-safepurger.svg" alt="SAFE Model Purger problem-to-solution flow" loading="lazy"></div></article>
+<article class="card oc"><div class="oc-b"><span class="badge">ETABS Plugin · C#</span><h3>Floor Mesh Preview</h3><p><b>Problem.</b> Automatic slab meshes can conceal mesh compatibility issues.</p><p><b>Solution.</b> Display analysis meshes and flag hanging-node conditions.</p><img class="oc-flow-img" src="assets/overview-meshpreview.svg" alt="Floor Mesh Preview problem-to-solution flow" loading="lazy"></div></article>
+<article class="card oc"><div class="oc-b"><span class="badge">Power BI · VBA</span><h3>Submittal Dashboard</h3><p><b>Problem.</b> Distributed tracking makes drawing status difficult to follow.</p><p><b>Solution.</b> Consolidate drawing progress and workload into a dashboard.</p><img class="oc-flow-img" src="assets/overview-submittal.svg" alt="Submittal Dashboard problem-to-solution flow" loading="lazy"></div></article></div>
+ </div>
 </section>
 
 <section id="contact" style="border-bottom:0">

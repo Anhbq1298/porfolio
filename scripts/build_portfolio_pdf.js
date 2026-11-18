@@ -194,7 +194,7 @@ const SHEET_CSS = `
       art.querySelectorAll('.dev-intro').forEach(e => e.remove());
       Array.from(art.querySelectorAll('p, div')).filter(e => /^\s*Trained colleagues/.test(e.textContent) && e.children.length === 0).forEach(e => e.remove());
       const heroRole = art.querySelector('.herorow .role');
-      if (heroRole) { const w = document.createElement('div'); w.className = 'why'; w.innerHTML = '<b>Why me:</b> I design to ASCE / ACI / AISC, Eurocode and Australian Standards — and I write the software (ETABS API, Grasshopper, TypeScript apps) that makes the work faster, checkable and traceable.'; heroRole.after(w); }
+      if (heroRole) { const w = document.createElement('div'); w.className = 'why'; w.innerHTML = '<b>Why me:</b> I know the international codes inside out, with a macro view of how the whole building behaves and a micro view of section design. I communicate clearly, work closely with external parties, and use AI and cutting-edge technology as a partner to accelerate the workflow.'; heroRole.after(w); }
       if (art.classList.contains('twoproj')) {
         sheet.dataset.twoproj = '1';
         art.querySelectorAll('.half').forEach(half => {

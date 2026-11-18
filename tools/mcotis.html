@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mcotis · Quang Anh (Mark) Bui</title>
+<meta name="description" content="Automated structural optimisation for cable-supported and tied-arch transfer structures — a parametric FEM workflow that evaluates design alternatives and compares them on tonnage and cost.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4788'/%3E%3Cpath d='M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#1F4788"/><path d="M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>Mark Bui</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="links" id="nav-links">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#tools">Tools &amp; R&amp;D</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-head">
+  <div class="wrap">
+    <a class="crumb" href="../index.html#tools">← All tools</a>
+    <div class="kicker">Desktop app · C# / .NET 8 · own FEM solver</div>
+    <h1>Mcotis</h1>
+    <p class="summary">Automated structural optimisation for cable-supported and tied-arch transfer structures — a parametric FEM workflow that evaluates design alternatives and compares them on tonnage and cost.</p>
+    <dl class="meta"><div><dt>Type</dt><dd>WPF desktop application</dd></div><div><dt>Stack</dt><dd>C# · .NET 8 · in-house FEM</dd></div><div><dt>Interop</dt><dd>SAP2000 / ETABS import–export</dd></div><div><dt>Status</dt><dd>Active development</dd></div></dl>
+  </div>
+</header>
+<main>
+<div class="cs-hero"><button data-full="../assets/mcotis-moment.jpg" data-cap="ULS bending moment envelope"><img src="../assets/mcotis-moment.jpg" alt="ULS bending moment envelope"></button></div>
+<div class="cs-body">
+  <aside class="toc"><b>On this page</b><a href="#problem">Problem</a><a href="#methodology">Methodology</a><a href="#result">Result</a><a href="#technical-implementation">Technical implementation</a><a href="#gallery">Gallery</a><a href="#keywords">Keywords</a></aside>
+  <article><section id="problem"><h2>Problem</h2><p>Choosing the depth of a transfer truss and the pretension of its cables is a coupled problem: each choice changes member forces, deflection and column demand. Doing this by hand in SAP2000 means building, running and post-processing one model per option, so only a handful of options are ever compared.</p></section><section id="methodology"><h2>Methodology</h2><ul>
+<li><b>Candidate generation.</b> The engineer defines ranges for loading, truss height and cable pretension; Mcotis builds every combination as a candidate.</li>
+<li><b>Analysis.</b> Each candidate is analysed by an in-house FEM solver with tension-only cables, benchmarked against SAP2000, so no external solver licence is needed.</li>
+<li><b>Design.</b> Steel, CFT, encased and mega composite columns are checked and optimised over section ranges.</li>
+<li><b>Comparison.</b> Material quantities and estimated cost are reported per candidate.</li>
+</ul></section><section id="result"><h2>Result</h2><div class="callout"><p>Design teams can compare a full grid of truss depths and cable pretensions on deflection, member utilisation, tonnage and cost in one run, instead of a few hand-built models.</p></div></section><section id="technical-implementation"><h2>Technical implementation</h2><ul>
+<li>WPF / .NET 8 desktop application with a single-window document workflow.</li>
+<li>In-house frame and cable FEM solver; SAP2000 and ETABS kept only as import/export utilities.</li>
+<li>Verification suite comparing solver results against SAP2000 benchmarks.</li>
+</ul></section><section id="gallery"><h2>Gallery</h2><div class="figs"><figure><button data-full="../assets/mcotis-3d.jpg" data-cap="3D extruded model"><img src="../assets/mcotis-3d.jpg" alt="3D extruded model" loading="lazy"></button><figcaption>3D extruded model</figcaption></figure><figure><button data-full="../assets/mcotis-deflection.jpg" data-cap="SLS deflection contour"><img src="../assets/mcotis-deflection.jpg" alt="SLS deflection contour" loading="lazy"></button><figcaption>SLS deflection contour</figcaption></figure><figure class="wide"><button data-full="../assets/mcotis-mega.jpg" data-cap="Mega composite column section"><img src="../assets/mcotis-mega.jpg" alt="Mega composite column section" loading="lazy"></button><figcaption>Mega composite column section</figcaption></figure><figure class="wide"><button data-full="../assets/mcotis-qto.jpg" data-cap="Material quantities and estimated cost"><img src="../assets/mcotis-qto.jpg" alt="Material quantities and estimated cost" loading="lazy"></button><figcaption>Material quantities and estimated cost</figcaption></figure></div></section><section id="keywords"><h2>Keywords</h2><div class="tags"><span>FEM</span><span>Optimisation</span><span>Cables</span><span>Composite columns</span><span>C#</span><span>.NET 8</span></div></section></article>
+</div>
+<nav class="pager" aria-label="More"><a href="../index.html#tools"><small>← Back</small>All tools</a><a class="next" href="bridger.html"><small>Next →</small>Bridger</a></nav>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Quang Anh (Mark) Bui</span>
+    <button class="theme-btn" id="theme">Toggle theme</button>
+  </div>
+</footer>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button aria-label="Close">×</button>
+  <img alt="">
+  <p></p>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

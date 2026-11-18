@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SP-Editor · Quang Anh (Mark) Bui</title>
+<meta name="description" content="Award-winning automation of shear-wall design input — extracts ETABS pier geometry and forces and generates spColumn files in batch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4788'/%3E%3Cpath d='M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#1F4788"/><path d="M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>Mark Bui</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="links" id="nav-links">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#tools">Tools &amp; R&amp;D</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-head">
+  <div class="wrap">
+    <a class="crumb" href="../index.html#tools">← All tools</a>
+    <div class="kicker">Desktop tool · Python · ETABS API · award-winning</div>
+    <h1>SP-Editor</h1>
+    <p class="summary">Award-winning automation of shear-wall design input — extracts ETABS pier geometry and forces and generates spColumn files in batch.</p>
+    <dl class="meta"><div><dt>Type</dt><dd>Desktop tool</dd></div><div><dt>Stack</dt><dd>Python · PySide · ETABS API</dd></div><div><dt>Award</dt><dd>CORE studio R&amp;D 2024 Cycle 1, Thornton Tomasetti</dd></div><div><dt>Demo</dt><dd>YouTube</dd></div></dl>
+  </div>
+</header>
+<main>
+<div class="cs-hero"><button data-full="../assets/sp-ui.jpg" data-cap="SP-Editor interface"><img src="../assets/sp-ui.jpg" alt="SP-Editor interface"></button></div>
+<div class="cs-body">
+  <aside class="toc"><b>On this page</b><a href="#problem">Problem</a><a href="#methodology">Methodology</a><a href="#result">Result</a><a href="#technical-implementation">Technical implementation</a><a href="#gallery">Gallery</a><a href="#try-it">Try it</a><a href="#keywords">Keywords</a></aside>
+  <article><section id="problem"><h2>Problem</h2><p>Shear-wall design in spColumn needs geometry and design forces for every pier, transcribed by hand from ETABS. On large buildings this is hours of manual work in the middle of the design process.</p></section><section id="methodology"><h2>Methodology</h2><ul>
+<li>Extract wall-pier geometry and retrieve and filter pier design forces through the ETABS API.</li>
+<li>Take the engineer's reinforcement pattern as input.</li>
+<li>Run batch processing and export demand/capacity results.</li>
+<li>Generate spColumn files for detailed design in later phases (100% DD or CD).</li>
+</ul></section><section id="result"><h2>Result</h2><div class="callout"><p>Removed the manual transcription step between ETABS and spColumn. The project received an award from CORE studio in Thornton Tomasetti's R&amp;D 2024 Cycle 1.</p></div></section><section id="technical-implementation"><h2>Technical implementation</h2><ul>
+<li>Python with a PySide interface and SQL storage.</li>
+<li>ETABS API for geometry and force extraction; spColumn file generation.</li>
+</ul></section><section id="gallery"><h2>Gallery</h2><div class="figs"><figure class="wide"><button data-full="../assets/sp-flow.jpg" data-cap="Workflow"><img src="../assets/sp-flow.jpg" alt="Workflow" loading="lazy"></button><figcaption>Workflow</figcaption></figure></div></section><section id="try-it"><h2>Try it</h2><div class="tool-links" style="margin-top:0"><a class="btn primary" href="https://www.youtube.com/watch?v=ujFrALC1rHs" target="_blank" rel="noopener">Watch demo on YouTube</a></div></section><section id="keywords"><h2>Keywords</h2><div class="tags"><span>Python</span><span>ETABS API</span><span>spColumn</span><span>Shear walls</span><span>Award</span></div></section></article>
+</div>
+<nav class="pager" aria-label="More"><a href="mbcolumn-lite.html"><small>← Previous</small>MBColumn Lite</a><a class="next" href="mgt.html"><small>Next →</small>MGT</a></nav>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Quang Anh (Mark) Bui</span>
+    <button class="theme-btn" id="theme">Toggle theme</button>
+  </div>
+</footer>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button aria-label="Close">×</button>
+  <img alt="">
+  <p></p>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

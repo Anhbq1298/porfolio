@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MBColumn Lite · Quang Anh (Mark) Bui</title>
+<meta name="description" content="Rectangular RC column design to Eurocode 2 in the browser — a fibre-based 3D PMM surface solved in seconds, with reports editable in MCalcCanvas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4788'/%3E%3Cpath d='M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#1F4788"/><path d="M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>Mark Bui</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="links" id="nav-links">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#tools">Tools &amp; R&amp;D</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-head">
+  <div class="wrap">
+    <a class="crumb" href="../index.html#tools">← All tools</a>
+    <div class="kicker">Web app · TypeScript</div>
+    <h1>MBColumn Lite</h1>
+    <p class="summary">Rectangular RC column design to Eurocode 2 in the browser — a fibre-based 3D PMM surface solved in seconds, with reports editable in MCalcCanvas.</p>
+    <dl class="meta"><div><dt>Type</dt><dd>Web application</dd></div><div><dt>Code</dt><dd>EN 1992-1-1</dd></div><div><dt>Method</dt><dd>Fibre section, 3D PMM</dd></div><div><dt>Status</dt><dd>Live</dd></div></dl>
+  </div>
+</header>
+<main>
+<div class="cs-hero"><button data-full="../assets/mbclite-pmm.jpg" data-cap="3D PMM surface, capacity check, P–M and Mx–My diagrams"><img src="../assets/mbclite-pmm.jpg" alt="3D PMM surface, capacity check, P–M and Mx–My diagrams"></button></div>
+<div class="cs-body">
+  <aside class="toc"><b>On this page</b><a href="#problem">Problem</a><a href="#methodology">Methodology</a><a href="#result">Result</a><a href="#technical-implementation">Technical implementation</a><a href="#gallery">Gallery</a><a href="#try-it">Try it</a><a href="#keywords">Keywords</a></aside>
+  <article><section id="problem"><h2>Problem</h2><p>Checking biaxially loaded columns needs the full P–Mx–My capacity surface. Commercial tools are licensed per seat, and quick spreadsheets usually simplify biaxial bending.</p></section><section id="methodology"><h2>Methodology</h2><ul>
+<li><b>Section editor.</b> Draw and drag bars on a grid canvas, edit coordinates in a table, or set bars by face.</li>
+<li><b>Fibre analysis.</b> The section is meshed into concrete fibres and bars; the solver builds the 3D PMM surface.</li>
+<li><b>Checks.</b> Multiple load cases with demand/capacity ratios, P–M and Mx–My diagrams, and optional EC2 §5.8 slenderness.</li>
+<li><b>Report.</b> Results export to a report that opens in MCalcCanvas.</li>
+</ul></section><section id="result"><h2>Result</h2><div class="callout"><p>A free, browser-based biaxial column check that solves in seconds and produces a reviewable report.</p></div></section><section id="technical-implementation"><h2>Technical implementation</h2><ul>
+<li>TypeScript web app; the solver runs in a background worker so the interface stays responsive.</li>
+<li>Interactive 3D surface with load-case points, governing ray and capacity contours.</li>
+</ul></section><section id="gallery"><h2>Gallery</h2><div class="figs"><figure class="wide"><button data-full="../assets/mbclite-ui.jpg" data-cap="Section editor, materials and load cases"><img src="../assets/mbclite-ui.jpg" alt="Section editor, materials and load cases" loading="lazy"></button><figcaption>Section editor, materials and load cases</figcaption></figure></div></section><section id="try-it"><h2>Try it</h2><div class="tool-links" style="margin-top:0"><a class="btn primary" href="https://mbcolumnlite.netlify.app/" target="_blank" rel="noopener">Open live app</a></div></section><section id="keywords"><h2>Keywords</h2><div class="tags"><span>EN 1992-1-1</span><span>PMM</span><span>Fibre section</span><span>TypeScript</span></div></section></article>
+</div>
+<nav class="pager" aria-label="More"><a href="mcompositebeamdesign.html"><small>← Previous</small>mCompositeBeamDesign</a><a class="next" href="sp-editor.html"><small>Next →</small>SP-Editor</a></nav>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Quang Anh (Mark) Bui</span>
+    <button class="theme-btn" id="theme">Toggle theme</button>
+  </div>
+</footer>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button aria-label="Close">×</button>
+  <img alt="">
+  <p></p>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

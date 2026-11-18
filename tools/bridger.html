@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bridger · Quang Anh (Mark) Bui</title>
+<meta name="description" content="Moves parts of one ETABS model into another — geometry, names, assignments and definitions intact — and verifies every value against the target model.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4788'/%3E%3Cpath d='M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#1F4788"/><path d="M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>Mark Bui</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="links" id="nav-links">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#tools">Tools &amp; R&amp;D</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-head">
+  <div class="wrap">
+    <a class="crumb" href="../index.html#tools">← All tools</a>
+    <div class="kicker">Desktop app · .NET 8 · ETABS API</div>
+    <h1>Bridger</h1>
+    <p class="summary">Moves parts of one ETABS model into another — geometry, names, assignments and definitions intact — and verifies every value against the target model.</p>
+    <dl class="meta"><div><dt>Type</dt><dd>WPF desktop application</dd></div><div><dt>Stack</dt><dd>C# · .NET 8 · ETABS API</dd></div><div><dt>Tested on</dt><dd>ETABS 22.7</dd></div><div><dt>Output</dt><dd>Migration log (.log / .jsonl)</dd></div></dl>
+  </div>
+</header>
+<main>
+<div class="cs-hero"><button data-full="../assets/bridger-ui.jpg" data-cap="Bridger — connections, migration options and execution log"><img src="../assets/bridger-ui.jpg" alt="Bridger — connections, migration options and execution log"></button></div>
+<div class="cs-body">
+  <aside class="toc"><b>On this page</b><a href="#problem">Problem</a><a href="#methodology">Methodology</a><a href="#result">Result</a><a href="#technical-implementation">Technical implementation</a><a href="#keywords">Keywords</a></aside>
+  <article><section id="problem"><h2>Problem</h2><p>Design teams often develop parts of a building in separate ETABS models and later need to merge them. Copying objects by hand loses unique names and assignments, and re-applying sections, releases, springs, loads and labels is slow and easy to get wrong.</p></section><section id="methodology"><h2>Methodology</h2><ul>
+<li><b>Connect.</b> Attach to two running ETABS instances (source and target), found by process and attached by PID.</li>
+<li><b>Select.</b> Pick joints, frames and shells in Model A and tick the categories to migrate.</li>
+<li><b>Migrate in stages.</b> Geometry and names → section definitions → assignments → loading → pier and spandrel labels → design overwrites.</li>
+<li><b>Fixed rules, no prompts.</b> Each situation — no match, one match, several matches, name taken — has a defined behaviour; skipped items are logged.</li>
+<li><b>Verify.</b> Every value is read back from Model B and compared before the model is refreshed.</li>
+</ul></section><section id="result"><h2>Result</h2><div class="callout"><p>Model merges become repeatable and auditable: what was copied, reused, renamed or skipped is recorded in a log rather than relying on manual checks.</p></div></section><section id="technical-implementation"><h2>Technical implementation</h2><ul>
+<li>.NET 8 WPF application compiled against the ETABS API.</li>
+<li>Load patterns, cases (including nonlinear static, staged construction and time history) and combinations migrate with the functions and mass sources they depend on.</li>
+<li>Live test suite drives two ETABS instances and regenerates a capability matrix of verified categories.</li>
+</ul></section><section id="keywords"><h2>Keywords</h2><div class="tags"><span>ETABS API</span><span>Model migration</span><span>Verification</span><span>C#</span><span>.NET 8</span></div></section></article>
+</div>
+<nav class="pager" aria-label="More"><a href="mcotis.html"><small>← Previous</small>Mcotis</a><a class="next" href="pdfetabs-column-mapper.html"><small>Next →</small>PDFETABS Column Mapper</a></nav>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Quang Anh (Mark) Bui</span>
+    <button class="theme-btn" id="theme">Toggle theme</button>
+  </div>
+</footer>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button aria-label="Close">×</button>
+  <img alt="">
+  <p></p>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

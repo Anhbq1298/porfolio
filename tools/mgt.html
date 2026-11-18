@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MGT · Quang Anh (Mark) Bui</title>
+<meta name="description" content="Parametric modelling for ETABS and SAP2000 — Grasshopper components that build, edit, query and load structural models straight from Rhino geometry.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4788'/%3E%3Cpath d='M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#1F4788"/><path d="M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>Mark Bui</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="links" id="nav-links">
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#tools">Tools &amp; R&amp;D</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="cs-head">
+  <div class="wrap">
+    <a class="crumb" href="../index.html#tools">← All tools</a>
+    <div class="kicker">Grasshopper plugin · C# · Python</div>
+    <h1>MGT</h1>
+    <p class="summary">Parametric modelling for ETABS and SAP2000 — Grasshopper components that build, edit, query and load structural models straight from Rhino geometry.</p>
+    <dl class="meta"><div><dt>Type</dt><dd>Grasshopper 8 plugin</dd></div><div><dt>Stack</dt><dd>C# · GHPython · CSI API</dd></div><div><dt>Targets</dt><dd>ETABS · SAP2000 · Excel</dd></div><div><dt>Demo</dt><dd>YouTube playlist</dd></div></dl>
+  </div>
+</header>
+<main>
+<div class="cs-hero"><button data-full="../assets/mgt-toolbar.jpg" data-cap="MGT toolbar — units, materials, loadings, point, frame, shell and cable objects, utilities"><img src="../assets/mgt-toolbar.jpg" alt="MGT toolbar — units, materials, loadings, point, frame, shell and cable objects, utilities"></button></div>
+<div class="cs-body">
+  <aside class="toc"><b>On this page</b><a href="#problem">Problem</a><a href="#methodology">Methodology</a><a href="#result">Result</a><a href="#technical-implementation">Technical implementation</a><a href="#gallery">Gallery</a><a href="#try-it">Try it</a><a href="#keywords">Keywords</a></aside>
+  <article><section id="problem"><h2>Problem</h2><p>Architectural geometry lives in Rhino, analysis lives in ETABS or SAP2000. Rebuilding irregular geometry in the analysis model, and keeping it in sync as the design changes, is slow and repetitive.</p></section><section id="methodology"><h2>Methodology</h2><ul>
+<li><b>CSI link.</b> Components wrap the ETABS and SAP2000 APIs to set up, edit, query and load models from Grasshopper, and export data trees to Excel.</li>
+<li><b>Grillage builder.</b> Turns slab boundaries into a strut-and-tie grillage model by conditionally sorting the Grasshopper data tree.</li>
+<li><b>Tributary take-down.</b> Voronoi-based tributary areas for irregular wall and column layouts from cleaned CAD data.</li>
+</ul></section><section id="result"><h2>Result</h2><div class="callout"><p>Analysis models are generated and updated parametrically from the design geometry instead of being redrawn by hand.</p></div></section><section id="technical-implementation"><h2>Technical implementation</h2><ul>
+<li>Grasshopper 8 plugin in C#, organised by component family (units, materials, loadings, points, frames, shells, cables, utilities).</li>
+<li>Python 3 components for data-tree processing.</li>
+<li>Compatibility and domain tests; example definitions shipped with the plugin.</li>
+</ul></section><section id="gallery"><h2>Gallery</h2><div class="figs"><figure><button data-full="../assets/gh-grillage.jpg" data-cap="Grillage strut-and-tie model from slab geometry"><img src="../assets/gh-grillage.jpg" alt="Grillage strut-and-tie model from slab geometry" loading="lazy"></button><figcaption>Grillage strut-and-tie model from slab geometry</figcaption></figure><figure><button data-full="../assets/gh-trib.jpg" data-cap="Voronoi tributary areas"><img src="../assets/gh-trib.jpg" alt="Voronoi tributary areas" loading="lazy"></button><figcaption>Voronoi tributary areas</figcaption></figure></div></section><section id="try-it"><h2>Try it</h2><div class="tool-links" style="margin-top:0"><a class="btn primary" href="https://www.youtube.com/playlist?list=PLP4F5t1phy2g" target="_blank" rel="noopener">Watch MGT on YouTube</a></div></section><section id="keywords"><h2>Keywords</h2><div class="tags"><span>Grasshopper</span><span>Rhino</span><span>ETABS API</span><span>SAP2000 API</span><span>C#</span><span>Python</span></div></section></article>
+</div>
+<nav class="pager" aria-label="More"><a href="sp-editor.html"><small>← Previous</small>SP-Editor</a><a class="next" href="../index.html#tools"><small>Back →</small>All tools</a></nav>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Quang Anh (Mark) Bui</span>
+    <button class="theme-btn" id="theme">Toggle theme</button>
+  </div>
+</footer>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button aria-label="Close">×</button>
+  <img alt="">
+  <p></p>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

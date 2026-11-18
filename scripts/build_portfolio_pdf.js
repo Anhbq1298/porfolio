@@ -12,22 +12,6 @@ const OUT = path.join(ROOT, 'assets', 'Mark_Bui_CV_and_Portfolio.pdf');
 const TMP = fs.mkdtempSync('/tmp/portfolio-pdf-');
 const PORT = 8123;
 
-const pages = [
-  ['Portfolio · Home', 'index.html'],
-  ['Project · 4th Broadway', 'projects/4th-broadway.html'],
-  ['Project · SDC Belmont Data Center', 'projects/sdc-belmont.html'],
-  ['Project · Apple Capstone Campus', 'projects/apple-capstone.html'],
-  ['Project · Shellharbour Hospital', 'projects/shellharbour-hospital.html'],
-  ['Tool · Mcotis', 'tools/mcotis.html'],
-  ['Tool · MCalcCanvas', 'tools/mcalccanvas.html'],
-  ['Tool · PDFETABS Column Mapper', 'tools/pdfetabs-column-mapper.html'],
-  ['Tool · SP-Editor', 'tools/sp-editor.html'],
-  ['Tool · mCompositeBeamDesign', 'tools/mcompositebeamdesign.html'],
-  ['Tool · MBColumn Lite', 'tools/mbcolumn-lite.html'],
-  ['Tool · Bridger', 'tools/bridger.html'],
-  ['Tool · MGT', 'tools/mgt.html'],
-];
-
 const fontFile = (pkg, name) => {
   const dir = path.dirname(require.resolve(pkg + '/package.json'));
   return path.join(dir, 'files', name);
@@ -47,21 +31,35 @@ const fontFiles = new Map([
   ...[400, 500].map(w => { const f = fontFile('@fontsource/ibm-plex-mono', `ibm-plex-mono-latin-${w}-normal.woff2`); return [path.basename(f), f]; }),
 ]);
 
-const PRINT_CSS = `
-  nav.top, .menu-btn, .book-launch, #open-book, dialog, .cta, .cv-download, .contact-cv, .skip-link, footer .top-link { display:none !important; }
-  *{ animation:none !important; transition:none !important; }
-  html{ scroll-behavior:auto !important; }
-  section{ padding:34px 0 !important; }
-  figure, .oc, .gallery figure, .tool-statement, .callout, .home-flow, table, .pager { break-inside:avoid; }
-  h2,h3,h4,.sec-head{ break-after:avoid; }
-  video{ display:none !important; }
+const SHEET_CSS = `
+  @page{size:297mm 210mm;margin:0}
+  html,body{margin:0;background:#fff}
+  nav.top,.menu-btn,.book-launch,dialog,header.site,footer.site,main,section,.skip-link{display:none !important}
+  *{animation:none !important;transition:none !important}
+  .sheet{width:297mm;height:210mm;box-sizing:border-box;padding:11mm 13mm 14mm;position:relative;overflow:hidden;break-after:page;background:var(--surface,#fff);color:var(--text,#172033)}
+  .sheet:last-child{break-after:auto}
+  .sheet .fit{transform-origin:top left;width:100%}
+  .sheet .book-page{overflow:visible !important;padding:0 !important;animation:none !important;font-size:15px;line-height:1.5;box-shadow:none !important;border:0 !important}
+  .sheet .book-page > h3{font-size:30px;margin:2px 0 10px}
+  .sheet .body{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;align-items:start}
+  .sheet .body.single{display:block;column-count:2;column-gap:26px}
+  .sheet .body.single > *{break-inside:avoid}
+  .sheet .book-gallery{margin:0;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sheet .book-gallery img{max-height:62mm;object-fit:contain;width:100%;background:#fff}
+  .sheet .book-gallery.many img{max-height:48mm}
+  .sheet .book-gallery.many{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sheet .book-details{margin:10px 0}
+  .sheet .book-downloads,.sheet .more-link{display:none !important}
+  .sheet .book-page .others{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+  .sheet .foot{position:absolute;left:13mm;right:13mm;bottom:6mm;display:flex;justify-content:space-between;font:10px Inter,Arial,sans-serif;color:#64748B}
+  .sheet figure,.sheet .oc,.sheet .tool-statement,.sheet .home-flow{break-inside:avoid}
 `;
 
 (async () => {
   const server = spawn('python3', ['-m', 'http.server', String(PORT), '--bind', '127.0.0.1'], { cwd: ROOT, stdio: 'ignore' });
   await new Promise(r => setTimeout(r, 1200));
   const browser = await chromium.launch();
-  const context = await browser.newContext({ colorScheme: 'light', viewport: { width: 1200, height: 900 } });
+  const context = await browser.newContext({ colorScheme: 'light', viewport: { width: 1500, height: 940 } });
   await context.route(/fonts\.googleapis\.com/, r => r.fulfill({ contentType: 'text/css', body: cssText }));
   await context.route(/fonts\.gstatic\.com/, r => r.abort());
   await context.route(/\/__font\//, r => {
@@ -70,49 +68,84 @@ const PRINT_CSS = `
     return f ? r.fulfill({ contentType: 'font/woff2', body: fs.readFileSync(f), headers: { 'access-control-allow-origin': '*' } }) : r.abort();
   });
 
-  const files = [];
-  const render = async (url, file, opts = {}) => {
-    const page = await context.newPage();
-    await page.goto(url, { waitUntil: 'load' });
-    await page.emulateMedia({ media: 'print', colorScheme: 'light' });
-    await page.addStyleTag({ content: PRINT_CSS });
-    await page.evaluate(async () => {
-      document.querySelectorAll('details').forEach(d => { d.open = true; });
-      document.querySelectorAll('img').forEach(i => { i.loading = 'eager'; });
-      document.querySelectorAll('video[poster]').forEach(v => {
-        const img = document.createElement('img');
-        img.src = v.poster; img.style.width = '100%'; v.replaceWith(img);
-      });
-      await Promise.all(Array.from(document.images, i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
-      await document.fonts.ready;
-    });
-    await page.waitForTimeout(400);
-    await page.pdf({ path: file, format: 'A4', printBackground: true, scale: 0.7, margin: { top: '10mm', bottom: '12mm', left: '9mm', right: '9mm' },
-      displayHeaderFooter: true, headerTemplate: '<span></span>',
-      footerTemplate: `<div style="width:100%;font:8px Inter,Arial,sans-serif;color:#64748B;text-align:center">${opts.footer || ''}  ·  <span class="pageNumber"></span>/<span class="totalPages"></span></div>` });
-    await page.close();
-  };
+  // 1. Collect every Book View page (same content as the on-site Portfolio Book).
+  const page = await context.newPage();
+  await page.goto(`http://127.0.0.1:${PORT}/index.html`, { waitUntil: 'load' });
+  await page.click('#open-book');
+  const count = await page.locator('.book-contents li').count();
+  const sheets = [];
+  for (let i = 0; i < count; i++) {
+    await page.click('.book-contents summary');
+    await page.locator('.book-contents li button').nth(i).click();
+    await page.waitForTimeout(80);
+    sheets.push(await page.evaluate(() => {
+      const el = document.querySelector('.book-spread .book-page');
+      return { title: el.querySelector('h3').textContent, html: el.outerHTML };
+    }));
+  }
+  console.log('book pages:', count);
 
-  // Part 2 divider page
+  // 2. Lay them out one per landscape A4 sheet, shrinking each to fit.
+  await page.evaluate(() => document.querySelector('#portfolio-book').close());
+  await page.emulateMedia({ media: 'print', colorScheme: 'light' });
+  await page.addStyleTag({ content: SHEET_CSS });
+  await page.evaluate((sheets) => {
+    const base = 'https://anhbq1298.github.io/porfolio/';
+    document.body.querySelectorAll(':scope > *').forEach(n => { if (n.tagName !== 'SCRIPT') n.remove(); });
+    sheets.forEach((s, i) => {
+      const sheet = document.createElement('div'); sheet.className = 'sheet';
+      sheet.innerHTML = `<div class="fit">${s.html}</div><div class="foot"><span>Quang Anh (Mark) Bui · Portfolio</span><span>${i + 1} / ${sheets.length}</span></div>`;
+      const art = sheet.querySelector('.book-page');
+      const heads = Array.from(art.children).filter(c => /^(P)$/.test(c.tagName) && c.classList.contains('book-chapter') || c.tagName === 'H3');
+      const media = Array.from(art.children).filter(c => c.matches('.book-gallery, .home-flow, .others, .portrait'));
+      const rest = Array.from(art.children).filter(c => !heads.includes(c) && !media.includes(c));
+      const body = document.createElement('div');
+      body.className = 'body' + (media.length ? '' : ' single');
+      if (media.length && !rest.length) { body.className = 'body'; body.style.display = 'block'; media.forEach(c => body.append(c)); art.querySelectorAll('.others').forEach(o => o.style.gridTemplateColumns = 'repeat(3,minmax(0,1fr))'); }
+      else if (media.length) {
+        const l = document.createElement('div'), r = document.createElement('div');
+        rest.forEach(c => l.append(c)); media.forEach(c => r.append(c));
+        body.append(l, r);
+      } else rest.forEach(c => body.append(c));
+      art.append(body);
+      art.querySelectorAll('.book-gallery').forEach(g => { if (g.children.length > 4) g.classList.add('many'); });
+      art.querySelectorAll('img').forEach(im => { im.loading = 'eager'; });
+      art.querySelectorAll('a[href]').forEach(a => { a.href = new URL(a.getAttribute('href'), base).href; });
+      document.body.append(sheet);
+    });
+  }, sheets);
+  await page.evaluate(async () => {
+    await Promise.all(Array.from(document.images, i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+    await document.fonts.ready;
+  });
+  await page.waitForTimeout(500);
+  const report = await page.evaluate(() => Array.from(document.querySelectorAll('.sheet')).map(sh => {
+    const fit = sh.querySelector('.fit'); const avail = sh.clientHeight - 40 - 24;
+    const availW = sh.clientWidth - 98;
+    const h = z => { fit.style.zoom = z; fit.style.width = (availW / z) + 'px'; return fit.getBoundingClientRect().height; };
+    let lo = 0.45, hi = 1.3;
+    for (let i = 0; i < 14; i++) { const m = (lo + hi) / 2; if (h(m) <= avail) lo = m; else hi = m; }
+    const z = lo; h(z);
+    return Math.round(z * 100);
+  }));
+  console.log('zoom %:', report.join(' '));
+  const body = path.join(TMP, 'portfolio.pdf');
+  await page.pdf({ path: body, preferCSSPageSize: true, printBackground: true });
+  await page.close();
+
   const divider = path.join(TMP, 'divider.pdf');
   const dp = await context.newPage();
-  await dp.setContent(`<style>@page{size:A4}body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;font-family:Inter,Arial,sans-serif;color:#172033}
-    .box{max-width:520px;padding:0 40px}.k{color:#1F4788;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
-    h1{font-size:44px;line-height:1.1;margin:12px 0}p{color:#64748B;font-size:16px;line-height:1.6}hr{border:0;border-top:3px solid #1F4788;width:64px;margin:24px 0}</style>
-    <div class="box"><div class="k">Part 2</div><h1>Portfolio</h1><hr><p><b>Quang Anh Bui (Mark)</b><br>Structural Engineer &amp; Engineering Software Developer</p>
-    <p>Print-out of the online portfolio: experience, project case studies and engineering tools. The live version, with videos and interactive workflows, is at <b>anhbq1298.github.io/porfolio</b>.</p></div>`);
-  await dp.pdf({ path: divider, format: 'A4', printBackground: true });
+  const bannerB64 = fs.readFileSync(path.join(ROOT, 'assets', 'tools-banner.jpg')).toString('base64');
+  await dp.setContent(`<style>@page{size:297mm 210mm;margin:0}body{margin:0;height:210mm;display:flex;flex-direction:column;font-family:Inter,Arial,sans-serif;color:#172033}
+    img{width:297mm;height:89mm;display:block}.box{padding:14mm 18mm 0}.k{color:#1F4788;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
+    h1{font-size:54px;line-height:1.1;margin:8px 0}p{color:#64748B;font-size:17px;line-height:1.55;max-width:720px;margin:0 0 8px}hr{border:0;border-top:3px solid #1F4788;width:64px;margin:16px 0}</style>
+    <img src="data:image/jpeg;base64,${bannerB64}"><div class="box"><div class="k">Part 2</div><h1>Portfolio</h1><hr><p><b>Quang Anh Bui (Mark)</b> · Structural Engineer &amp; Engineering Software Developer</p>
+    <p>Book-style print-out of the online portfolio: one page per project and tool. The live version, with videos and interactive workflows, is at <b>anhbq1298.github.io/porfolio</b>.</p></div>`);
+  await dp.pdf({ path: divider, preferCSSPageSize: true, printBackground: true });
   await dp.close();
-
-  const rendered = [];
-  for (const [title, rel] of pages) {
-    const out = path.join(TMP, rel.replace(/[\/]/g, '_') + '.pdf');
-    await render(`http://127.0.0.1:${PORT}/${rel}`, out, { footer: 'Quang Anh (Mark) Bui · Portfolio · ' + title });
-    rendered.push([title, out]);
-    console.log('rendered', rel);
-  }
   await browser.close();
   server.kill();
+  const rendered = [['All pages', body]];
 
   const py = `
 import sys, json
@@ -125,12 +158,17 @@ def add(path, title, parent=None):
     return w.add_outline_item(title, start, parent=parent)
 add(cv, 'Part 1 · CV')
 part2 = add(divider, 'Part 2 · Portfolio')
-for title, f in parts: add(f, title, part2)
+r = PdfReader(parts[0][1]); st = len(w.pages)
+import json as _j
+titles = _j.load(open(sys.argv[5]))
+for p in r.pages: w.add_page(p)
+for i, t in enumerate(titles): w.add_outline_item(t, st + i, parent=part2)
 w.add_metadata({'/Title': 'Quang Anh (Mark) Bui — CV and Portfolio', '/Author': 'Quang Anh Bui'})
 w.compress_identical_objects(remove_identicals=True, remove_orphans=True)
 for p in w.pages: p.compress_content_streams()
 w.write(out)
 `;
-  execFileSync('python3', ['-c', py, CV, divider, OUT, JSON.stringify(rendered)], { stdio: 'inherit' });
+  fs.writeFileSync(path.join(TMP,'titles.json'), JSON.stringify(sheets.map(s=>s.title)));
+  execFileSync('python3', ['-c', py, CV, divider, OUT, JSON.stringify(rendered), path.join(TMP,'titles.json')], { stdio: 'inherit' });
   console.log('wrote', OUT, (fs.statSync(OUT).size / 1e6).toFixed(1) + ' MB');
 })();

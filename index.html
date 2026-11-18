@@ -256,7 +256,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="stats wrap" style="padding:0">
     <div class="stat"><b>5+ yrs</b><span>Structural design experience</span></div>
     <div class="stat"><b>3 firms</b><span>Thornton Tomasetti · Aurecon · Meinhardt</span></div>
-    <div class="stat"><b>15+ tools</b><span>Self-developed apps, add-ins &amp; scripts</span></div>
+    <div class="stat"><b>12+ tools</b><span>Self-developed apps, add-ins &amp; scripts</span></div>
     <div class="stat"><b>US + EU</b><span>ACI · AISC · ASCE · Eurocode</span></div>
   </div>
 </header>
@@ -526,15 +526,27 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           <button data-full="assets/sp-flow.jpg" data-cap="SP-Editor workflow"><img src="assets/sp-flow.jpg" alt="SP-Editor workflow diagram" loading="lazy"></button>
         </div>
       </article>
+      <article class="card tool">
+        <div class="tool-body">
+          <span class="badge">Grasshopper 8 · C# · Python</span>
+          <h3>MGT — MGrasshopperToolbox</h3>
+          <p class="sub">Grasshopper toolbox that connects Rhino geometry to ETABS and SAP2000.</p>
+          <ul>
+            <li><b>CSI link:</b> components wrap ETABS and SAP2000 APIs to set up, edit, query and load structural models parametrically, and export data trees to Excel.</li>
+            <li><b>Grillage builder:</b> turns slab boundaries into a strut-and-tie grillage model by sorting the Grasshopper data tree.</li>
+            <li><b>Tributary take-down:</b> Voronoi-based tributary areas for irregular wall and column layouts from cleaned CAD data.</li>
+          </ul>
+        </div>
+        <div class="tool-media">
+          <button class="wide" data-full="assets/gh-grillage.jpg" data-cap="MGT — grillage strut-and-tie model from slab geometry"><img src="assets/gh-grillage.jpg" alt="Grillage model generated in Grasshopper" loading="lazy"></button>
+          <button data-full="assets/gh-trib.jpg" data-cap="MGT — Voronoi tributary areas"><img src="assets/gh-trib.jpg" alt="Tributary areas in Grasshopper" loading="lazy"></button>
+          <button data-full="assets/gh-plugin.jpg" data-cap="MGT — Grasshopper toolbar"><img src="assets/gh-plugin.jpg" alt="MGT Grasshopper toolbar" loading="lazy" style="object-fit:contain;background:#fff;padding:12px"></button>
+        </div>
+      </article>
     </div>
 
     <h3 class="sub-head">CSI &amp; CAD add-ins</h3>
     <div class="addins">
-      <article class="card addin">
-        <span class="badge">Grasshopper 8 · C#</span>
-        <h3>MGT — Grasshopper tool</h3>
-        <p>Grasshopper plugin that wraps ETABS and SAP2000 APIs so Rhino users can set up, edit, query and load structural models parametrically.</p>
-      </article>
       <article class="card addin">
         <span class="badge">AutoCAD 2021 · C# · WPF</span>
         <h3>MDraftingHelper</h3>
@@ -565,33 +577,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <h3>Floor Mesh Preview</h3>
         <p>Reads the actual analysis mesh ETABS generates for floor objects and flags hanging nodes between slabs in a pan/zoom viewer.</p>
       </article>
-    </div>
-
-    <h3 class="sub-head">Grasshopper scripts &amp; dashboards</h3>
-    <div class="mini-tools" style="margin-top:0">
-      <article class="card">
-        <button data-full="assets/gh-grillage.jpg" data-cap="Grillage strut-and-tie builder"><img src="assets/gh-grillage.jpg" alt="Grillage model generated in Grasshopper" loading="lazy"></button>
-        <div class="b"><h3>Grillage strut-and-tie builder</h3><p>Grasshopper + Python 3 script that turns slab boundaries into a strut-and-tie grillage model.</p></div>
-      </article>
-      <article class="card">
-        <button data-full="assets/gh-trib.jpg" data-cap="Tributary area take-down with Voronoi"><img src="assets/gh-trib.jpg" alt="Tributary areas in Grasshopper" loading="lazy"></button>
-        <div class="b"><h3>Tributary take-down</h3><p>Voronoi-based tributary areas for irregular wall and column layouts from cleaned CAD data.</p></div>
-      </article>
-      <article class="card">
-        <button data-full="assets/gh-truss.jpg" data-cap="Parametric truss to ETABS"><img src="assets/gh-truss.jpg" alt="Parametric diagonal truss geometry" loading="lazy"></button>
-        <div class="b"><h3>Geometry → ETABS</h3><p>Parametric diagonal-truss generator pushed straight into ETABS through a Python API component.</p></div>
-      </article>
-      <article class="card">
-        <button data-full="assets/gh-plugin.jpg" data-cap="Grasshopper plugin toolbar"><img src="assets/gh-plugin.jpg" alt="Grasshopper plugin toolbar" loading="lazy" style="object-fit:contain;background:#fff;padding:20px"></button>
-        <div class="b"><h3>Grasshopper → ETABS components</h3><p>Early components to stream models from Grasshopper into ETABS and export data trees to Excel.</p></div>
-      </article>
-      <article class="card">
-        <button data-full="assets/etabs-plugin.jpg" data-cap="ETABS → SAFE load set transfer"><img src="assets/etabs-plugin.jpg" alt="ETABS plugin window" loading="lazy" style="object-position:top"></button>
-        <div class="b"><h3>Shell load set transfer</h3><p>Transfers shell uniform load sets and assignments from ETABS to SAFE.</p></div>
-      </article>
-      <article class="card">
-        <button data-full="assets/apple-powerbi.jpg" data-cap="Power BI submittal tracker"><img src="assets/apple-powerbi.jpg" alt="Power BI dashboard" loading="lazy"></button>
-        <div class="b"><h3>Submittal dashboard</h3><p>Power BI tracker for shop-drawing status and team workload during construction administration.</p></div>
+      <article class="card addin">
+        <span class="badge">Power BI · VBA</span>
+        <h3>Submittal dashboard</h3>
+        <p>Power BI tracker for shop-drawing status and team workload during construction administration, plus VBA-refactored calculation workbooks.</p>
       </article>
     </div>
   </div>

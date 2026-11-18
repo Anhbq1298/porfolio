@@ -36,7 +36,7 @@ const SHEET_CSS = `
   html,body{margin:0;background:#fff}
   nav.top,.menu-btn,.book-launch,dialog,header.site,footer.site,main,section,.skip-link{display:none !important}
   *{animation:none !important;transition:none !important}
-  .sheet{width:297mm;height:210mm;box-sizing:border-box;padding:11mm 13mm 14mm;position:relative;overflow:hidden;break-after:page;background:var(--surface,#fff);color:var(--text,#172033)}
+  .sheet{width:297mm;height:210mm;box-sizing:border-box;padding:16mm 13mm 14mm;position:relative;overflow:hidden;break-after:page;background:var(--surface,#fff);color:var(--text,#172033)}
   .sheet:last-child{break-after:auto}
   .sheet .fit{transform-origin:top left;width:100%}
   .sheet .book-page{overflow:visible !important;padding:0 !important;animation:none !important;font-size:15px;line-height:1.5;box-shadow:none !important;border:0 !important}
@@ -79,16 +79,28 @@ const SHEET_CSS = `
   .sheet .herorow .portrait img{max-height:210px;width:auto;max-width:100%;aspect-ratio:auto;margin-left:auto;display:block}
   .sheet .herorow > h3{font-size:34px;margin:0 0 4px}
   .sheet .herorow .stats{background:transparent !important;border:0 !important;grid-column:2;grid-row:1 / span 6;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0;align-content:start}
-  .sheet .herorow ~ .two{grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr)}
-  .sheet .herorow ~ .two .skills{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .sheet .herorow ~ .two .skills > :nth-child(3){grid-column:1 / span 2}
+  .sheet .herorow ~ .two{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch}
+  .sheet .herorow ~ .two > div:first-child{grid-column:1;grid-row:1}
+  .sheet .herorow ~ .two > div:last-child{display:contents}
+  .sheet .herorow ~ .two .skills{display:contents !important}
+  .sheet .herorow ~ .two > div:first-child{grid-row:1 / span 2}
+  .sheet .herorow ~ .two .skills > :nth-child(1){grid-column:2;grid-row:1}
+  .sheet .herorow ~ .two .skills > :nth-child(2){grid-column:2;grid-row:2}
+  .sheet .herorow ~ .two .skills > :nth-child(3){grid-column:3;grid-row:1 / span 2}
+  .sheet .herorow ~ .two .dev-grid{grid-template-columns:minmax(0,1fr) !important}
+  .sheet .herorow ~ .two .card, .sheet .herorow ~ .two > div:first-child > *{padding:10px 14px !important}
+  .sheet .herorow ~ .two li, .sheet .herorow ~ .two p{margin-top:2px !important;margin-bottom:2px !important}
+  .sheet .herorow ~ .two h3, .sheet .herorow ~ .two h4{margin:6px 0 3px !important}
+  .sheet .herorow ~ .two .chips{margin-top:4px;gap:4px}
+  .sheet .herorow .stat{padding:8px 12px !important}
+  .sheet .why{margin:12px 0 8px;padding:10px 14px;border-left:4px solid #1F4788;background:#EEF3FB;border-radius:0 10px 10px 0;font-size:17px;line-height:1.5;color:#172033}
+  .sheet .why b{color:#1F4788}
   .sheet .halves{display:grid;grid-template-columns:minmax(0,1fr) 2px minmax(0,1fr);gap:26px}
   .sheet .halves .sep{background:#CBD5E1;border-radius:2px}
   .sheet .half{display:flex;flex-direction:column;min-height:0;min-width:0}
-  .sheet .half > h3{font-size:26px;margin:2px 0 8px}
   .sheet .half .desc{font-size:17px}
   .sheet .half .cards{grid-template-columns:minmax(0,1fr);flex:1}
-  .sheet .herorow .stat{background:#fff !important;border:1px solid #E2E8F0 !important;border-radius:12px;padding:12px 14px}
+  .sheet .corner{position:absolute;top:6mm;right:13mm;font:700 22px Inter,Arial,sans-serif;color:#1F4788;letter-spacing:.01em}
   .sheet .foot{position:absolute;left:13mm;right:13mm;bottom:6mm;display:flex;justify-content:space-between;font:10px Inter,Arial,sans-serif;color:#64748B}
   .sheet figure,.sheet .oc,.sheet .tool-statement,.sheet .home-flow{break-inside:avoid}
 `;
@@ -157,6 +169,11 @@ const SHEET_CSS = `
       const art = sheet.querySelector('.book-page');
       Array.from(art.querySelectorAll('.about > *')).filter(e => /^\s*Hi, I/.test(e.textContent)).forEach(e => e.remove());
       art.querySelectorAll('.herorow .portrait').forEach(e => e.remove());
+      art.querySelectorAll('.herorow .lead, .herorow .focus').forEach(e => e.remove());
+      art.querySelectorAll('.dev-intro').forEach(e => e.remove());
+      Array.from(art.querySelectorAll('p, div')).filter(e => /^\s*Trained colleagues/.test(e.textContent) && e.children.length === 0).forEach(e => e.remove());
+      const heroRole = art.querySelector('.herorow .role');
+      if (heroRole) { const w = document.createElement('div'); w.className = 'why'; w.innerHTML = '<b>Why me:</b> I design to ASCE / ACI / AISC, Eurocode and Australian Standards — and I write the software (ETABS API, Grasshopper, TypeScript apps) that makes the work faster, checkable and traceable.'; heroRole.after(w); }
       if (art.classList.contains('twoproj')) {
         sheet.dataset.twoproj = '1';
         art.querySelectorAll('.half').forEach(half => {
@@ -219,18 +236,31 @@ const SHEET_CSS = `
       document.body.append(sheet);
     });
   }, sheets);
+  await page.evaluate(() => {
+    document.querySelectorAll('.sheet').forEach(sh => {
+      if (sh.querySelector('.herorow')) return;
+      const chs = Array.from(sh.querySelectorAll('.book-page > .book-chapter:first-child, .half > .book-chapter:first-child, .thead .book-chapter:first-child'));
+      if (!chs.length) return;
+      const corner = document.createElement('div'); corner.className = 'corner'; corner.textContent = chs[0].textContent.trim();
+      chs.forEach(c => c.remove());
+      sh.append(corner);
+    });
+  });
   await page.evaluate(async () => {
     await Promise.all(Array.from(document.images, i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
     await document.fonts.ready;
   });
   await page.waitForTimeout(500);
-  const report = await page.evaluate(() => Array.from(document.querySelectorAll('.sheet')).map(sh => {
-    const fit = sh.querySelector('.fit'); const avail = sh.clientHeight - 40 - 24;
+  const layout = forced => page.evaluate(forced => Array.from(document.querySelectorAll('.sheet')).map(sh => {
+    const fit = sh.querySelector('.fit'); const avail = sh.clientHeight - 64 - 40;
     const availW = sh.clientWidth - 98;
-    const h = z => { fit.style.zoom = z; fit.style.width = (availW / z) + 'px'; return fit.getBoundingClientRect().height; };
+    const titles = fit.querySelector('.herorow') ? [] : Array.from(fit.querySelectorAll('.book-page > h3, .half > h3, .thead h3'));
+    titles.forEach(t => { t.style.textTransform = 'uppercase'; t.style.letterSpacing = '.03em'; t.style.fontWeight = '700'; t.style.lineHeight = '1.15'; });
+    const h = z => { fit.style.zoom = z; fit.style.width = (availW / z) + 'px'; titles.forEach(t => { t.style.fontSize = (22 / z) + 'px'; }); return fit.getBoundingClientRect().height; };
     let lo = 0.45, hi = sh.dataset.tool ? 1.0 : sh.dataset.cards ? 1.6 : 1.75;
     for (let i = 0; i < 14; i++) { const m = (lo + hi) / 2; if (h(m) <= avail) lo = m; else hi = m; }
-    const z = lo; h(z);
+    if (!forced) return lo;
+    const z = forced; h(z);
     const tb = fit.querySelector('.toolbody');
     if (tb) {
       const top = (tb.getBoundingClientRect().top - fit.getBoundingClientRect().top) / z;
@@ -261,7 +291,11 @@ const SHEET_CSS = `
       gal.querySelectorAll('img').forEach(im => { im.style.cssText += `;flex:1;min-height:0;max-height:none;height:100%;object-fit:cover;object-position:top center`; });
     }
     return Math.round(z * 100);
-  }));
+  }), forced);
+  const zs = await layout(0);
+  const Z = Math.min(1, ...zs);
+  console.log('fit zooms', zs.map(z => z.toFixed(2)).join(' '), '-> uniform', Z.toFixed(2));
+  const report = await layout(Z);
   console.log('zoom %:', report.join(' '));
   const body = path.join(TMP, 'portfolio.pdf');
   await page.pdf({ path: body, preferCSSPageSize: true, printBackground: true });

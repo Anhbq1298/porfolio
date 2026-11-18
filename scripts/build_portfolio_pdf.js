@@ -73,7 +73,7 @@ const SHEET_CSS = `
   .sheet .tbot .book-details{margin:0;padding:10px 12px}.sheet .tbot .book-details li{margin:3px 0;font-size:13px}
   .sheet .tbot .home-flow{margin:0 0 8px}.sheet .tbot .home-flow img{width:100%;height:auto}
   .sheet .tbot .tool-links{display:flex;gap:8px;flex-wrap:wrap}.sheet .tbot .tool-links a{font-size:12px;padding:6px 10px}
-  .sheet .herorow{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.5fr);column-gap:24px;margin-bottom:12px}
+  .sheet .herorow{display:grid;grid-template-columns:minmax(0,1fr);column-gap:24px;margin-bottom:12px}
   .sheet .herorow > *{grid-column:1}
   .sheet .herorow > .portrait{grid-column:2;grid-row:1 / span 6;max-width:none}
   .sheet .herorow .portrait img{max-height:210px;width:auto;max-width:100%;aspect-ratio:auto;margin-left:auto;display:block}
@@ -142,6 +142,7 @@ const SHEET_CSS = `
       sheet.innerHTML = `<div class="fit">${s.html}</div><div class="foot"><span>Bui Quang Anh (Mark) · Portfolio</span><span>${i + 1} / ${sheets.length}</span></div>`;
       const art = sheet.querySelector('.book-page');
       Array.from(art.querySelectorAll('.about > *')).filter(e => /^\s*Hi, I/.test(e.textContent)).forEach(e => e.remove());
+      art.querySelectorAll('.herorow .portrait').forEach(e => e.remove());
       if (art.classList.contains('merged')) { art.querySelectorAll('img').forEach(im => { im.loading = 'eager'; }); document.body.append(sheet); return; }
       if (art.querySelector('.tool-statement')) {
         sheet.dataset.tool = '1';

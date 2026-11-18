@@ -325,7 +325,7 @@ const SHEET_CSS = `
 
   const divider = path.join(TMP, 'divider.pdf');
   const dp = await context.newPage();
-  const bannerB64 = fs.readFileSync(path.join(ROOT, 'assets', 'tools-banner.jpg')).toString('base64');
+  const bannerB64 = fs.readFileSync(path.join(ROOT, 'assets', 'portfolio-banner.jpg')).toString('base64');
   await dp.setContent(`<style>@page{size:297mm 210mm;margin:0}body{margin:0;height:210mm;display:flex;flex-direction:column;font-family:Inter,Arial,sans-serif;color:#172033}
     img{width:297mm;height:89mm;display:block}.box{padding:14mm 18mm 0}.k{color:#1F4788;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
     h1{font-size:54px;line-height:1.1;margin:8px 0}p{color:#64748B;font-size:17px;line-height:1.55;max-width:720px;margin:0 0 8px}hr{border:0;border-top:3px solid #1F4788;width:64px;margin:16px 0}</style>

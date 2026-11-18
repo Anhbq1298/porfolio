@@ -20,6 +20,24 @@
   ];
   const STEP = 9; // seconds per chord
 
+  // iOS: Web Audio is muted by the silent switch unless the page uses the "playback" audio session.
+  // navigator.audioSession covers iOS 17+; a looping silent <audio> element covers older versions.
+  const SILENT = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+  let silentEl = null;
+  function claimMediaSession() {
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+    try {
+      if (!silentEl) {
+        silentEl = new Audio(SILENT);
+        silentEl.loop = true;
+        silentEl.setAttribute('playsinline', '');
+        silentEl.volume = 0.01;
+      }
+      const attempt = silentEl.play();
+      if (attempt && attempt.catch) attempt.catch(() => {});
+    } catch (e) {}
+  }
+
   let ctx, master, filter, timer, voices = [], index = 0, playing = false, started = false;
 
   function build() {
@@ -110,8 +128,13 @@
   }
 
   async function start() {
-    if (!started) { build(); started = true; }
-    await ctx.resume();
+    claimMediaSession();
+    if (!started) {
+      build();
+      started = true;
+      ctx.onstatechange = () => { if (playing && ctx.state !== 'running') handleInterruption(); };
+    }
+    try { await ctx.resume(); } catch (e) {}
     master.gain.cancelScheduledValues(ctx.currentTime);
     master.gain.linearRampToValueAtTime(0.22, ctx.currentTime + 3);
     loop();
@@ -124,19 +147,34 @@
     master.gain.cancelScheduledValues(now);
     master.gain.setValueAtTime(master.gain.value, now);
     master.gain.linearRampToValueAtTime(0, now + 1.2);
-    setTimeout(() => { if (!playing) ctx.suspend(); }, 1400);
+    setTimeout(() => { if (!playing) { ctx.suspend(); if (silentEl) silentEl.pause(); } }, 1400);
     playing = false;
   }
 
-  button.addEventListener('click', async () => {
-    if (playing) stop(); else await start();
+  function reflect() {
     button.setAttribute('aria-pressed', String(playing));
     button.setAttribute('aria-label', playing ? 'Pause ambient background music' : 'Play ambient background music');
     button.title = 'Ambient music (' + (playing ? 'on' : 'off') + ')';
     button.classList.toggle('is-on', playing);
+  }
+
+  button.addEventListener('click', async () => {
+    if (playing) stop(); else await start();
+    reflect();
   });
 
+  // Phone calls, Siri or locking the screen can interrupt audio on iOS: reset the button so one tap restarts it.
+  function handleInterruption() {
+    if (!playing) return;
+    clearTimeout(timer);
+    playing = false;
+    if (master) master.gain.value = 0;
+    if (silentEl) silentEl.pause();
+    reflect();
+  }
+  window.addEventListener('pagehide', handleInterruption);
+
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden && playing) { stop(); button.setAttribute('aria-pressed', 'false'); button.classList.remove('is-on'); }
+    if (document.hidden && playing) { stop(); reflect(); }
   });
 })();

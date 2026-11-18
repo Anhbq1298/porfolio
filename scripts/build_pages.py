@@ -231,7 +231,7 @@ TOOLS = [
 </ul>""",
         figs=[("pdfetabs-flow.svg", "Workflow"), ("pdfetabs-before.jpg", "Before — PDF tags (orange) over ETABS columns (blue)"),
               ("pdfetabs-after.jpg", "After — matched pairs within the search radius", "wide"),
-              ("pdfetabs-column-mapper.mp4", "Demo at 2× speed with idle time removed. File paths blurred.", "wide")],
+              ("pdfetabs-column-mapper.mp4", "Demo", "wide")],
         links=[], tags=["CORENET X", "ETABS API", "PDF", "QA/QC"],
     ),
     dict(

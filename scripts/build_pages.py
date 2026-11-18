@@ -26,31 +26,6 @@ LOGO = ('<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32
 
 PROJECTS = [
     dict(
-        slug="meinhardt-pile-raft",
-        kicker="Meinhardt · Structural design",
-        title="Pile-raft foundation &amp; long-span steel truss",
-        summary="Eurocode design of a nonlinear pile-raft foundation and footfall-vibration checks on a long-span steel truss, backed by in-house automation for reviewing results.",
-        meta=[("Firm", "Meinhardt"), ("Role", "Structural Engineer"), ("Codes", "EN 1990 · EN 1997 · EN 1998"), ("Software", "ETABS · Excel VBA")],
-        hero=None,
-        sections=[
-            ("Challenge", """
-<p>A pile-raft shares load between the raft bearing on soil and the piles, so the foundation forces depend on the relative stiffness of soil, piles and superstructure. The design also had to cover Eurocode seismic and uplift (UPL) combinations, where some piles may go into tension.</p>
-<p>Separately, a long-span steel truss needed to be checked for walking-induced vibration, where the governing criterion is user comfort rather than strength.</p>"""),
-            ("Approach", """
-<ul>
-<li><b>Soil–structure interaction.</b> Built a nonlinear ETABS model with point springs for the piles, area springs for the raft subgrade and rigid diaphragms, so pile and raft reactions follow their relative stiffness.</li>
-<li><b>Load combinations.</b> Set up EN 1997 Design Approach 1 (DA1-C1 and DA1-C2), seismic and UPL combinations.</li>
-<li><b>Run time.</b> Iterated on the nonlinear model to keep analysis time workable across many combinations.</li>
-<li><b>Footfall vibration.</b> Checked the 3D truss model for peak acceleration against a 5%g limit and for the RMS-based response factor R.</li>
-</ul>"""),
-            ("Automation", """
-<p>Reviewing reactions and utilisation for hundreds of piles by table is slow and error-prone. I built an Excel VBA toolset that plots pile reactions and utilisation ratios as multi-module bubble charts on plan, with one-click PDF export for review and reporting.</p>"""),
-            ("Outcome", """
-<div class="callout"><p>A foundation model that captures pile–raft load sharing under the full Eurocode combination set, a documented footfall check for the truss, and a reusable visual review tool for pile results.</p></div>"""),
-        ],
-        tags=["EN 1997 DA1", "EN 1998", "Nonlinear springs", "Footfall", "ETABS", "VBA"],
-    ),
-    dict(
         slug="shellharbour-hospital",
         kicker="Aurecon · Healthcare · CD phase",
         title="Shellharbour Hospital",

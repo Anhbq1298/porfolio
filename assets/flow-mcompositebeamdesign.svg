@@ -3,16 +3,16 @@
 <desc id="desc">Engineering problem, computational approach, and output in three connected panels.</desc>
 <rect width="940" height="240" rx="14" fill="#FFFFFF"/>
 <text x="18" y="37" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17" font-weight="700" fill="#172033">mCompositeBeamDesign</text>
-<rect x="18" y="65" width="275" height="125" rx="13" fill="#EDF2F8" stroke="#D7E2ED"/>
-<text x="36" y="92" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing=".9" fill="#1F4788">01  ENGINEERING PROBLEM</text>
+<rect x="18" y="65" width="275" height="125" rx="13" fill="#FFF1ED" stroke="#F1CDC6"/>
+<text x="36" y="92" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing=".9" fill="#A64136">PROBLEM</text>
 <text x="36" y="127" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17" font-weight="600" fill="#172033">Tapered beams and unusual</text>
 <text x="36" y="151" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17" font-weight="600" fill="#172033">shear stud configurations</text>
-<rect x="333" y="65" width="275" height="125" rx="13" fill="#E8F0FD" stroke="#D7E2ED"/>
-<text x="351" y="92" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing=".9" fill="#1F4788">02  COMPUTATIONAL SOLUTION</text>
+<rect x="333" y="65" width="275" height="125" rx="13" fill="#E8F0FD" stroke="#C9D9F2"/>
+<text x="351" y="92" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing=".9" fill="#1F4788">SOLUTION</text>
 <text x="351" y="127" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17" font-weight="600" fill="#172033">FEM critical LTB moment,</text>
 <text x="351" y="151" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17" font-weight="600" fill="#172033">stud pattern and shear checks</text>
-<rect x="648" y="65" width="275" height="125" rx="13" fill="#EDF5F1" stroke="#D7E2ED"/>
-<text x="666" y="92" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing=".9" fill="#1F4788">03  REVIEWABLE OUTCOME</text>
+<rect x="648" y="65" width="275" height="125" rx="13" fill="#EDF5F1" stroke="#C9DCCF"/>
+<text x="666" y="92" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" letter-spacing=".9" fill="#286846">OUTPUT</text>
 <text x="666" y="127" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17" font-weight="600" fill="#172033">Traceable EC4 design outputs</text>
 <text x="666" y="151" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17" font-weight="600" fill="#172033">and editable calculation</text>
 <path d="M293 127.5 h33" stroke="#54769E" stroke-width="2" fill="none"/><path d="M318 121.5 l8 6 -8 6" stroke="#54769E" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M608 127.5 h33" stroke="#54769E" stroke-width="2" fill="none"/><path d="M633 121.5 l8 6 -8 6" stroke="#54769E" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>

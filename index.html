@@ -10,7 +10,7 @@
 <meta property="og:image" content="assets/mcotis-moment.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4788'/%3E%3Cpath d='M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/site.css">
 </head>
@@ -73,8 +73,8 @@
         <h3>Education</h3>
         <dl class="kv">
           <dt>University</dt><dd>Ho Chi Minh City University of Technology (HCMUT), 2016–2020</dd>
-          <dt>Degree</dt><dd>B.Eng. Civil Engineering — Honours Program</dd>
-          <dt>GPA</dt><dd><span class="mono">3.54 / 4.0</span></dd>
+          <dt>Degree</dt><dd>B.Eng. in Civil Engineering, Honours Program<span class="education-note">The program selects the 30 students with the highest GPAs.</span></dd>
+          <dt>GPA</dt><dd><strong>8.1/10</strong><span class="education-note">Equivalent to 3.54/4 using HCMUT’s conversion scale.</span></dd>
         </dl>
         <ul class="awards">
           <li><b>HCMUT Academic Merit Award</b> ×3 — top 10% semester GPA</li>
@@ -114,18 +114,38 @@
     <div class="skills">
       <div class="card">
         <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>Structural design</h3>
-        <div class="chips">
-          <span class="chip">RC columns &amp; shear walls</span><span class="chip">Seismic detailing</span><span class="chip">Mat &amp; pile-raft foundations</span>
-          <span class="chip">Composite steel framing</span><span class="chip">Braced frames</span><span class="chip">Diaphragm design</span>
-          <span class="chip">PT girders</span><span class="chip">Footfall vibration</span><span class="chip">Blast design</span><span class="chip">Shop-drawing review &amp; RFIs</span>
-        </div>
+        <h4>Global Analysis</h4>
+        <ul class="skill-list">
+          <li>Whole-building finite element modelling</li>
+          <li>Lateral systems and diaphragm force transfer</li>
+          <li>Footfall vibration assessment</li>
+        </ul>
+        <h4>Section and Member Design</h4>
+        <ul class="skill-list">
+          <li>RC columns, shear walls and seismic detailing</li>
+          <li>Composite steel framing and braced frames</li>
+          <li>Diaphragm reinforcement and post-tensioned girders</li>
+          <li>Mat and pile-raft foundations</li>
+        </ul>
+        <h4>Design Coordination</h4>
+        <ul class="skill-list">
+          <li>Shop-drawing review and RFIs</li>
+        </ul>
       </div>
       <div class="card">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16v12H4zM8 20h8M12 16v4"/></svg>Analysis &amp; codes</h3>
-        <div class="chips">
-          <span class="chip">ETABS</span><span class="chip">SAP2000</span><span class="chip">SAFE</span><span class="chip">RAM Structural System</span><span class="chip">spColumn</span><span class="chip">Revit · Bluebeam</span>
-          <span class="chip code">ASCE 7-16</span><span class="chip code">ACI 318-14/19</span><span class="chip code">AISC 360-16</span><span class="chip code">CBC</span><span class="chip code">EN 1990–1998</span>
-        </div>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16v12H4zM8 20h8M12 16v4"/></svg>Software and Standards</h3>
+        <h4>Software</h4>
+        <ul class="skill-list">
+          <li><strong>CSI package</strong> · ETABS, SAP2000, SAFE</li>
+          <li><strong>Bentley package</strong> · RAM Structural System</li>
+          <li><strong>Other tools</strong> · spColumn, Revit, Bluebeam</li>
+        </ul>
+        <h4>Standards</h4>
+        <ul class="skill-list">
+          <li><strong>US</strong> · ASCE 7-16, ACI 318-14/19, AISC 360-16, CBC</li>
+          <li><strong>Eurocodes</strong> · EN 1990–1998</li>
+          <li><strong>Australia</strong> · Australian Standards for structural design</li>
+        </ul>
       </div>
       <div class="card">
         <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>Automation &amp; code</h3>

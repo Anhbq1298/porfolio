@@ -51,6 +51,13 @@ const SHEET_CSS = `
   .sheet .book-details{margin:10px 0}
   .sheet .book-downloads,.sheet .more-link{display:none !important}
   .sheet .book-page .others{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+  .sheet .cardsbody{display:flex !important;flex-direction:column;column-count:auto}
+  .sheet .cardsbody .top{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-bottom:6px}
+  .sheet .cardsbody .top .desc{font-size:20px;flex:1 1 60%;margin:0}
+  .sheet .cards-label{margin:14px 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#64748B}
+  .sheet .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;flex:1;min-height:0;grid-auto-rows:minmax(0,1fr)}
+  .sheet .card-li{display:flex;gap:16px;align-items:center;padding:16px 20px;border:1px solid #E2E8F0;border-radius:12px;background:#F8FAFC;font-size:21px;line-height:1.45}
+  .sheet .card-li .n{white-space:nowrap;flex:none;font:700 28px Inter,Arial,sans-serif;color:#1F4788;opacity:.85}
   .sheet .foot{position:absolute;left:13mm;right:13mm;bottom:6mm;display:flex;justify-content:space-between;font:10px Inter,Arial,sans-serif;color:#64748B}
   .sheet figure,.sheet .oc,.sheet .tool-statement,.sheet .home-flow{break-inside:avoid}
 `;
@@ -107,6 +114,18 @@ const SHEET_CSS = `
         rest.forEach(c => l.append(c)); media.forEach(c => r.append(c));
         body.append(l, r);
       } else rest.forEach(c => body.append(c));
+      const ul = body.classList.contains('single') && (body.querySelector('.proj-points') || body.querySelector('.book-details ul'));
+      if (ul) {
+        sheet.dataset.cards = '1';
+        const items = Array.from(ul.querySelectorAll(':scope > li'));
+        const grid = document.createElement('div'); grid.className = 'cards';
+        items.forEach((li, n) => { const c = document.createElement('div'); c.className = 'card-li'; c.innerHTML = `<span class="n">${String(n + 1).padStart(2, '0')}</span><div>${li.innerHTML}</div>`; grid.append(c); });
+        const top = document.createElement('div'); top.className = 'top';
+        Array.from(body.children).forEach(c => { if (c !== ul && !c.contains(ul)) top.append(c); });
+        const lab = document.createElement('h4'); lab.className = 'cards-label'; lab.textContent = 'Scope of work';
+        body.replaceChildren(top, lab, grid);
+        body.className = 'body cardsbody';
+      }
       art.append(body);
       art.querySelectorAll('.book-gallery').forEach(g => { if (g.children.length > 4) g.classList.add('many'); });
       art.querySelectorAll('img').forEach(im => { im.loading = 'eager'; });
@@ -124,9 +143,14 @@ const SHEET_CSS = `
     const fit = sh.querySelector('.fit'); const avail = sh.clientHeight - 40 - 24;
     const availW = sh.clientWidth - 98;
     const h = z => { fit.style.zoom = z; fit.style.width = (availW / z) + 'px'; return fit.getBoundingClientRect().height; };
-    let lo = 0.45, hi = 1.75;
+    let lo = 0.45, hi = sh.dataset.cards ? 1.6 : 1.75;
     for (let i = 0; i < 14; i++) { const m = (lo + hi) / 2; if (h(m) <= avail) lo = m; else hi = m; }
     const z = lo; h(z);
+    const cb = fit.querySelector('.cardsbody');
+    if (cb) {
+      const top = (cb.getBoundingClientRect().top - fit.getBoundingClientRect().top) / z;
+      cb.style.height = (avail / z - top - 14 / z) + 'px';
+    }
     // stretch gallery images to cover the remaining blank space of the sheet
     const body = fit.querySelector('.body:not(.single)');
     const gal = body && body.querySelector('.book-gallery');

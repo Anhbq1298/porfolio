@@ -73,15 +73,22 @@ const SHEET_CSS = `
   .sheet .tbot .book-details{margin:0;padding:10px 12px}.sheet .tbot .book-details li{margin:3px 0;font-size:13px}
   .sheet .tbot .home-flow{margin:0 0 8px}.sheet .tbot .home-flow img{width:100%;height:auto}
   .sheet .tbot .tool-links{display:flex;gap:8px;flex-wrap:wrap}.sheet .tbot .tool-links a{font-size:12px;padding:6px 10px}
-  .sheet .herorow{display:grid;grid-template-columns:minmax(0,1fr);column-gap:24px;margin-bottom:12px}
+  .sheet .herorow{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);column-gap:24px;margin-bottom:12px}
   .sheet .herorow > *{grid-column:1}
   .sheet .herorow > .portrait{grid-column:2;grid-row:1 / span 6;max-width:none}
   .sheet .herorow .portrait img{max-height:210px;width:auto;max-width:100%;aspect-ratio:auto;margin-left:auto;display:block}
   .sheet .herorow > h3{font-size:34px;margin:0 0 4px}
-  .sheet .herorow .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 0}
+  .sheet .herorow .stats{background:transparent !important;border:0 !important;grid-column:2;grid-row:1 / span 6;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0;align-content:start}
   .sheet .herorow ~ .two{grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr)}
   .sheet .herorow ~ .two .skills{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .sheet .herorow ~ .two .skills > :nth-child(3){grid-column:1 / span 2}
+  .sheet .halves{display:grid;grid-template-columns:minmax(0,1fr) 2px minmax(0,1fr);gap:26px}
+  .sheet .halves .sep{background:#CBD5E1;border-radius:2px}
+  .sheet .half{display:flex;flex-direction:column;min-height:0;min-width:0}
+  .sheet .half > h3{font-size:26px;margin:2px 0 8px}
+  .sheet .half .desc{font-size:17px}
+  .sheet .half .cards{grid-template-columns:minmax(0,1fr);flex:1}
+  .sheet .herorow .stat{background:#fff !important;border:1px solid #E2E8F0 !important;border-radius:12px;padding:12px 14px}
   .sheet .foot{position:absolute;left:13mm;right:13mm;bottom:6mm;display:flex;justify-content:space-between;font:10px Inter,Arial,sans-serif;color:#64748B}
   .sheet figure,.sheet .oc,.sheet .tool-statement,.sheet .home-flow{break-inside:avoid}
 `;
@@ -130,6 +137,13 @@ const SHEET_CSS = `
     sheets.splice(0, 2, { title: sheets[0].title, html: `<article class="book-page merged"><div class="herorow">${inner(sheets[0].html)}</div>${two}</article>` });
   }
 
+  // Merge the two sparse Meinhardt pages (7-storey school + 23-storey hospital) into one page with a separator.
+  const i7 = sheets.findIndex(x => x.title.startsWith('7-storey'));
+  if (i7 >= 0 && sheets[i7 + 1] && sheets[i7 + 1].title.startsWith('Public hospital')) {
+    const inner = h => h.replace(/^<article[^>]*>/, '').replace(/<\/article>$/, '');
+    sheets.splice(i7, 2, { title: '7-storey school · 23-storey hospital', html: `<article class="book-page merged twoproj"><div class="halves"><div class="half">${inner(sheets[i7].html)}</div><div class="sep"></div><div class="half">${inner(sheets[i7 + 1].html)}</div></div></article>` });
+  }
+
   // 2. Lay them out one per landscape A4 sheet, shrinking each to fit.
   await page.evaluate(() => document.querySelector('#portfolio-book').close());
   await page.emulateMedia({ media: 'print', colorScheme: 'light' });
@@ -143,6 +157,16 @@ const SHEET_CSS = `
       const art = sheet.querySelector('.book-page');
       Array.from(art.querySelectorAll('.about > *')).filter(e => /^\s*Hi, I/.test(e.textContent)).forEach(e => e.remove());
       art.querySelectorAll('.herorow .portrait').forEach(e => e.remove());
+      if (art.classList.contains('twoproj')) {
+        sheet.dataset.twoproj = '1';
+        art.querySelectorAll('.half').forEach(half => {
+          const ul = half.querySelector('.proj-points');
+          const grid = document.createElement('div'); grid.className = 'cards';
+          Array.from(ul ? ul.children : []).forEach((li, n) => { const c = document.createElement('div'); c.className = 'card-li'; c.innerHTML = `<span class="n">${String(n + 1).padStart(2, '0')}</span><div>${li.innerHTML}</div>`; grid.append(c); });
+          const lab = document.createElement('h4'); lab.className = 'cards-label'; lab.textContent = 'Scope of work';
+          if (ul) ul.replaceWith(lab, grid);
+        });
+      }
       if (art.classList.contains('merged')) { art.querySelectorAll('img').forEach(im => { im.loading = 'eager'; }); document.body.append(sheet); return; }
       if (art.querySelector('.tool-statement')) {
         sheet.dataset.tool = '1';
@@ -213,6 +237,8 @@ const SHEET_CSS = `
       tb.style.height = (avail / z - top - 14 / z) + 'px';
       tb.querySelectorAll('.tgal figure').forEach(f => { const im = f.querySelector('img'); const ar = (im.naturalWidth || 1) / (im.naturalHeight || 1); f.style.flex = `${ar} ${ar} 0`; });
     }
+    const hv = fit.querySelector('.halves');
+    if (hv) { const top = (hv.getBoundingClientRect().top - fit.getBoundingClientRect().top) / z; hv.style.height = (avail / z - top - 14 / z) + 'px'; }
     const cb = fit.querySelector('.cardsbody');
     if (cb) {
       const top = (cb.getBoundingClientRect().top - fit.getBoundingClientRect().top) / z;

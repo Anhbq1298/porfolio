@@ -1,6 +1,6 @@
 // Builds assets/tools-banner.jpg: collage of tool snapshots. Run from repo root.
 const { chromium } = require('playwright'); const path = require('path'); const fs = require('fs');
-const tiles = [['Mcotis','mcotis-3d.jpg'],['MCalcCanvas','mcalc-pdf.jpg'],['mCompositeBeamDesign','composite-ui.jpg'],['MBColumn Lite','mbclite-pmm.jpg'],
+const tiles = [['Mcotis','mcotis-deflection.jpg'],['MCalcCanvas','mcalc-pdf.jpg'],['mCompositeBeamDesign','composite-ui.jpg'],['MBColumn Lite','mbclite-pmm.jpg'],
  ['MGT · Grasshopper','mgt-rhino.jpg'],['SP-Editor','sp-ui.jpg'],['PDFETABS Column Mapper','pdfetabs-after.jpg'],['Bridger','bridger-ui.jpg']];
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:2400,height:720}});
 await p.setContent(`<style>body{margin:0;background:#0f2447;font-family:Inter,Arial,sans-serif}

@@ -94,7 +94,7 @@ const SHEET_CSS = `
     document.body.querySelectorAll(':scope > *').forEach(n => { if (n.tagName !== 'SCRIPT') n.remove(); });
     sheets.forEach((s, i) => {
       const sheet = document.createElement('div'); sheet.className = 'sheet';
-      sheet.innerHTML = `<div class="fit">${s.html}</div><div class="foot"><span>Quang Anh (Mark) Bui · Portfolio</span><span>${i + 1} / ${sheets.length}</span></div>`;
+      sheet.innerHTML = `<div class="fit">${s.html}</div><div class="foot"><span>Bui Quang Anh (Mark) · Portfolio</span><span>${i + 1} / ${sheets.length}</span></div>`;
       const art = sheet.querySelector('.book-page');
       const heads = Array.from(art.children).filter(c => /^(P)$/.test(c.tagName) && c.classList.contains('book-chapter') || c.tagName === 'H3');
       const media = Array.from(art.children).filter(c => c.matches('.book-gallery, .home-flow, .others, .portrait'));
@@ -127,6 +127,22 @@ const SHEET_CSS = `
     let lo = 0.45, hi = 1.75;
     for (let i = 0; i < 14; i++) { const m = (lo + hi) / 2; if (h(m) <= avail) lo = m; else hi = m; }
     const z = lo; h(z);
+    // stretch gallery images to cover the remaining blank space of the sheet
+    const body = fit.querySelector('.body:not(.single)');
+    const gal = body && body.querySelector('.book-gallery');
+    if (gal) {
+      const top = (body.getBoundingClientRect().top - fit.getBoundingClientRect().top) / z;
+      body.style.height = (avail / z - top) + 'px';
+      body.style.alignItems = 'stretch';
+      const right = body.lastElementChild; const tool = !!right.querySelector('.home-flow');
+      right.style.cssText += ';height:100%;display:flex;flex-direction:column;gap:12px;min-height:0';
+      const n = gal.children.length, cols = n === 1 ? 1 : 2;
+      gal.classList.remove('many');
+      gal.style.cssText += `;flex:1;min-height:0;overflow:hidden;grid-template-columns:repeat(${cols},minmax(0,1fr));grid-template-rows:repeat(${Math.ceil(n / cols)},minmax(0,1fr))`;
+      gal.querySelectorAll('figure,a').forEach(f => { f.style.cssText += ';display:flex;flex-direction:column;min-height:0;overflow:hidden'; });
+      gal.querySelectorAll('figure > a, figure > button').forEach(x => { x.style.cssText += ';flex:1;min-height:0;display:block;overflow:hidden'; });
+      gal.querySelectorAll('img').forEach(im => { im.style.cssText += `;flex:1;min-height:0;max-height:none;height:100%;object-fit:cover;object-position:top center`; });
+    }
     return Math.round(z * 100);
   }));
   console.log('zoom %:', report.join(' '));
@@ -140,7 +156,7 @@ const SHEET_CSS = `
   await dp.setContent(`<style>@page{size:297mm 210mm;margin:0}body{margin:0;height:210mm;display:flex;flex-direction:column;font-family:Inter,Arial,sans-serif;color:#172033}
     img{width:297mm;height:89mm;display:block}.box{padding:14mm 18mm 0}.k{color:#1F4788;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
     h1{font-size:54px;line-height:1.1;margin:8px 0}p{color:#64748B;font-size:17px;line-height:1.55;max-width:720px;margin:0 0 8px}hr{border:0;border-top:3px solid #1F4788;width:64px;margin:16px 0}</style>
-    <img src="data:image/jpeg;base64,${bannerB64}"><div class="box"><div class="k">Part 2</div><h1>Portfolio</h1><hr><p><b>Quang Anh Bui (Mark)</b> · Structural Engineer &amp; Engineering Software Developer</p>
+    <img src="data:image/jpeg;base64,${bannerB64}"><div class="box"><div class="k">Part 2</div><h1>Portfolio</h1><hr><p><b>Bui Quang Anh (Mark)</b> · Structural Engineer &amp; Engineering Software Developer</p>
     <p>Book-style print-out of the online portfolio: one page per project and tool. The live version, with videos and interactive workflows, is at <b>anhbq1298.github.io/porfolio</b>.</p></div>`);
   await dp.pdf({ path: divider, preferCSSPageSize: true, printBackground: true });
   await dp.close();
@@ -164,7 +180,7 @@ import json as _j
 titles = _j.load(open(sys.argv[5]))
 for p in r.pages: w.add_page(p)
 for i, t in enumerate(titles): w.add_outline_item(t, st + i, parent=part2)
-w.add_metadata({'/Title': 'Quang Anh (Mark) Bui — CV and Portfolio', '/Author': 'Quang Anh Bui'})
+w.add_metadata({'/Title': 'Bui Quang Anh (Mark) — CV and Portfolio', '/Author': 'Quang Anh Bui'})
 w.compress_identical_objects(remove_identicals=True, remove_orphans=True)
 for p in w.pages: p.compress_content_streams()
 w.write(out)

@@ -414,3 +414,5 @@ button.oc-link{cursor:zoom-in}
 @media(max-width:580px){.programming-card .dev-grid{grid-template-columns:1fr;gap:16px}}
 
 .proj-points{margin:10px 0 0;padding-left:20px;color:var(--text-2)}.proj-points li{margin:4px 0}
+
+.tools-banner{margin:26px auto 4px}.tools-banner img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:0 10px 30px rgb(15 36 71 / 12%)}

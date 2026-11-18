@@ -404,3 +404,11 @@ button.oc-link{cursor:zoom-in}
 .dev-group .chip{font-size:12.5px;line-height:1.45;padding:5px 9px}
 @media(max-width:900px){.skills{grid-template-columns:1fr}.dev-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:580px){.dev-grid{grid-template-columns:1fr}.dev-intro{margin-bottom:18px}.dev-group{padding-bottom:12px;border-bottom:1px solid var(--line)}.dev-group:last-child{border-bottom:0}}
+
+/* Compact IT-style programming overview */
+.programming-card .dev-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:24px;column-gap:32px}
+.programming-card .dev-group h4{font-size:13.5px}
+.programming-card .dev-group .chip{font-size:12.5px}
+.cv-download{white-space:nowrap}
+.contact-cv{margin-top:18px}
+@media(max-width:580px){.programming-card .dev-grid{grid-template-columns:1fr;gap:16px}}

@@ -181,6 +181,13 @@ h3{font-size:19px;margin:0 0 6px;letter-spacing:-.01em}
   .tool:nth-child(even) .tool-body{order:0}
   .tool-body{padding:24px}
 }
+.sub-head{font-size:18px;margin:44px 0 16px;display:flex;align-items:center;gap:10px}
+.sub-head::after{content:"";flex:1;height:1px;background:var(--line)}
+.addins{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.addin{padding:20px}
+.addin .badge{display:inline-block;margin-bottom:10px}
+.addin h3{font-size:16px}
+.addin p{margin:0;font-size:14px;color:var(--text-2)}
 .mini-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
 .mini-tools .card{overflow:hidden}
 .mini-tools button{display:block;width:100%;padding:0;border:0;border-bottom:1px solid var(--line);background:#fff;cursor:zoom-in}
@@ -249,7 +256,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="stats wrap" style="padding:0">
     <div class="stat"><b>5+ yrs</b><span>Structural design experience</span></div>
     <div class="stat"><b>3 firms</b><span>Thornton Tomasetti · Aurecon · Meinhardt</span></div>
-    <div class="stat"><b>6+ tools</b><span>Self-developed engineering software</span></div>
+    <div class="stat"><b>15+ tools</b><span>Self-developed apps, add-ins &amp; scripts</span></div>
     <div class="stat"><b>US + EU</b><span>ACI · AISC · ASCE · Eurocode</span></div>
   </div>
 </header>
@@ -440,19 +447,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
       <article class="card tool">
         <div class="tool-body">
-          <span class="badge">C# · .NET 8 · own FEM solver</span>
+          <span class="badge">C# · .NET 8 · WPF · own FEM solver</span>
           <h3>Mcotis</h3>
           <p class="sub">Parametric study and design of cable-supported and tied-arch transfer structures.</p>
           <ul>
             <li><b>Study engine:</b> every loading × truss depth × cable pretension candidate is generated and analysed automatically.</li>
-            <li><b>Solver:</b> in-house FEM with tension-only cables; SAP2000 / ETABS kept only for import and export.</li>
-            <li><b>Design:</b> steel, CFT, encased and mega composite columns, plus quantity take-off per candidate.</li>
+            <li><b>Solver:</b> in-house FEM with tension-only cables, benchmarked against SAP2000; SAP2000 / ETABS kept only for import and export.</li>
+            <li><b>Design:</b> steel, CFT, encased and mega composite columns, with column optimisation over section ranges.</li>
+            <li><b>Cost:</b> material quantity take-off and estimated cost per candidate, so options are compared on tonnage and price.</li>
           </ul>
         </div>
         <div class="tool-media">
           <button class="wide" data-full="assets/mcotis-moment.jpg" data-cap="Mcotis — ULS bending moment envelope"><img src="assets/mcotis-moment.jpg" alt="Mcotis bending moment diagram" loading="lazy"></button>
-          <button data-full="assets/mcotis-geom.jpg" data-cap="Mcotis — geometry & candidate set-up"><img src="assets/mcotis-geom.jpg" alt="Mcotis geometry set-up screen" loading="lazy"></button>
-          <button data-full="assets/mcotis-chart.jpg" data-cap="Mcotis — parametric results"><img src="assets/mcotis-chart.jpg" alt="Mcotis parametric results chart" loading="lazy"></button>
+          <button data-full="assets/mcotis-3d.jpg" data-cap="Mcotis — 3D extruded model"><img src="assets/mcotis-3d.jpg" alt="Mcotis 3D model of the cable-supported truss" loading="lazy" style="object-fit:contain;background:#fff"></button>
+          <button data-full="assets/mcotis-deflection.jpg" data-cap="Mcotis — SLS deflection contour"><img src="assets/mcotis-deflection.jpg" alt="Mcotis deflection contour" loading="lazy" style="object-fit:contain;background:#fff"></button>
+          <button class="wide" data-full="assets/mcotis-qto.jpg" data-cap="Mcotis — material quantities & estimated cost"><img src="assets/mcotis-qto.jpg" alt="Mcotis material quantities and cost table" loading="lazy"></button>
         </div>
       </article>
 
@@ -464,6 +473,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
           <ul>
             <li><b>Free canvas:</b> equations placed anywhere on A4 pages with an engineering grid.</li>
             <li><b>Live engine:</b> unit-aware evaluation — change an input and every dependent result updates.</li>
+            <li><b>Templates:</b> RC beams and columns (EC2), steel beams and beam-columns (EC3), composite design (EC4).</li>
             <li><b>Reports:</b> vector PDF calculation sheets with title block, outline and parameter panel.</li>
           </ul>
           <div class="tool-links">
@@ -471,8 +481,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
             <a class="btn ghost" href="https://github.com/Anhbq1298/mCalcCanvas" target="_blank" rel="noopener">Source on GitHub</a>
           </div>
         </div>
-        <div class="tool-media" style="grid-template-columns:1fr">
-          <button class="wide" data-full="assets/mcalc.jpg" data-cap="MCalcCanvas — RC beam bending design to EN 1992-1-1"><img src="assets/mcalc.jpg" alt="MCalcCanvas worksheet" loading="lazy"></button>
+        <div class="tool-media">
+          <button class="wide" data-full="assets/mcalc-column.jpg" data-cap="MCalcCanvas — RC rectangular column check (EC2)"><img src="assets/mcalc-column.jpg" alt="MCalcCanvas RC column worksheet" loading="lazy"></button>
+          <button data-full="assets/mcalc-steel.jpg" data-cap="MCalcCanvas — simply supported steel beam"><img src="assets/mcalc-steel.jpg" alt="MCalcCanvas steel beam worksheet" loading="lazy" style="object-position:top"></button>
+          <button data-full="assets/mcalc-pdf.jpg" data-cap="MCalcCanvas — exported PDF, steel beam-column check (EC3)"><img src="assets/mcalc-pdf.jpg" alt="MCalcCanvas PDF report page" loading="lazy" style="object-position:top"></button>
         </div>
       </article>
 
@@ -480,11 +492,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <div class="tool-body">
           <span class="badge">C# · .NET 8 · WPF</span>
           <h3>MBColumn</h3>
-          <p class="sub">3D P-M-M interaction charts for column and wall checking.</p>
+          <p class="sub">Reinforced-concrete column design, PMM checking and reporting.</p>
           <ul>
-            <li><b>Method:</b> fibre-based interaction surface with batch checking of load combinations.</li>
-            <li><b>Codes:</b> ACI 318 and Eurocode 2 through a pluggable strategy layer.</li>
-            <li><b>Direction:</b> deep ETABS integration to streamline the column and wall design process; a lightweight web version is in progress.</li>
+            <li><b>Sections:</b> rectangular, circular and irregular polygon sections with full rebar modelling.</li>
+            <li><b>Checks:</b> PM, Mx–My and 3D PMM interaction surfaces; shear check; EC2 slenderness workflow.</li>
+            <li><b>Codes:</b> ACI 318 and Eurocode 2 through a pluggable design-code layer.</li>
+            <li><b>Workflow:</b> ETABS force import, multiple load cases, project save/open and engineering report generation. The same solver also powers a PMM check inside AutoCAD.</li>
           </ul>
         </div>
         <div class="tool-media">
@@ -515,10 +528,50 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </article>
     </div>
 
-    <div class="mini-tools">
+    <h3 class="sub-head">CSI &amp; CAD add-ins</h3>
+    <div class="addins">
+      <article class="card addin">
+        <span class="badge">Grasshopper 8 · C#</span>
+        <h3>MGT — Grasshopper tool</h3>
+        <p>Grasshopper plugin that wraps ETABS and SAP2000 APIs so Rhino users can set up, edit, query and load structural models parametrically.</p>
+      </article>
+      <article class="card addin">
+        <span class="badge">AutoCAD 2021 · C# · WPF</span>
+        <h3>MDraftingHelper</h3>
+        <p>AutoCAD ribbon for 2D structural drafting: rebar percentage tables, ties with 90°/135°/180° hooks, steel-section dynamic blocks, quick RC column sections and an EC2 PMM check using the MBColumn solver.</p>
+      </article>
+      <article class="card addin">
+        <span class="badge">Excel VSTO · CSI API</span>
+        <h3>Excel CSI ToolBox</h3>
+        <p>Excel ribbon that attaches to running ETABS / SAP2000 models: imports reactions, modal mass, story forces and drifts; creates objects from tables; batch-models drop panels with backup and rollback.</p>
+      </article>
+      <article class="card addin">
+        <span class="badge">ETABS 22 add-in · C#</span>
+        <h3>ETABS → SAFE Foundation</h3>
+        <p>Transfers column forces as SAFE point loads and wall-pier forces as line loads, including equivalent end line loads from pier moments.</p>
+      </article>
+      <article class="card addin">
+        <span class="badge">SAFE 22 add-in · C#</span>
+        <h3>SAFE Model Purger</h3>
+        <p>Dry-run scan and safe consolidation of duplicate column, shell and spring properties, plus centroid-based matching of shell load sets from ETABS.</p>
+      </article>
+      <article class="card addin">
+        <span class="badge">.NET 8 · ETABS API</span>
+        <h3>ETABS Model Migrator</h3>
+        <p>Copies selected joints, frames and shells — names and assignments included — from one running ETABS model to another, with a full migration log.</p>
+      </article>
+      <article class="card addin">
+        <span class="badge">ETABS plugin · C#</span>
+        <h3>Floor Mesh Preview</h3>
+        <p>Reads the actual analysis mesh ETABS generates for floor objects and flags hanging nodes between slabs in a pan/zoom viewer.</p>
+      </article>
+    </div>
+
+    <h3 class="sub-head">Grasshopper scripts &amp; dashboards</h3>
+    <div class="mini-tools" style="margin-top:0">
       <article class="card">
         <button data-full="assets/gh-grillage.jpg" data-cap="Grillage strut-and-tie builder"><img src="assets/gh-grillage.jpg" alt="Grillage model generated in Grasshopper" loading="lazy"></button>
-        <div class="b"><h3>MGT — Grillage builder</h3><p>Grasshopper + Python 3 component that turns slab boundaries into a strut-and-tie grillage model.</p></div>
+        <div class="b"><h3>Grillage strut-and-tie builder</h3><p>Grasshopper + Python 3 script that turns slab boundaries into a strut-and-tie grillage model.</p></div>
       </article>
       <article class="card">
         <button data-full="assets/gh-trib.jpg" data-cap="Tributary area take-down with Voronoi"><img src="assets/gh-trib.jpg" alt="Tributary areas in Grasshopper" loading="lazy"></button>
@@ -530,11 +583,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       </article>
       <article class="card">
         <button data-full="assets/gh-plugin.jpg" data-cap="Grasshopper plugin toolbar"><img src="assets/gh-plugin.jpg" alt="Grasshopper plugin toolbar" loading="lazy" style="object-fit:contain;background:#fff;padding:20px"></button>
-        <div class="b"><h3>Grasshopper plugin</h3><p>Components to stream models from Grasshopper into ETABS and export data trees to Excel.</p></div>
+        <div class="b"><h3>Grasshopper → ETABS components</h3><p>Early components to stream models from Grasshopper into ETABS and export data trees to Excel.</p></div>
       </article>
       <article class="card">
-        <button data-full="assets/etabs-plugin.jpg" data-cap="ETABS → SAFE load transfer plugin"><img src="assets/etabs-plugin.jpg" alt="ETABS plugin window" loading="lazy" style="object-position:top"></button>
-        <div class="b"><h3>ETABS → SAFE plugin</h3><p>Transfers shell uniform load sets and assignments from ETABS to SAFE.</p></div>
+        <button data-full="assets/etabs-plugin.jpg" data-cap="ETABS → SAFE load set transfer"><img src="assets/etabs-plugin.jpg" alt="ETABS plugin window" loading="lazy" style="object-position:top"></button>
+        <div class="b"><h3>Shell load set transfer</h3><p>Transfers shell uniform load sets and assignments from ETABS to SAFE.</p></div>
       </article>
       <article class="card">
         <button data-full="assets/apple-powerbi.jpg" data-cap="Power BI submittal tracker"><img src="assets/apple-powerbi.jpg" alt="Power BI dashboard" loading="lazy"></button>

@@ -279,13 +279,7 @@
 <section id="tools">
   <div class="wrap">
     <div class="sec-head"><span class="num">04</span><h2>Tools &amp; R&amp;D</h2><p>Software I've built to remove manual steps from structural design — from award-winning internal tools to open web apps.</p></div>
-    <div class="flagships">
-      <a class="card flag" href="tools/mcotis.html"><div class="im"><img src="assets/mcotis-3d.jpg" alt="" loading="lazy" style="object-fit:contain"></div><div class="t"><h3>Mcotis</h3><p>Numerical FEM and structural optimisation</p><span class="go">Read more →</span></div></a>
-      <a class="card flag" href="tools/mcalccanvas.html"><div class="im"><img src="assets/mcalc-column.jpg" alt="" loading="lazy" style="object-fit:cover;object-position:top left"></div><div class="t"><h3>MCalcCanvas</h3><p>Engineering calculation platform</p><span class="go">Read more →</span></div></a>
-      <a class="card flag" href="tools/mbcolumn-lite.html"><div class="im"><img src="assets/mbclite-pmm.jpg" alt="" loading="lazy" style="object-fit:cover;object-position:center 40%"></div><div class="t"><h3>MBColumn Lite</h3><p>Fibre-section PMM capacity analysis</p><span class="go">Read more →</span></div></a>
-      <a class="card flag" href="tools/mgt.html"><div class="im"><img src="assets/gh-grillage.jpg" alt="" loading="lazy" style="object-fit:cover"></div><div class="t"><h3>MGT · SP-Editor</h3><p>Automation and parametric design</p><span class="go">Read more →</span></div></a>
-    </div>
-    <h3 class="sub-head">All tools</h3>
+    <h3 class="sub-head">Featured</h3>
     <div class="tools">
 
       <article id="tool-mcotis" class="card tool">
@@ -309,19 +303,6 @@
           <button data-full="assets/mcotis-3d.jpg" data-cap="Mcotis — 3D extruded model"><img src="assets/mcotis-3d.jpg" alt="Mcotis 3D model of the cable-supported truss" loading="lazy" style="object-fit:contain;background:#fff"></button>
           <button data-full="assets/mcotis-deflection.jpg" data-cap="Mcotis — SLS deflection contour"><img src="assets/mcotis-deflection.jpg" alt="Mcotis deflection contour" loading="lazy" style="object-fit:contain;background:#fff"></button>
           <button class="wide" data-full="assets/mcotis-qto.jpg" data-cap="Mcotis — material quantities & estimated cost"><img src="assets/mcotis-qto.jpg" alt="Mcotis material quantities and cost table" loading="lazy"></button>
-        </div>
-      </article>
-
-      <article id="tool-bridger" class="card tool stack">
-        <div class="tool-body">
-          <span class="badge">New · .NET 8 · WPF · ETABS API</span>
-          <h3>Bridger</h3>
-          <p class="sub" style="margin:0">Moves parts of one ETABS model into another — geometry, names, assignments and definitions intact — with every value verified against the target model.</p>
-          <button class="flow-btn" data-full="assets/flow-bridger.svg" data-cap="How it works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v4h11v4"/></svg>How it works</button>
-          <a class="more-link" href="tools/bridger.html">Problem, method &amp; results →</a>
-        </div>
-        <div class="tool-media" style="grid-template-columns:1fr">
-          <button class="wide" data-full="assets/bridger-ui.jpg" data-cap="Bridger — ETABS model migrator"><img src="assets/bridger-ui.jpg" alt="Bridger app window: ETABS connections, migration options and execution log" loading="lazy"></button>
         </div>
       </article>
 
@@ -356,7 +337,6 @@
         </div>
       </article>
 
-
       <article id="tool-mcalc" class="card tool">
         <div class="tool-body">
           <span class="badge">TypeScript · React · web</span>
@@ -384,54 +364,6 @@
         </div>
       </article>
 
-      <article id="tool-composite" class="card tool">
-        <div class="tool-body">
-          <span class="badge">TypeScript · web · MCalcCanvas engine</span>
-          <h3>mCompositeBeamDesign</h3>
-          <p class="sub">Composite beam design to EN 1994-1-1 in the browser — every check traced to its clause, with the full report editable in MCalcCanvas.</p>
-          <details class="more"><summary>Key features</summary>
-          <ul>
-            <li><b>Design:</b> simply supported composite beams on solid slab or profiled deck, uniform or tapered sections, construction and composite stages.</li>
-            <li><b>Checks:</b> bending, shear, LTB, shear connection, web under point loads, transverse slab reinforcement and deflection — each with its clause and utilisation.</li>
-            <li><b>Open report:</b> the full calculation opens in MCalcCanvas, where it can be customised, reviewed and exported to PDF.</li>
-          </ul>
-          </details>
-          <button class="flow-btn" data-full="assets/flow-mcompositebeamdesign.svg" data-cap="How it works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v4h11v4"/></svg>How it works</button>
-          <a class="more-link" href="tools/mcompositebeamdesign.html">Problem, method &amp; results →</a>
-          <div class="tool-links">
-            <a class="btn primary" href="https://anhbq1298.github.io/mCalcCanvas/composite/" target="_blank" rel="noopener">Open live app</a>
-          </div>
-        </div>
-        <div class="tool-media">
-          <button class="wide" data-full="assets/composite-ui.jpg" data-cap="mCompositeBeamDesign — inputs, loading diagrams, plastic stress block and check list"><img src="assets/composite-ui.jpg" alt="mCompositeBeamDesign app with inputs, diagrams and utilisation checks" loading="lazy"></button>
-          <button class="wide" data-full="assets/composite-report.jpg" data-cap="The same design opened as an editable MCalcCanvas report"><img src="assets/composite-report.jpg" alt="Composite beam calculation report open in MCalcCanvas" loading="lazy"></button>
-        </div>
-      </article>
-
-      <article id="tool-mbclite" class="card tool">
-        <div class="tool-body">
-          <span class="badge">TypeScript · web</span>
-          <h3>MBColumn Lite</h3>
-          <p class="sub">Rectangular RC column design to Eurocode 2 in the browser — a fibre-based 3D PMM surface solved in seconds, with reports editable in MCalcCanvas.</p>
-          <details class="more"><summary>Key features</summary>
-          <ul>
-            <li><b>Section editor:</b> draw and drag bars on a grid canvas, or edit coordinates in a table; set bars by face.</li>
-            <li><b>Check:</b> fibre-based 3D PMM surface for multiple load cases, with P–M and Mx–My diagrams and optional EC2 §5.8 slenderness. Solves in the browser in seconds.</li>
-            <li><b>Open report:</b> results export to a report that opens in MCalcCanvas for customising and review.</li>
-          </ul>
-          </details>
-          <button class="flow-btn" data-full="assets/flow-mbcolumn-lite.svg" data-cap="How it works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v4h11v4"/></svg>How it works</button>
-          <a class="more-link" href="tools/mbcolumn-lite.html">Problem, method &amp; results →</a>
-          <div class="tool-links">
-            <a class="btn primary" href="https://mbcolumnlite.netlify.app/" target="_blank" rel="noopener">Open live app</a>
-          </div>
-        </div>
-        <div class="tool-media" style="grid-template-columns:1fr">
-          <button class="wide" data-full="assets/mbclite-pmm.jpg" data-cap="MBColumn Lite — 3D PMM surface, capacity check, P–M and Mx–My diagrams"><img src="assets/mbclite-pmm.jpg" alt="MBColumn Lite 3D PMM surface with load cases and capacity check" loading="lazy"></button>
-          <button class="wide" data-full="assets/mbclite-ui.jpg" data-cap="MBColumn Lite — section editor, materials and load cases"><img src="assets/mbclite-ui.jpg" alt="MBColumn Lite section editor" loading="lazy"></button>
-        </div>
-      </article>
-
       <article id="tool-sp" class="card tool">
         <div class="tool-body">
           <span class="badge">Python · ETABS API</span>
@@ -456,59 +388,19 @@
           <button data-full="assets/sp-flow.jpg" data-cap="SP-Editor workflow"><img src="assets/sp-flow.jpg" alt="SP-Editor workflow diagram" loading="lazy"></button>
         </div>
       </article>
-      <article id="tool-mgt" class="card tool">
-        <div class="tool-body">
-          <span class="badge">Grasshopper 8 · C# · Python</span>
-          <h3>MGT</h3>
-          <p class="sub">Parametric modelling for ETABS and SAP2000 — Grasshopper components that build, edit, query and load structural models straight from Rhino geometry.</p>
-          <details class="more"><summary>Key features</summary>
-          <ul>
-            <li><b>CSI link:</b> components wrap ETABS and SAP2000 APIs to set up, edit, query and load structural models parametrically, and export data trees to Excel.</li>
-            <li><b>Grillage builder:</b> turns slab boundaries into a strut-and-tie grillage model by sorting the Grasshopper data tree.</li>
-            <li><b>Tributary take-down:</b> Voronoi-based tributary areas for irregular wall and column layouts from cleaned CAD data.</li>
-          </ul>
-          </details>
-          <button class="flow-btn" data-full="assets/flow-mgt.svg" data-cap="How it works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v4h11v4"/></svg>How it works</button>
-          <a class="more-link" href="tools/mgt.html">Problem, method &amp; results →</a>
-          <div class="tool-links">
-            <a class="btn primary" href="https://www.youtube.com/playlist?list=PLP4F5t1phy2g" target="_blank" rel="noopener">Watch MGT on YouTube</a>
-          </div>
-        </div>
-        <div class="tool-media">
-          <button data-full="assets/gh-grillage.jpg" data-cap="MGT — grillage strut-and-tie model from slab geometry"><img src="assets/gh-grillage.jpg" alt="Grillage model generated in Grasshopper" loading="lazy"></button>
-          <button data-full="assets/gh-trib.jpg" data-cap="MGT — Voronoi tributary areas"><img src="assets/gh-trib.jpg" alt="Tributary areas in Grasshopper" loading="lazy"></button>
-          <button class="wide" data-full="assets/mgt-toolbar.jpg" data-cap="MGT — Grasshopper toolbar: units, materials, loadings, point, frame, shell and cable objects, utilities"><img src="assets/mgt-toolbar.jpg" alt="MGT Grasshopper toolbar with component groups" loading="lazy"></button>
-        </div>
-      </article>
     </div>
 
-    <h3 class="sub-head">CSI &amp; CAD add-ins</h3>
-    <div class="addins">
-      <article class="card addin">
-        <span class="badge">AutoCAD 2021 · C# · WPF</span>
-        <h3>MDraftingHelper</h3>
-        <p>AutoCAD ribbon for 2D structural drafting: rebar percentage tables, ties with 90°/135°/180° hooks, steel-section dynamic blocks, quick RC column sections and an EC2 PMM check using the MBColumn solver.</p>
-      </article>
-      <article class="card addin">
-        <span class="badge">Excel VSTO · CSI API</span>
-        <h3>Excel CSI ToolBox</h3>
-        <p>Excel ribbon that attaches to running ETABS / SAP2000 models: imports reactions, modal mass, story forces and drifts; creates objects from tables; batch-models drop panels with backup and rollback.</p>
-      </article>
-      <article class="card addin">
-        <span class="badge">SAFE 22 add-in · C#</span>
-        <h3>SAFE Model Purger</h3>
-        <p>Dry-run scan and safe consolidation of duplicate column, shell and spring properties, plus centroid-based matching of shell load sets from ETABS.</p>
-      </article>
-      <article class="card addin">
-        <span class="badge">ETABS plugin · C#</span>
-        <h3>Floor Mesh Preview</h3>
-        <p>Reads the actual analysis mesh ETABS generates for floor objects and flags hanging nodes between slabs in a pan/zoom viewer.</p>
-      </article>
-      <article class="card addin">
-        <span class="badge">Power BI · VBA</span>
-        <h3>Submittal dashboard</h3>
-        <p>Power BI tracker for shop-drawing status and team workload during construction administration, plus VBA-refactored calculation workbooks.</p>
-      </article>
+    <h3 class="sub-head">Other tools</h3>
+    <div class="others">
+      <article class="card oc"><a class="oc-im" href="tools/bridger.html" tabindex="-1" aria-hidden="true"><img src="assets/bridger-ui.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">.NET 8 · ETABS API</span><h3><a href="tools/bridger.html">Bridger</a></h3><p>Moves parts of one ETABS model into another with names and assignments intact, verifying every value.</p><div class="oc-links"><button class="oc-link flow-link" data-full="assets/flow-bridger.svg" data-cap="Bridger — how it works">How it works</button><a class="oc-link" href="tools/bridger.html">Details →</a></div></div></article>
+      <article class="card oc"><a class="oc-im" href="tools/mcompositebeamdesign.html" tabindex="-1" aria-hidden="true"><img src="assets/composite-ui.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">TypeScript · web</span><h3><a href="tools/mcompositebeamdesign.html">mCompositeBeamDesign</a></h3><p>Composite beam design to EN 1994-1-1 in the browser, with the full report editable in MCalcCanvas.</p><div class="oc-links"><button class="oc-link flow-link" data-full="assets/flow-mcompositebeamdesign.svg" data-cap="mCompositeBeamDesign — how it works">How it works</button><a class="oc-link" href="tools/mcompositebeamdesign.html">Details →</a><a class="oc-link" href="https://anhbq1298.github.io/mCalcCanvas/composite/" target="_blank" rel="noopener">Live app ↗</a></div></div></article>
+      <article class="card oc"><a class="oc-im" href="tools/mbcolumn-lite.html" tabindex="-1" aria-hidden="true"><img src="assets/mbclite-pmm.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">TypeScript · web</span><h3><a href="tools/mbcolumn-lite.html">MBColumn Lite</a></h3><p>Eurocode 2 column check with a fibre-based 3D PMM surface, solved in seconds in the browser.</p><div class="oc-links"><button class="oc-link flow-link" data-full="assets/flow-mbcolumn-lite.svg" data-cap="MBColumn Lite — how it works">How it works</button><a class="oc-link" href="tools/mbcolumn-lite.html">Details →</a><a class="oc-link" href="https://mbcolumnlite.netlify.app/" target="_blank" rel="noopener">Live app ↗</a></div></div></article>
+      <article class="card oc"><a class="oc-im" href="tools/mgt.html" tabindex="-1" aria-hidden="true"><img src="assets/gh-grillage.jpg" alt="" loading="lazy"></a><div class="oc-b"><span class="badge">Grasshopper · C# · Python</span><h3><a href="tools/mgt.html">MGT</a></h3><p>Grasshopper components that build, edit and load ETABS and SAP2000 models from Rhino geometry.</p><div class="oc-links"><button class="oc-link flow-link" data-full="assets/flow-mgt.svg" data-cap="MGT — how it works">How it works</button><a class="oc-link" href="tools/mgt.html">Details →</a><a class="oc-link" href="https://www.youtube.com/playlist?list=PLP4F5t1phy2g" target="_blank" rel="noopener">YouTube ↗</a></div></div></article>
+      <article class="card oc oc-text"><div class="oc-b"><span class="badge">AutoCAD · C#</span><h3>MDraftingHelper</h3><p>AutoCAD ribbon for 2D structural drafting: rebar tables, ties and hooks, steel-section blocks and an EC2 column PMM check.</p></div></article>
+      <article class="card oc oc-text"><div class="oc-b"><span class="badge">Excel VSTO · CSI API</span><h3>Excel CSI ToolBox</h3><p>Excel ribbon that reads and writes ETABS / SAP2000 results and objects, including batch drop-panel modelling.</p></div></article>
+      <article class="card oc oc-text"><div class="oc-b"><span class="badge">SAFE 22 add-in · C#</span><h3>SAFE Model Purger</h3><p>Finds and safely merges duplicate column, shell and spring properties, and matches shell load sets from ETABS.</p></div></article>
+      <article class="card oc oc-text"><div class="oc-b"><span class="badge">ETABS plugin · C#</span><h3>Floor Mesh Preview</h3><p>Shows the actual analysis mesh ETABS generates for floors and flags hanging nodes between slabs.</p></div></article>
+      <article class="card oc oc-text"><div class="oc-b"><span class="badge">Power BI · VBA</span><h3>Submittal dashboard</h3><p>Tracks shop-drawing status and team workload during construction administration.</p></div></article>
     </div>
   </div>
 </section>

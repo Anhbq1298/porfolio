@@ -307,3 +307,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .flow-btn:hover{border-color:var(--blue);color:var(--blue)}
 .flow-btn svg{width:16px;height:16px;color:var(--blue)}
 .lb img{background:#fff}
+/* other tools */
+.others{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.oc{display:flex;flex-direction:column;overflow:hidden}
+.oc-im{display:block;aspect-ratio:16/9;background:#fff;border-bottom:1px solid var(--line);overflow:hidden}
+.oc-im img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.oc-b{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.oc-b .badge{align-self:flex-start;margin-bottom:10px}
+.oc h3{font-size:17px;margin:0 0 6px}
+.oc h3 a{color:var(--text)}
+.oc h3 a:hover{color:var(--blue);text-decoration:none}
+.oc p{margin:0;font-size:14px;color:var(--text-2);line-height:1.55}
+.oc-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:auto;padding-top:14px}
+.oc-link{font:inherit;font-size:13.5px;font-weight:600;color:var(--blue);background:none;border:0;padding:0;cursor:pointer}
+button.oc-link{cursor:zoom-in}

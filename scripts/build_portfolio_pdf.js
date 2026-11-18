@@ -111,6 +111,7 @@ const SHEET_CSS = `
       art.querySelectorAll('.book-gallery').forEach(g => { if (g.children.length > 4) g.classList.add('many'); });
       art.querySelectorAll('img').forEach(im => { im.loading = 'eager'; });
       art.querySelectorAll('a[href]').forEach(a => { a.href = new URL(a.getAttribute('href'), base).href; });
+      sheet.querySelectorAll('.contact-cv, .cv-download, a[download], .book-downloads').forEach(n => n.remove());
       document.body.append(sheet);
     });
   }, sheets);
@@ -123,7 +124,7 @@ const SHEET_CSS = `
     const fit = sh.querySelector('.fit'); const avail = sh.clientHeight - 40 - 24;
     const availW = sh.clientWidth - 98;
     const h = z => { fit.style.zoom = z; fit.style.width = (availW / z) + 'px'; return fit.getBoundingClientRect().height; };
-    let lo = 0.45, hi = 1.3;
+    let lo = 0.45, hi = 1.75;
     for (let i = 0; i < 14; i++) { const m = (lo + hi) / 2; if (h(m) <= avail) lo = m; else hi = m; }
     const z = lo; h(z);
     return Math.round(z * 100);

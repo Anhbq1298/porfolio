@@ -206,7 +206,7 @@ TOOLS = [
 <li>Load patterns, cases (including nonlinear static, staged construction and time history) and combinations migrate with the functions and mass sources they depend on.</li>
 <li>Live test suite drives two ETABS instances and regenerates a capability matrix of verified categories.</li>
 </ul>""",
-        figs=[], links=[], tags=["ETABS API", "Model migration", "Verification", "C#", ".NET 8"],
+        figs=[("bridger-demo.mp4", "Demo", "wide")], links=[], tags=["ETABS API", "Model migration", "Verification", "C#", ".NET 8"],
     ),
     dict(
         slug="pdfetabs-column-mapper",
@@ -412,7 +412,7 @@ def fig_html(f):
     wide = len(f) > 2
     cls = ' class="wide"' if wide else ""
     if file.endswith(".mp4"):
-        poster = "../assets/pdfetabs-poster.jpg"
+        poster = "../assets/bridger-poster.jpg" if file.startswith("bridger") else "../assets/pdfetabs-poster.jpg"
         inner = (f'<video controls muted playsinline preload="metadata" poster="{poster}">'
                  f'<source src="../assets/{file}" type="video/mp4"></video>')
     else:

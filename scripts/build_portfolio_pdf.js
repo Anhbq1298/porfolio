@@ -58,6 +58,7 @@ const SHEET_CSS = `
   .sheet .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;flex:1;min-height:0;grid-auto-rows:minmax(0,1fr)}
   .sheet .card-li{display:flex;gap:16px;align-items:center;padding:16px 20px;border:1px solid #E2E8F0;border-radius:12px;background:#F8FAFC;font-size:21px;line-height:1.45}
   .sheet .card-li .n{white-space:nowrap;flex:none;font:700 28px Inter,Arial,sans-serif;color:#1F4788;opacity:.85}
+  .sheet .merged .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
   .sheet .foot{position:absolute;left:13mm;right:13mm;bottom:6mm;display:flex;justify-content:space-between;font:10px Inter,Arial,sans-serif;color:#64748B}
   .sheet figure,.sheet .oc,.sheet .tool-statement,.sheet .home-flow{break-inside:avoid}
 `;
@@ -92,6 +93,13 @@ const SHEET_CSS = `
   }
   console.log('book pages:', count);
 
+  // Merge About & Education with Core Skills into one two-column sheet.
+  const ia = sheets.findIndex(x => x.title === 'About & Education');
+  if (ia >= 0 && sheets[ia + 1] && sheets[ia + 1].title === 'Core Skills') {
+    const inner = h => h.replace(/^<article[^>]*>/, '').replace(/<\/article>$/, '');
+    sheets.splice(ia, 2, { title: 'About, Education & Skills', html: `<article class="book-page merged"><h3>About, Education &amp; Skills</h3><div class="two"><div>${inner(sheets[ia].html).replace(/<h3[^>]*>.*?<\/h3>/, '')}</div><div>${inner(sheets[ia + 1].html).replace(/<h3[^>]*>.*?<\/h3>/, '')}</div></div></article>` });
+  }
+
   // 2. Lay them out one per landscape A4 sheet, shrinking each to fit.
   await page.evaluate(() => document.querySelector('#portfolio-book').close());
   await page.emulateMedia({ media: 'print', colorScheme: 'light' });
@@ -103,6 +111,7 @@ const SHEET_CSS = `
       const sheet = document.createElement('div'); sheet.className = 'sheet';
       sheet.innerHTML = `<div class="fit">${s.html}</div><div class="foot"><span>Bui Quang Anh (Mark) · Portfolio</span><span>${i + 1} / ${sheets.length}</span></div>`;
       const art = sheet.querySelector('.book-page');
+      if (art.classList.contains('merged')) { art.querySelectorAll('img').forEach(im => { im.loading = 'eager'; }); document.body.append(sheet); return; }
       const heads = Array.from(art.children).filter(c => /^(P)$/.test(c.tagName) && c.classList.contains('book-chapter') || c.tagName === 'H3');
       const media = Array.from(art.children).filter(c => c.matches('.book-gallery, .home-flow, .others, .portrait'));
       const rest = Array.from(art.children).filter(c => !heads.includes(c) && !media.includes(c));

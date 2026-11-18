@@ -73,6 +73,15 @@ const SHEET_CSS = `
   .sheet .tbot .book-details{margin:0;padding:10px 12px}.sheet .tbot .book-details li{margin:3px 0;font-size:13px}
   .sheet .tbot .home-flow{margin:0 0 8px}.sheet .tbot .home-flow img{width:100%;height:auto}
   .sheet .tbot .tool-links{display:flex;gap:8px;flex-wrap:wrap}.sheet .tbot .tool-links a{font-size:12px;padding:6px 10px}
+  .sheet .herorow{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.5fr);column-gap:24px;margin-bottom:12px}
+  .sheet .herorow > *{grid-column:1}
+  .sheet .herorow > .portrait{grid-column:2;grid-row:1 / span 6;max-width:none}
+  .sheet .herorow .portrait img{max-height:210px;width:auto;max-width:100%;aspect-ratio:auto;margin-left:auto;display:block}
+  .sheet .herorow > h3{font-size:34px;margin:0 0 4px}
+  .sheet .herorow .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 0}
+  .sheet .herorow ~ .two{grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr)}
+  .sheet .herorow ~ .two .skills{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .sheet .herorow ~ .two .skills > :nth-child(3){grid-column:1 / span 2}
   .sheet .foot{position:absolute;left:13mm;right:13mm;bottom:6mm;display:flex;justify-content:space-between;font:10px Inter,Arial,sans-serif;color:#64748B}
   .sheet figure,.sheet .oc,.sheet .tool-statement,.sheet .home-flow{break-inside:avoid}
 `;
@@ -112,6 +121,13 @@ const SHEET_CSS = `
   if (ia >= 0 && sheets[ia + 1] && sheets[ia + 1].title === 'Core Skills') {
     const inner = h => h.replace(/^<article[^>]*>/, '').replace(/<\/article>$/, '');
     sheets.splice(ia, 2, { title: 'About, Education & Skills', html: `<article class="book-page merged"><h3>About, Education &amp; Skills</h3><div class="two"><div>${inner(sheets[ia].html).replace(/<h3[^>]*>.*?<\/h3>/, '')}</div><div>${inner(sheets[ia + 1].html).replace(/<h3[^>]*>.*?<\/h3>/, '')}</div></div></article>` });
+  }
+
+  // Put About / Education / Skills on the first page together with the intro.
+  if (sheets[0].title.startsWith('Bui Quang Anh') && sheets[1] && sheets[1].title === 'About, Education & Skills') {
+    const inner = h => h.replace(/^<article[^>]*>/, '').replace(/<\/article>$/, '');
+    const two = inner(sheets[1].html).replace(/^<h3[^>]*>.*?<\/h3>/, '');
+    sheets.splice(0, 2, { title: sheets[0].title, html: `<article class="book-page merged"><div class="herorow">${inner(sheets[0].html)}</div>${two}</article>` });
   }
 
   // 2. Lay them out one per landscape A4 sheet, shrinking each to fit.

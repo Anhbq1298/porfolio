@@ -37,18 +37,14 @@
 <main>
 <div class="cs-hero"><button data-full="../assets/bridger-ui.jpg" data-cap="Bridger — connections, migration options and execution log"><img src="../assets/bridger-ui.jpg" alt="Bridger — connections, migration options and execution log"></button></div>
 <div class="cs-body">
-  <aside class="toc"><b>On this page</b><a href="#problem">Problem</a><a href="#how-it-works">Solution</a><a href="#methodology">Methodology</a><a href="#result">Result</a><a href="#technical-implementation">Technical implementation</a><a href="#keywords">Keywords</a></aside>
+  <aside class="toc"><b>On this page</b><a href="#problem">Problem</a><a href="#how-it-works">Solution</a><a href="#methodology">Methodology</a><a href="#result">Result</a><a href="#keywords">Keywords</a></aside>
   <article><section id="problem"><h2>Problem</h2><p>Design teams often develop parts of a building in separate ETABS models and later need to merge them. Copying objects by hand loses unique names and assignments, and re-applying sections, releases, springs, loads and labels is slow and easy to get wrong.</p></section><section id="how-it-works"><h2>Solution</h2><p>Read model objects and their assignments, transfer them using ETABS APIs and verify the target model before accepting the migration.</p><figure class="flow"><button data-full="../assets/flow-bridger.svg" data-cap="Bridger — how it works"><img src="../assets/flow-bridger.svg" alt="Workflow diagram for Bridger"></button></figure></section><section id="methodology"><h2>Methodology</h2><ul>
 <li><b>Connect.</b> Attach to two running ETABS instances (source and target), found by process and attached by PID.</li>
 <li><b>Select.</b> Pick joints, frames and shells in Model A and tick the categories to migrate.</li>
 <li><b>Migrate in stages.</b> Geometry and names → section definitions → assignments → loading → pier and spandrel labels → design overwrites.</li>
 <li><b>Fixed rules, no prompts.</b> Each situation — no match, one match, several matches, name taken — has a defined behaviour; skipped items are logged.</li>
 <li><b>Verify.</b> Every value is read back from Model B and compared before the model is refreshed.</li>
-</ul></section><section id="result"><h2>Result</h2><div class="callout"><p>Model merges become repeatable and auditable: what was copied, reused, renamed or skipped is recorded in a log rather than relying on manual checks.</p></div></section><section id="technical-implementation"><h2>Technical implementation</h2><ul>
-<li>.NET 8 WPF application compiled against the ETABS API.</li>
-<li>Load patterns, cases (including nonlinear static, staged construction and time history) and combinations migrate with the functions and mass sources they depend on.</li>
-<li>Live test suite drives two ETABS instances and regenerates a capability matrix of verified categories.</li>
-</ul></section><section id="keywords"><h2>Keywords</h2><div class="tags"><span>ETABS API</span><span>Model migration</span><span>Verification</span><span>C#</span><span>.NET 8</span></div></section></article>
+</ul></section><section id="result"><h2>Result</h2><div class="callout"><p>Model merges become repeatable and auditable: what was copied, reused, renamed or skipped is recorded in a log rather than relying on manual checks.</p></div></section><section id="keywords"><h2>Keywords</h2><div class="tags"><span>ETABS API</span><span>Model migration</span><span>Verification</span><span>C#</span><span>.NET 8</span></div></section></article>
 </div>
 <nav class="pager" aria-label="More"><a href="mcotis.html"><small>← Previous</small>Mcotis</a><a class="next" href="pdfetabs-column-mapper.html"><small>Next →</small>PDFETABS Column Mapper</a></nav>
 </main>

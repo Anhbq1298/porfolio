@@ -412,3 +412,5 @@ button.oc-link{cursor:zoom-in}
 .cv-download{white-space:nowrap}
 .contact-cv{margin-top:18px}
 @media(max-width:580px){.programming-card .dev-grid{grid-template-columns:1fr;gap:16px}}
+
+.proj-points{margin:10px 0 0;padding-left:20px;color:var(--text-2)}.proj-points li{margin:4px 0}

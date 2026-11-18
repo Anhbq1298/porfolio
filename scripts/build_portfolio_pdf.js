@@ -59,6 +59,20 @@ const SHEET_CSS = `
   .sheet .card-li{display:flex;gap:16px;align-items:center;padding:16px 20px;border:1px solid #E2E8F0;border-radius:12px;background:#F8FAFC;font-size:21px;line-height:1.45}
   .sheet .card-li .n{white-space:nowrap;flex:none;font:700 28px Inter,Arial,sans-serif;color:#1F4788;opacity:.85}
   .sheet .merged .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+  .sheet .toolbody{display:flex;flex-direction:column;gap:12px}
+  .sheet .thead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+  .sheet .thead h3{margin:2px 0 0 !important;font-size:30px}
+  .sheet .tgal{display:flex !important;gap:12px;flex:1 1 0;min-height:0;margin:0 !important;overflow:hidden}
+  .sheet .tgal figure,.sheet .tgal a{margin:0;display:flex;flex-direction:column;min-width:0;min-height:0}
+  .sheet .tgal figure{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden}
+  .sheet .tgal a{flex:1;min-height:0;display:block}
+  .sheet .tgal img{width:100%;height:100%;object-fit:contain;max-height:none !important;border:0 !important;border-radius:0 !important;background:transparent}
+  .sheet .tgal figcaption{font-size:11px;padding:2px 8px}
+  .sheet .tbot{display:grid;grid-template-columns:1.1fr 1.2fr .9fr;gap:16px;align-items:start;font-size:13px;line-height:1.4}
+  .sheet .tbot .tool-statement{margin:0 0 8px}.sheet .tbot p{margin:2px 0 0;font-size:13px}
+  .sheet .tbot .book-details{margin:0;padding:10px 12px}.sheet .tbot .book-details li{margin:3px 0;font-size:13px}
+  .sheet .tbot .home-flow{margin:0 0 8px}.sheet .tbot .home-flow img{width:100%;height:auto}
+  .sheet .tbot .tool-links{display:flex;gap:8px;flex-wrap:wrap}.sheet .tbot .tool-links a{font-size:12px;padding:6px 10px}
   .sheet .foot{position:absolute;left:13mm;right:13mm;bottom:6mm;display:flex;justify-content:space-between;font:10px Inter,Arial,sans-serif;color:#64748B}
   .sheet figure,.sheet .oc,.sheet .tool-statement,.sheet .home-flow{break-inside:avoid}
 `;
@@ -112,6 +126,25 @@ const SHEET_CSS = `
       sheet.innerHTML = `<div class="fit">${s.html}</div><div class="foot"><span>Bui Quang Anh (Mark) · Portfolio</span><span>${i + 1} / ${sheets.length}</span></div>`;
       const art = sheet.querySelector('.book-page');
       if (art.classList.contains('merged')) { art.querySelectorAll('img').forEach(im => { im.loading = 'eager'; }); document.body.append(sheet); return; }
+      if (art.querySelector('.tool-statement')) {
+        sheet.dataset.tool = '1';
+        const pick = sel => Array.from(art.querySelectorAll(':scope > ' + sel));
+        const chapter = art.querySelector(':scope > .book-chapter'), h3 = art.querySelector(':scope > h3');
+        const badge = pick('.badge')[0], st = pick('.tool-statement'), flow = pick('.home-flow')[0], det = pick('.book-details')[0], gal = pick('.book-gallery')[0], links = pick('.tool-links')[0];
+        const head = document.createElement('div'); head.className = 'thead';
+        const hl = document.createElement('div'); [chapter, h3].forEach(x => x && hl.append(x)); head.append(hl); if (badge) head.append(badge);
+        const bot = document.createElement('div'); bot.className = 'tbot';
+        const c1 = document.createElement('div'); st.forEach(x => c1.append(x));
+        const c2 = document.createElement('div'); if (det) c2.append(det);
+        const c3 = document.createElement('div'); if (flow) c3.append(flow); if (links) c3.append(links);
+        bot.append(c1, c2, c3);
+        const wrap = document.createElement('div'); wrap.className = 'toolbody';
+        wrap.append(head); if (gal) { gal.classList.add('tgal'); wrap.append(gal); } wrap.append(bot);
+        art.replaceChildren(wrap);
+        art.querySelectorAll('img').forEach(im => { im.loading = 'eager'; });
+        art.querySelectorAll('a[href]').forEach(a => { a.href = new URL(a.getAttribute('href'), base).href; });
+        document.body.append(sheet); return;
+      }
       const heads = Array.from(art.children).filter(c => /^(P)$/.test(c.tagName) && c.classList.contains('book-chapter') || c.tagName === 'H3');
       const media = Array.from(art.children).filter(c => c.matches('.book-gallery, .home-flow, .others, .portrait'));
       const rest = Array.from(art.children).filter(c => !heads.includes(c) && !media.includes(c));
@@ -137,6 +170,7 @@ const SHEET_CSS = `
       }
       art.append(body);
       art.querySelectorAll('.book-gallery').forEach(g => { if (g.children.length > 4) g.classList.add('many'); });
+      const g0 = body.querySelector('.book-gallery'); if (g0 && !body.classList.contains('single') && g0.children.length <= 2) body.style.gridTemplateColumns = 'minmax(0,.85fr) minmax(0,1.3fr)';
       art.querySelectorAll('img').forEach(im => { im.loading = 'eager'; });
       art.querySelectorAll('a[href]').forEach(a => { a.href = new URL(a.getAttribute('href'), base).href; });
       sheet.querySelectorAll('.contact-cv, .cv-download, a[download], .book-downloads').forEach(n => n.remove());
@@ -152,9 +186,15 @@ const SHEET_CSS = `
     const fit = sh.querySelector('.fit'); const avail = sh.clientHeight - 40 - 24;
     const availW = sh.clientWidth - 98;
     const h = z => { fit.style.zoom = z; fit.style.width = (availW / z) + 'px'; return fit.getBoundingClientRect().height; };
-    let lo = 0.45, hi = sh.dataset.cards ? 1.6 : 1.75;
+    let lo = 0.45, hi = sh.dataset.tool ? 1.0 : sh.dataset.cards ? 1.6 : 1.75;
     for (let i = 0; i < 14; i++) { const m = (lo + hi) / 2; if (h(m) <= avail) lo = m; else hi = m; }
     const z = lo; h(z);
+    const tb = fit.querySelector('.toolbody');
+    if (tb) {
+      const top = (tb.getBoundingClientRect().top - fit.getBoundingClientRect().top) / z;
+      tb.style.height = (avail / z - top - 14 / z) + 'px';
+      tb.querySelectorAll('.tgal figure').forEach(f => { const im = f.querySelector('img'); const ar = (im.naturalWidth || 1) / (im.naturalHeight || 1); f.style.flex = `${ar} ${ar} 0`; });
+    }
     const cb = fit.querySelector('.cardsbody');
     if (cb) {
       const top = (cb.getBoundingClientRect().top - fit.getBoundingClientRect().top) / z;

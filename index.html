@@ -168,6 +168,9 @@ h3{font-size:19px;margin:0 0 6px;letter-spacing:-.01em}
 .tool:nth-child(even){grid-template-columns:1.15fr 1fr}
 .tool:nth-child(even) .tool-body{order:2}
 .tool-body{padding:32px}
+.tool.stack,.tool.stack:nth-child(even){grid-template-columns:1fr}
+.tool.stack .tool-body{order:0;padding-bottom:20px}
+.tool.stack .tool-media{padding:0 32px 32px;background:transparent}
 .tool-body .badge{margin-bottom:12px;display:inline-block}
 .tool-body h3{font-size:24px}
 .tool-body .sub{color:var(--text-2);margin:0 0 16px}
@@ -480,46 +483,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         </div>
       </article>
 
-      <article class="card tool">
+      <article class="card tool stack">
         <div class="tool-body">
           <span class="badge">New · .NET 8 · WPF · ETABS API</span>
           <h3>Bridger</h3>
-          <p class="sub">Moves parts of one ETABS model into another — geometry, names and assignments intact.</p>
-          <ul>
-            <li><b>Selective:</b> pick joints, frames and shells in Model A, tick the categories, click Migrate.</li>
-            <li><b>Complete:</b> sections, restraints, springs, releases, modifiers, loads, pier/spandrel labels and design overwrites; load patterns, cases and combinations come across with the functions and mass sources they need.</li>
-            <li><b>Predictable:</b> fixed rules instead of prompts — match, reuse, create or skip — with name conflicts imported as <span class="mono">[Migrated]Name</span>.</li>
-            <li><b>Verified:</b> every assignment is read back from the target; a live test suite drives two ETABS instances and regenerates the capability matrix.</li>
-          </ul>
+          <p class="sub" style="margin:0">Moves parts of one ETABS model into another — geometry, names, assignments and definitions intact — with every value verified against the target model.</p>
         </div>
-        <div class="tool-media" style="grid-template-columns:1fr;background:var(--blue-soft)">
-          <svg viewBox="0 0 520 330" role="img" aria-label="Bridger migrates selected objects from ETABS Model A to Model B in seven verified stages" style="width:100%;height:auto;display:block">
-            <defs><marker id="bar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--blue)"/></marker></defs>
-            <g font-family="Inter,Segoe UI,sans-serif">
-              <rect x="10" y="20" width="130" height="110" rx="10" fill="var(--surface)" stroke="var(--line)"/>
-              <text x="75" y="44" text-anchor="middle" font-size="12" font-weight="700" fill="var(--text)">ETABS · Model A</text>
-              <g stroke="var(--blue)" stroke-width="2" fill="none"><path d="M35 115V60M75 115V60M115 115V60M35 60H115M35 88H115"/></g>
-              <g fill="var(--orange)"><circle cx="35" cy="60" r="4"/><circle cx="75" cy="60" r="4"/><circle cx="35" cy="88" r="4"/><circle cx="75" cy="88" r="4"/></g>
-              <rect x="380" y="20" width="130" height="110" rx="10" fill="var(--surface)" stroke="var(--line)"/>
-              <text x="445" y="44" text-anchor="middle" font-size="12" font-weight="700" fill="var(--text)">ETABS · Model B</text>
-              <g stroke="var(--text-3)" stroke-width="2" fill="none"><path d="M405 115V60M445 115V60M485 115V60M405 60H485M405 88H485"/></g>
-              <g stroke="var(--blue)" stroke-width="2.5" fill="none"><path d="M405 60H445M405 88H445M405 115V60M445 115V60"/></g>
-              <rect x="185" y="52" width="150" height="46" rx="23" fill="var(--blue)"/>
-              <text x="260" y="80" text-anchor="middle" font-size="15" font-weight="700" fill="var(--bg)">Bridger</text>
-              <path d="M142 75H180" stroke="var(--blue)" stroke-width="2" marker-end="url(#bar)"/>
-              <path d="M338 75H376" stroke="var(--blue)" stroke-width="2" marker-end="url(#bar)"/>
-              <g font-size="11.5" fill="var(--text)">
-                <g transform="translate(10,160)"><rect width="160" height="36" rx="6" fill="var(--surface)" stroke="var(--line)"/><text x="12" y="23"><tspan font-weight="700" fill="var(--blue)">1</tspan>  Geometry &amp; names</text></g>
-                <g transform="translate(180,160)"><rect width="160" height="36" rx="6" fill="var(--surface)" stroke="var(--line)"/><text x="12" y="23"><tspan font-weight="700" fill="var(--blue)">2</tspan>  Section definitions</text></g>
-                <g transform="translate(350,160)"><rect width="160" height="36" rx="6" fill="var(--surface)" stroke="var(--line)"/><text x="12" y="23"><tspan font-weight="700" fill="var(--blue)">3</tspan>  Assignments</text></g>
-                <g transform="translate(10,206)"><rect width="160" height="36" rx="6" fill="var(--surface)" stroke="var(--line)"/><text x="12" y="23"><tspan font-weight="700" fill="var(--blue)">4</tspan>  Loading</text></g>
-                <g transform="translate(180,206)"><rect width="160" height="36" rx="6" fill="var(--surface)" stroke="var(--line)"/><text x="12" y="23"><tspan font-weight="700" fill="var(--blue)">5</tspan>  Pier &amp; spandrel labels</text></g>
-                <g transform="translate(350,206)"><rect width="160" height="36" rx="6" fill="var(--surface)" stroke="var(--line)"/><text x="12" y="23"><tspan font-weight="700" fill="var(--blue)">6</tspan>  Design overwrites</text></g>
-                <g transform="translate(10,252)"><rect width="500" height="36" rx="6" fill="var(--surface)" stroke="var(--green)"/><text x="12" y="23"><tspan font-weight="700" fill="var(--green)">7</tspan>  Verify every value against a fresh read of Model B, then refresh</text></g>
-              </g>
-              <text x="10" y="318" font-size="11" fill="var(--text-3)" font-family="JetBrains Mono,Consolas,monospace">Live-tested on ETABS 22.7 · full .log / .jsonl migration log</text>
-            </g>
-          </svg>
+        <div class="tool-media" style="grid-template-columns:1fr">
+          <button class="wide" data-full="assets/bridger-ui.jpg" data-cap="Bridger — ETABS model migrator"><img src="assets/bridger-ui.jpg" alt="Bridger app window: ETABS connections, migration options and execution log" loading="lazy"></button>
         </div>
       </article>
 

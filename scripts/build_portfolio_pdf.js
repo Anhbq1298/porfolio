@@ -101,6 +101,19 @@ const SHEET_CSS = `
   .sheet .half .desc{font-size:17px}
   .sheet .half .cards{grid-template-columns:minmax(0,1fr);flex:1}
   .sheet .corner{position:absolute;top:6mm;right:13mm;font:700 22px Inter,Arial,sans-serif;color:#1F4788;letter-spacing:.01em}
+  .sheet .cover{height:100%}
+  .sheet .cover .cv-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;height:calc(210mm - 16mm - 14mm - 30px);align-items:stretch}
+  .sheet .cover.wide .cv-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr}
+  .sheet .cover.wide .cv-imgs{order:-1}
+  .sheet .cover .cv-text{align-self:center}
+  .sheet .cover .cv-k{color:#1F4788;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px}
+  .sheet .cover h1{font-size:56px;line-height:1.05;margin:10px 0;text-transform:uppercase;letter-spacing:.02em}
+  .sheet .cover hr{border:0;border-top:3px solid #1F4788;width:64px;margin:18px 0}
+  .sheet .cover ul{margin:0;padding-left:20px;font-size:18px;line-height:1.6;color:#475569}
+  .sheet .cover .cv-imgs{display:grid;gap:10px;min-height:0}
+  .sheet .cover .cv-imgs.n6{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+  .sheet .cover .cv-imgs.n1{grid-template-columns:1fr}
+  .sheet .cover .cv-imgs img{width:100%;height:100%;object-fit:cover;border-radius:12px;min-height:0}
   .sheet .foot{position:absolute;left:13mm;right:13mm;bottom:6mm;display:flex;justify-content:space-between;font:10px Inter,Arial,sans-serif;color:#64748B}
   .sheet figure,.sheet .oc,.sheet .tool-statement,.sheet .home-flow{break-inside:avoid}
 `;
@@ -156,6 +169,13 @@ const SHEET_CSS = `
     sheets.splice(i7, 2, { title: '7-storey school · 23-storey hospital', html: `<article class="book-page merged twoproj"><div class="halves"><div class="half">${inner(sheets[i7].html)}</div><div class="sep"></div><div class="half">${inner(sheets[i7 + 1].html)}</div></div></article>` });
   }
 
+  // Section cover pages: Working Projects, R&D Projects.
+  const cover = (title, kicker, lines, imgs, wide) => ({ title, cover: true, html: `<article class="book-page cover ${wide ? 'wide' : ''}"><div class="cv-grid"><div class="cv-text"><div class="cv-k">${kicker}</div><h1>${title}</h1><hr><ul>${lines.map(l => `<li>${l}</li>`).join('')}</ul></div><div class="cv-imgs n${imgs.length}">${imgs.map(i => `<img src="${i}">`).join('')}</div></div></article>` });
+  const iw = sheets.findIndex(x => x.title === 'Airport project');
+  const it = sheets.findIndex(x => x.title === 'Mcotis');
+  if (it >= 0) sheets.splice(it, 0, cover('R&amp;D Projects', 'Portfolio · Engineering software', ['Mcotis · cable-supported truss FEM study engine', 'MCalcCanvas · human-readable calculation canvas', 'mCompositeBeamDesign · composite beam design to EC4', 'MBColumn Lite · fibre-section column checks', 'MGT · Grasshopper toolbox for ETABS / SAP2000', 'SP-Editor · ETABS-to-spColumn automation', 'PDFETABS Column Mapper · Bridger · Excel CSI ToolBox'], ['assets/tools-banner.jpg'], true));
+  if (iw >= 0) sheets.splice(iw, 0, cover('Working Projects', 'Portfolio · Professional experience', ['Meinhardt (Singapore) · Airport · 7-storey school · Public hospital', 'Aurecon Viet Nam · Shellharbour Hospital', 'Thornton Tomasetti Viet Nam · SDC Belmont Data Center · Apple Capstone Campus · Hard Rock Hotel &amp; Casino Hellinikon · 4th Broadway · OKC Tower'], ['assets/sdc-render.jpg', 'assets/apple-render.jpg', 'assets/hardrock-render.jpg', 'assets/okc-render.jpg', 'assets/tb-render.jpg', 'assets/shell-render.jpg'], false));
+
   // 2. Lay them out one per landscape A4 sheet, shrinking each to fit.
   await page.evaluate(() => document.querySelector('#portfolio-book').close());
   await page.emulateMedia({ media: 'print', colorScheme: 'light' });
@@ -167,6 +187,7 @@ const SHEET_CSS = `
       const sheet = document.createElement('div'); sheet.className = 'sheet';
       sheet.innerHTML = `<div class="fit">${s.html}</div><div class="foot"><span>Bui Quang Anh (Mark) · Portfolio</span><span>${i + 1} / ${sheets.length}</span></div>`;
       const art = sheet.querySelector('.book-page');
+      if (art.classList.contains('cover')) { sheet.dataset.cover = '1'; document.body.append(sheet); return; }
       Array.from(art.querySelectorAll('.about > *')).filter(e => /^\s*Hi, I/.test(e.textContent)).forEach(e => e.remove());
       art.querySelectorAll('.herorow .portrait').forEach(e => e.remove());
       art.querySelectorAll('.herorow .lead, .herorow .focus').forEach(e => e.remove());
@@ -252,6 +273,7 @@ const SHEET_CSS = `
   });
   await page.waitForTimeout(500);
   const layout = forced => page.evaluate(forced => Array.from(document.querySelectorAll('.sheet')).map(sh => {
+    if (sh.dataset.cover) return 9;
     const fit = sh.querySelector('.fit'); const avail = sh.clientHeight - 64 - 40;
     const availW = sh.clientWidth - 98;
     const titles = fit.querySelector('.herorow') ? [] : Array.from(fit.querySelectorAll('.book-page > h3, .half > h3, .thead h3'));
@@ -293,7 +315,7 @@ const SHEET_CSS = `
     return Math.round(z * 100);
   }), forced);
   const zs = await layout(0);
-  const Z = Math.min(1, ...zs);
+  const Z = Math.min(1, ...zs.filter(z => z < 9));
   console.log('fit zooms', zs.map(z => z.toFixed(2)).join(' '), '-> uniform', Z.toFixed(2));
   const report = await layout(Z);
   console.log('zoom %:', report.join(' '));

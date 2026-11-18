@@ -173,6 +173,8 @@ h3{font-size:24.7px;margin:0 0 6px;letter-spacing:-.01em}
 .tool-body{padding:32px}
 .tool.stack,.tool.stack:nth-child(even){grid-template-columns:1fr}
 .tool.stack .tool-body{order:0;padding-bottom:20px}
+.demo{width:100%;display:block;border:1px solid var(--line);border-radius:8px;background:#fff}
+.vcap{margin:6px 0 0;font-size:15.6px;color:var(--text-3)}
 .tool.stack .tool-media{padding:0 32px 32px;background:transparent}
 .tool-body .badge{margin-bottom:12px;display:inline-block}
 .tool-body h3{font-size:31.2px}
@@ -503,6 +505,20 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         </div>
         <div class="tool-media" style="grid-template-columns:1fr">
           <button class="wide" data-full="assets/bridger-ui.jpg" data-cap="Bridger — ETABS model migrator"><img src="assets/bridger-ui.jpg" alt="Bridger app window: ETABS connections, migration options and execution log" loading="lazy"></button>
+        </div>
+      </article>
+
+      <article class="card tool stack">
+        <div class="tool-body">
+          <span class="badge">New · ETABS API · PDF markups</span>
+          <h3>PDFETABS Column Mapper</h3>
+          <p class="sub" style="margin:0">Assigns ETABS column names from PDF markups and supports QA/QC during the naming phase for CORENET X submission. PDF and ETABS columns are overlaid in one local frame and matched geometrically, so engineers can see every match, mismatch and conflict before writing names and pier labels back to ETABS — reducing discrepancies between drawings and model.</p>
+        </div>
+        <div class="tool-media" style="grid-template-columns:1fr">
+          <video class="demo" controls muted loop playsinline preload="metadata" poster="assets/pdfetabs-poster.jpg">
+            <source src="assets/pdfetabs-column-mapper.mp4" type="video/mp4">
+          </video>
+          <p class="vcap">Demo, sped up 4× with idle time removed (≈50 s).</p>
         </div>
       </article>
 

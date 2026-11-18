@@ -37,8 +37,8 @@
 <main>
 <div class="cs-hero"><button data-full="../assets/sp-ui.jpg" data-cap="SP-Editor interface"><img src="../assets/sp-ui.jpg" alt="SP-Editor interface"></button></div>
 <div class="cs-body">
-  <aside class="toc"><b>On this page</b><a href="#problem">Problem</a><a href="#how-it-works">Proposed solution</a><a href="#methodology">Methodology</a><a href="#result">Result</a><a href="#technical-implementation">Technical implementation</a><a href="#gallery">Gallery</a><a href="#try-it">Try it</a><a href="#keywords">Keywords</a></aside>
-  <article><section id="problem"><h2>Problem</h2><p>Shear-wall design in spColumn needs geometry and design forces for every pier, transcribed by hand from ETABS. On large buildings this is hours of manual work in the middle of the design process.</p></section><section id="how-it-works"><h2>Proposed solution</h2><p>Automate the extraction of wall pier geometry and forces through the CSI API, then generate consistent spColumn inputs and design checks in batches.</p><figure class="flow"><button data-full="../assets/flow-sp-editor.svg" data-cap="SP-Editor — how it works"><img src="../assets/flow-sp-editor.svg" alt="Workflow diagram for SP-Editor"></button></figure></section><section id="methodology"><h2>Methodology</h2><ul>
+  <aside class="toc"><b>On this page</b><a href="#problem">Problem</a><a href="#how-it-works">Solution</a><a href="#methodology">Methodology</a><a href="#result">Result</a><a href="#technical-implementation">Technical implementation</a><a href="#gallery">Gallery</a><a href="#try-it">Try it</a><a href="#keywords">Keywords</a></aside>
+  <article><section id="problem"><h2>Problem</h2><p>Shear-wall design in spColumn needs geometry and design forces for every pier, transcribed by hand from ETABS. On large buildings this is hours of manual work in the middle of the design process.</p></section><section id="how-it-works"><h2>Solution</h2><p>Automate the extraction of wall pier geometry and forces through the CSI API, then generate consistent spColumn inputs and design checks in batches.</p><figure class="flow"><button data-full="../assets/flow-sp-editor.svg" data-cap="SP-Editor — how it works"><img src="../assets/flow-sp-editor.svg" alt="Workflow diagram for SP-Editor"></button></figure></section><section id="methodology"><h2>Methodology</h2><ul>
 <li>Extract wall-pier geometry and retrieve and filter pier design forces through the ETABS API.</li>
 <li>Take the engineer's reinforcement pattern as input.</li>
 <li>Run batch processing and export demand/capacity results.</li>
@@ -48,7 +48,7 @@
 <li>ETABS API for geometry and force extraction; spColumn file generation.</li>
 </ul></section><section id="gallery"><h2>Gallery</h2><div class="figs"><figure class="wide"><button data-full="../assets/sp-flow.jpg" data-cap="Workflow"><img src="../assets/sp-flow.jpg" alt="Workflow" loading="lazy"></button><figcaption>Workflow</figcaption></figure></div></section><section id="try-it"><h2>Try it</h2><div class="tool-links" style="margin-top:0"><a class="btn primary" href="https://www.youtube.com/watch?v=ujFrALC1rHs" target="_blank" rel="noopener">Watch demo on YouTube</a></div></section><section id="keywords"><h2>Keywords</h2><div class="tags"><span>Python</span><span>ETABS API</span><span>spColumn</span><span>Shear walls</span><span>Award</span></div></section></article>
 </div>
-<nav class="pager" aria-label="More"><a href="mbcolumn-lite.html"><small>← Previous</small>MBColumn Lite</a><a class="next" href="mgt.html"><small>Next →</small>MGT</a></nav>
+<nav class="pager" aria-label="More"><a href="mgt.html"><small>← Previous</small>MGT</a><a class="next" href="../index.html#tools"><small>Back →</small>All tools</a></nav>
 </main>
 
 <footer>

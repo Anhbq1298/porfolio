@@ -334,7 +334,7 @@ TOOLS = [
         title="MGT",
         summary="Parametric modelling for ETABS and SAP2000 — Grasshopper components that build, edit, query and load structural models straight from Rhino geometry.",
         meta=[("Type", "Grasshopper 8 plugin"), ("Stack", "C# · GHPython · CSI API"), ("Targets", "ETABS · SAP2000 · Excel"), ("Demo", "YouTube playlist")],
-        hero=("mgt-toolbar.jpg", "MGT toolbar — units, materials, loadings, point, frame, shell and cable objects, utilities"),
+        hero=("mgt-rhino.jpg", "ETABS model (left) generated from the Rhino geometry (right) by a Grasshopper definition"),
         problem="Architectural geometry lives in Rhino, analysis lives in ETABS or SAP2000. Rebuilding irregular geometry in the analysis model, and keeping it in sync as the design changes, is slow and repetitive.",
         method="""<ul>
 <li><b>CSI link.</b> Components wrap the ETABS and SAP2000 APIs to set up, edit, query and load models from Grasshopper, and export data trees to Excel.</li>
@@ -347,7 +347,7 @@ TOOLS = [
 <li>Python 3 components for data-tree processing.</li>
 <li>Compatibility and domain tests; example definitions shipped with the plugin.</li>
 </ul>""",
-        figs=[("gh-grillage.jpg", "Grillage strut-and-tie model from slab geometry"), ("gh-trib.jpg", "Voronoi tributary areas")],
+        figs=[("mgt-toolbar.jpg", "MGT toolbar — units, materials, loadings, point, frame, shell and cable objects, utilities"), ("gh-grillage.jpg", "Grillage strut-and-tie model from slab geometry"), ("gh-trib.jpg", "Voronoi tributary areas")],
         links=[("Watch MGT on YouTube", "https://www.youtube.com/playlist?list=PLP4F5t1phy2g")],
         tags=["Grasshopper", "Rhino", "ETABS API", "SAP2000 API", "C#", "Python"],
     ),

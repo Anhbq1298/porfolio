@@ -229,7 +229,7 @@ TOOLS = [
 <li>PDF annotation parsing with page and scale handling.</li>
 <li>Interactive overlay chart with search radii, match lines and status filtering.</li>
 </ul>""",
-        figs=[("pdfetabs-flow.svg", "Workflow"), ("pdfetabs-before.jpg", "Before — PDF tags (orange) over ETABS columns (blue)"),
+        figs=[("pdfetabs-before.jpg", "Before — PDF tags (orange) over ETABS columns (blue)"),
               ("pdfetabs-after.jpg", "After — matched pairs within the search radius", "wide"),
               ("pdfetabs-column-mapper.mp4", "Demo", "wide")],
         links=[], tags=["CORENET X", "ETABS API", "PDF", "QA/QC"],
@@ -447,7 +447,11 @@ def page(item, kind, prev_item, next_item, back_href, back_label):
         links = "".join(
             f'<a class="btn {"primary" if i == 0 else "ghost"}" href="{u}" target="_blank" rel="noopener">{t}</a>'
             for i, (t, u) in enumerate(item.get("links", [])))
+        flow = f"flow-{item['slug']}.svg" if item["slug"] != "pdfetabs-column-mapper" else "pdfetabs-flow.svg"
+        flow_html = (f'<figure class="flow"><button data-full="../assets/{flow}" data-cap="{escape(strip_tags(item["title"]), quote=True)} — how it works">'
+                     f'<img src="../assets/{flow}" alt="Workflow diagram for {escape(strip_tags(item["title"]), quote=True)}"></button></figure>')
         secs = [("Problem", f"<p>{item['problem']}</p>"),
+                ("How it works", flow_html),
                 ("Methodology", item["method"]),
                 ("Result", f'<div class="callout"><p>{item["result"]}</p></div>'),
                 ("Technical implementation", item["impl"])]

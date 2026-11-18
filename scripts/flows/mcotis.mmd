@@ -1,0 +1,16 @@
+flowchart TB
+  S["SAP2000 / ETABS model<br/>import geometry"] --> R
+  R["Define ranges<br/>loading · truss height · cable pretension"] --> G["Generate every<br/>combination as a candidate"]
+  G --> F["In-house FEM analysis<br/>tension-only cables"]
+  F --> D["Design checks<br/>steel · CFT · encased · mega columns"]
+  D --> Q["Quantities and cost<br/>per candidate"]
+  Q --> C{"Compare candidates"}
+  C --> B["Best option on deflection,<br/>utilisation, tonnage and cost"]
+  classDef io fill:#E8EEF7,stroke:#1F4788,color:#172033
+  classDef core fill:#1F4788,stroke:#1F4788,color:#ffffff
+  classDef ok fill:#E7F3E8,stroke:#2E7D32,color:#172033
+  classDef warn fill:#FFF1E0,stroke:#F57C00,color:#172033
+  class S,R io
+  class G,F,D,Q core
+  class C core
+  class B ok

@@ -1,0 +1,17 @@
+flowchart TB
+  A["Model A in ETABS<br/>select joints, frames, shells"] --> M
+  T["Model B in ETABS<br/>target model"] --> M
+  M["Bridger<br/>attach both instances"] --> S1["1 Geometry and unique names"]
+  S1 --> S2["2 Section definitions"] --> S3["3 Assignments<br/>points, frames, shells"]
+  S3 --> S4["4 Loading"] --> S5["5 Pier and spandrel labels"] --> S6["6 Design overwrites"]
+  S6 --> V{"7 Verify against a<br/>fresh read of Model B"}
+  V -->|matches| OK["Model B updated"]
+  V -->|skipped or refused| L["Reported in the<br/>migration log"]
+  classDef io fill:#E8EEF7,stroke:#1F4788,color:#172033
+  classDef core fill:#1F4788,stroke:#1F4788,color:#ffffff
+  classDef ok fill:#E7F3E8,stroke:#2E7D32,color:#172033
+  classDef warn fill:#FFF1E0,stroke:#F57C00,color:#172033
+  class A,T io
+  class M,S1,S2,S3,S4,S5,S6,V core
+  class OK ok
+  class L warn

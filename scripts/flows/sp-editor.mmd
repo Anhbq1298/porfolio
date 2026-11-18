@@ -1,0 +1,17 @@
+flowchart TB
+  E["ETABS model"] -->|API| G["Wall pier geometry"]
+  E -->|API| F["Pier design forces"]
+  F --> X["Filter load combinations"]
+  U["Engineer's reinforcement pattern"] --> B
+  G --> B["Batch check every pier"]
+  X --> B
+  B --> D["Demand / capacity results<br/>exported"]
+  B --> S["spColumn files<br/>for DD / CD detailed design"]
+  classDef io fill:#E8EEF7,stroke:#1F4788,color:#172033
+  classDef core fill:#1F4788,stroke:#1F4788,color:#ffffff
+  classDef ok fill:#E7F3E8,stroke:#2E7D32,color:#172033
+  classDef warn fill:#FFF1E0,stroke:#F57C00,color:#172033
+  class E,U io
+  class G,F,X,B core
+  class D ok
+  class S io

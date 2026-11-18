@@ -296,3 +296,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .pager .next{text-align:right}
 .more-link{display:inline-block;margin-top:12px;font-size:14px;font-weight:600}
 @media (max-width:900px){.cs-body{grid-template-columns:1fr;gap:24px;padding-top:36px}.toc{display:none}.figs{grid-template-columns:1fr}.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
+.flow{margin:4px 0 8px}
+.flow button{display:block;width:100%;padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;cursor:zoom-in}
+.flow img{display:block;margin:0 auto;width:auto;max-width:100%;height:auto}
+.home-flow{margin:14px 0 0}
+.home-flow button{display:block;width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:zoom-in}
+.home-flow img{display:block;margin:0 auto;max-width:100%;max-height:560px;width:auto;height:auto}
+.home-flow figcaption{font-size:12.5px;color:var(--text-3);margin-top:6px}
+.flow-btn{display:inline-flex;align-items:center;gap:8px;margin:14px 12px 0 0;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);font:inherit;font-size:13.5px;font-weight:600;cursor:zoom-in}
+.flow-btn:hover{border-color:var(--blue);color:var(--blue)}
+.flow-btn svg{width:16px;height:16px;color:var(--blue)}
+.lb img{background:#fff}

@@ -1,0 +1,18 @@
+flowchart TB
+  R["Rhino geometry<br/>slab outlines · grids · CAD data"] --> M["MGT components<br/>in Grasshopper"]
+  M --> G["Grillage builder<br/>strut-and-tie grillage"]
+  M --> T["Tributary take-down<br/>Voronoi areas"]
+  M --> C["CSI link<br/>build · edit · query · load"]
+  G --> C
+  T --> C
+  C --> E["ETABS / SAP2000 model"]
+  M --> X["Data trees to Excel"]
+  E -->|design changes| R
+  classDef io fill:#E8EEF7,stroke:#1F4788,color:#172033
+  classDef core fill:#1F4788,stroke:#1F4788,color:#ffffff
+  classDef ok fill:#E7F3E8,stroke:#2E7D32,color:#172033
+  classDef warn fill:#FFF1E0,stroke:#F57C00,color:#172033
+  class R io
+  class M,G,T,C core
+  class E ok
+  class X io

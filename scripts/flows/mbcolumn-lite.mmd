@@ -1,0 +1,16 @@
+flowchart TB
+  S["Section editor<br/>size · cover · bars on grid"] --> M["Materials<br/>concrete · rebar grade"]
+  M --> F["Fibre mesh of the section"]
+  F --> P["3D PMM surface<br/>solved in a background worker"]
+  L["Load cases<br/>P · Mx · My"] --> D
+  P --> D{"Demand / capacity<br/>per load case"}
+  D --> V["P–M and Mx–My diagrams<br/>governing case"]
+  V --> R["Report opens in MCalcCanvas<br/>for review and customising"]
+  classDef io fill:#E8EEF7,stroke:#1F4788,color:#172033
+  classDef core fill:#1F4788,stroke:#1F4788,color:#ffffff
+  classDef ok fill:#E7F3E8,stroke:#2E7D32,color:#172033
+  classDef warn fill:#FFF1E0,stroke:#F57C00,color:#172033
+  class S,M,L io
+  class F,P,D core
+  class V ok
+  class R io

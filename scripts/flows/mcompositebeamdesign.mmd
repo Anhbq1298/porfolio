@@ -1,0 +1,20 @@
+flowchart TB
+  I["Inputs<br/>steel section · slab · materials · loads"] --> C1["Construction stage<br/>steel beam alone"]
+  I --> C2["Composite stage<br/>steel + slab"]
+  C1 --> K["Checks with clause and location<br/>bending · shear · LTB · studs · web · slab · deflection"]
+  C2 --> K
+  K --> G{"Governing utilisation"}
+  G -->|within 1.0| P["Pass"]
+  G -->|over 1.0| F["Fail — adjust section<br/>or optimise"]
+  F --> I
+  P --> R["Open full report in MCalcCanvas<br/>review, customise, export PDF"]
+  F --> R
+  classDef io fill:#E8EEF7,stroke:#1F4788,color:#172033
+  classDef core fill:#1F4788,stroke:#1F4788,color:#ffffff
+  classDef ok fill:#E7F3E8,stroke:#2E7D32,color:#172033
+  classDef warn fill:#FFF1E0,stroke:#F57C00,color:#172033
+  class I io
+  class C1,C2,K,G core
+  class P ok
+  class F warn
+  class R io

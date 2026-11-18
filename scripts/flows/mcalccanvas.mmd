@@ -1,0 +1,16 @@
+flowchart TB
+  T["Design templates<br/>EC2 · EC3 · EC4"] --> W
+  X["Reports from mCompositeBeamDesign<br/>and MBColumn Lite"] --> W
+  I["Inputs with units"] --> W
+  W["Worksheet on A4 canvas<br/>equations placed freely"] --> E["Unit-aware engine<br/>live recalculation"]
+  E --> R["Results and code checks<br/>pass / fail"]
+  R -->|edit an input| W
+  R --> P["Vector PDF calculation report"]
+  classDef io fill:#E8EEF7,stroke:#1F4788,color:#172033
+  classDef core fill:#1F4788,stroke:#1F4788,color:#ffffff
+  classDef ok fill:#E7F3E8,stroke:#2E7D32,color:#172033
+  classDef warn fill:#FFF1E0,stroke:#F57C00,color:#172033
+  class T,X,I io
+  class W,E core
+  class R ok
+  class P io

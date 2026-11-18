@@ -1,0 +1,24 @@
+flowchart TB
+  A["Marked-up PDF<br/>column tags + page scale"] --> C
+  B["ETABS model<br/>columns by story (API)"] --> C
+  C["Pin a common origin<br/>PDF origin tag = ETABS constraint column"] --> D["Shared local frame<br/>both sets in ΔX, ΔY"]
+  D --> E{"Geometric match<br/>within search radius"}
+  E -->|one candidate| M["Match"]
+  E -->|several| AM["Ambiguous"]
+  E -->|none| N["No match"]
+  E -->|name clash| CF["Conflict"]
+  M --> R["Engineer review<br/>overlay chart, inspector,<br/>manual overwrite"]
+  AM --> R
+  N --> R
+  CF --> R
+  R --> W["Apply names to ETABS<br/>two-pass rename + pier labels"]
+  W --> X["Export report<br/>QA/QC for CORENET X"]
+  classDef io fill:#E8EEF7,stroke:#1F4788,color:#1A1A1A
+  classDef core fill:#1F4788,stroke:#1F4788,color:#ffffff
+  classDef ok fill:#E7F3E8,stroke:#2E7D32,color:#1A1A1A
+  classDef warn fill:#FFF1E0,stroke:#F57C00,color:#1A1A1A
+  class A,B,X io
+  class C,D,E,W core
+  class M ok
+  class AM,N,CF warn
+  class R io

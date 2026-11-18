@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;750&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F4788'/%3E%3Cpath d='M6 24 L16 8 L26 24 Z M11 24 L16 16 L21 24' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/book.css">
 </head>
 <body>
 
@@ -30,6 +31,7 @@
       <a href="#tools">Tools &amp; R&amp;D</a>
       <a href="#contact">Contact</a>
     </div>
+    <button type="button" class="book-launch" id="open-book" aria-haspopup="dialog" hidden>Book View</button>
   </div>
 </nav>
 
@@ -407,6 +409,23 @@
   <p></p>
 </div>
 
+<dialog class="book" id="portfolio-book" aria-labelledby="book-title">
+  <div class="book-toolbar">
+    <h2 id="book-title">Portfolio Book</h2>
+    <details class="book-contents">
+      <summary>Contents</summary>
+      <ol aria-label="Portfolio pages"></ol>
+    </details>
+    <button type="button" class="book-close">Close</button>
+  </div>
+  <div class="book-spread"></div>
+  <div class="book-controls">
+    <button type="button" data-turn="-1">Previous</button>
+    <p class="book-status" role="status"></p>
+    <button type="button" data-turn="1">Next</button>
+  </div>
+</dialog>
 <script src="assets/site.js"></script>
+<script src="assets/book.js"></script>
 </body>
 </html>
